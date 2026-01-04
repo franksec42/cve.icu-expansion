@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    // Apply theme immediately to prevent flash of wrong theme
+    (function() {
+        const savedTheme = localStorage.getItem('cveicu-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Growth Trends - CVE.ICU</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W0CE61HN2F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-W0CE61HN2F');
+    </script>
+    
+    <!-- Favicon - Phoenix Security -->
+    <link rel="icon" type="image/png" href="static/images/phoenix-favicon.png">
+    <link rel="apple-touch-icon" href="static/images/phoenix-favicon.png">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/images/logo.png">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="static/css/style.css">
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="CVE.ICU provides comprehensive analysis and visualization of Common Vulnerabilities and Exposures (CVE) data from 1999 to present.">
+    <meta name="keywords" content="CVE, vulnerabilities, security, analysis, dashboard, cybersecurity">
+    <meta name="author" content="CVE.ICU">
+    
+    <!-- Mobile-specific meta tags -->
+    <meta name="theme-color" content="#0d1117" id="theme-color-meta">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="CVE.ICU">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="CVE.ICU - CVE Analysis Dashboard">
+    <meta property="og:description" content="Comprehensive CVE analysis and visualization from 1999 to present">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cve.icu">
+    <meta property="og:image" content="https://cve.icu/static/images/logo.png">
+</head>
+<body>
+    <!-- Header and Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-group">
+                <a href="index.html" class="logo">
+                    <img src="static/images/logo.png" alt="CVE.ICU Logo">
+                    CVE.ICU
+                </a>
+                <span class="logo-separator">×</span>
+                <a href="https://phoenix.security" target="_blank" class="phoenix-logo" title="Phoenix Security Research">
+                    <img src="static/images/phoenix-logo-light.png" alt="Phoenix Security" class="phoenix-logo-img phoenix-logo-light">
+                    <img src="static/images/phoenix-logo-dark.png" alt="Phoenix Security" class="phoenix-logo-img phoenix-logo-dark">
+                </a>
+            </div>
+            
+            <nav class="nav">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="years.html">Yearly Analysis</a></li>
+                    <li class="nav-dropdown">
+                        <a href="cna-hub.html" class="dropdown-toggle">CNA</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cna.html">CNA Intelligence</a></li>
+                            <li><a href="data-quality.html">Name Matching</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="cpe.html">CPE</a></li>
+                    <li><a href="cwe.html">CWE</a></li>
+                    <li class="nav-dropdown">
+                        <a href="scoring.html" class="dropdown-toggle">Scoring</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cvss.html">CVSS</a></li>
+                            <li><a href="epss.html">EPSS</a></li>
+                            <li><a href="kev.html">KEV</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="growth.html" class="dropdown-toggle">Growth</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="nvd-status.html">NVD Status</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                    <!-- Moon icon (for light mode - click to go dark) -->
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <!-- Sun icon (for dark mode - click to go light) -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+<style>
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Active button styling for better visual indication */
+.quick-select-btn.active {
+    background-color: #3b82f6 !important;
+    color: white !important;
+    border-color: #2563eb !important;
+}
+
+.quick-select-btn:hover {
+    background-color: #60a5fa;
+    color: white;
+    border-color: #3b82f6;
+}
+</style>
+
+<!-- Hero Section -->
+<div class="page-header mb-4 text-center">
+    <h1 class="display-4 mb-2">Growth Intelligence Dashboard</h1>
+    <small class="text-muted d-block mb-3" id="pageSubtitle">
+        Showing comprehensive growth analysis across all years (1999-2026)
+    </small>
+    
+    <!-- Note about historical data requirement -->
+    <div class="d-flex justify-content-center mb-3">
+        <div class="text-muted small">
+            <i class="fas fa-info-circle me-1"></i>
+            Growth analysis shows comprehensive trends across all years (1999-2026)
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="stats-grid mb-4">
+    <div class="stat-card">
+        <div class="stat-number" id="totalCvesCount">-</div>
+        <div class="stat-label">Total CVEs</div>
+        <small class="text-muted" style="font-size: 0.75rem;" id="totalCvesSubtext">📊 Loading...</small>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-number" id="avgGrowthRate">-</div>
+        <div class="stat-label">Average Annual Growth</div>
+        <small class="text-muted" style="font-size: 0.75rem;" id="avgGrowthSubtext">📈 Loading...</small>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-number" id="peakGrowthYear">-</div>
+        <div class="stat-label">Peak Growth Year</div>
+        <small class="text-muted" style="font-size: 0.75rem;" id="peakGrowthSubtext">🚀 Loading...</small>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-number" id="ytdComparison">-</div>
+        <div class="stat-label">Year-to-Date Growth</div>
+        <small class="text-muted" style="font-size: 0.75rem;" id="ytdSubtext">📅 Loading...</small>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div class="row g-4 mb-4">
+    <!-- CVE Growth Trends Chart -->
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header py-2 d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-chart-line me-2"></i>CVE Growth Trends Over Time
+                </h3>
+                <div class="chart-controls d-flex gap-2">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-outline-secondary active quick-select-btn" id="absoluteBtn" onclick="toggleGrowthView('absolute')">
+                            Absolute
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary quick-select-btn" id="rateBtn" onclick="toggleGrowthView('rate')">
+                            Growth Rate
+                        </button>
+                    </div>
+                    <div class="btn-group btn-group-sm" role="group" id="modeToggle">
+                        <button type="button" class="btn btn-outline-primary active quick-select-btn" id="yearlyBtn" onclick="toggleChartMode('yearly')">
+                            Per Year
+                        </button>
+                        <button type="button" class="btn btn-outline-primary quick-select-btn" id="cumulativeBtn" onclick="toggleChartMode('cumulative')">
+                            Cumulative
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="growthTrendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Growth Rate Distribution Chart -->
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header py-2">
+                <h3 class="card-title mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-chart-bar me-2"></i>Growth Rate Distribution
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="growthDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cumulative Growth Chart -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header py-2">
+                <h3 class="card-title mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-chart-area me-2"></i>Cumulative CVE Growth
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="cumulativeGrowthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Growth Insights Panel -->
+<div class="card mb-4">
+    <div class="card-header py-2">
+        <h3 class="card-title" style="font-size: 1.1rem;">🔍 Growth Intelligence Insights</h3>
+    </div>
+    <div class="card-body py-3">
+        <div class="row" id="growthInsights">
+            <div class="col-md-4 mb-3">
+                <div class="insight-card">
+                    <div class="insight-icon">📈</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Highest Growth</div>
+                        <div class="insight-text" id="highestGrowthInsight">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="insight-card">
+                    <div class="insight-icon">📉</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Lowest Growth</div>
+                        <div class="insight-text" id="lowestGrowthInsight">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="insight-card">
+                    <div class="insight-icon">📊</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Trend Analysis</div>
+                        <div class="insight-text" id="trendAnalysisInsight">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Growth Data Table -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header py-2">
+                <h3 class="card-title mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-table me-2"></i>Year-over-Year Growth Data
+                </h3>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Total CVEs</th>
+                                <th>Growth Rate</th>
+                                <th>Absolute Change</th>
+                                <th>3-Year Avg</th>
+                            </tr>
+                        </thead>
+                        <tbody id="growthTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">Loading growth data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CVE Projections Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header py-2 d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-crystal-ball me-2"></i>🔮 CVE Projections to 2030
+                </h3>
+                <div class="d-flex align-items-center gap-2">
+                    <small class="text-muted" id="projectionBasis">Based on 2018+ growth rate</small>
+                    <div class="btn-group btn-group-sm ms-auto" role="group">
+                        <button type="button" class="btn btn-outline-primary active" id="projYearlyBtn" onclick="toggleProjectionView('yearly')">Per Year</button>
+                        <button type="button" class="btn btn-outline-primary" id="projCumulativeBtn" onclick="toggleProjectionView('cumulative')">Cumulative</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Actual vs Projection Comparison Box -->
+                <div id="actualVsProjectionBox" class="mb-4" style="display: none;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <div class="stat-card projection-stat-card" style="padding: 1rem;">
+                                <div class="stat-number" id="avpActualYtd" style="font-size: 1.5rem;">-</div>
+                                <div class="stat-label">Actual YTD</div>
+                                <small class="text-muted" id="avpActualDate">-</small>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <div class="stat-card projection-stat-card" style="padding: 1rem;">
+                                <div class="stat-number" id="avpProjectedYtd" style="font-size: 1.5rem;">-</div>
+                                <div class="stat-label">Projected YTD</div>
+                                <small class="text-muted">Based on avg growth rate</small>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <div class="stat-card projection-stat-card" style="padding: 1rem;">
+                                <div class="stat-number" id="avpDifference" style="font-size: 1.5rem;">-</div>
+                                <div class="stat-label">Difference</div>
+                                <small class="text-muted" id="avpStatus">-</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projections Chart -->
+                <div class="chart-container mb-4" style="height: 300px;">
+                    <canvas id="projectionsChart"></canvas>
+                </div>
+                
+                <!-- Projections Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Projected CVEs</th>
+                                <th>Cumulative</th>
+                                <th>Growth Rate</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectionsTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">Loading projections...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export and Share Panel -->
+<div class="card mb-3">
+    <div class="card-header py-2">
+        <h2 class="card-title mb-0" style="font-size: 1.1rem;">📤 Export & Share</h2>
+    </div>
+    <div class="card-body py-3">
+        <div class="export-buttons">
+            <button class="btn btn-primary btn-sm" onclick="exportData('csv')">📊 Export CSV</button>
+            <button class="btn btn-primary btn-sm" onclick="exportData('json')">📋 Export JSON</button>
+            <button class="btn btn-secondary btn-sm" onclick="copyPermalink()">🔗 Copy Permalink</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print Report</button>
+        </div>
+        <div class="permalink-result mt-2" id="permalinkResult" style="display: none;">
+            <input type="text" class="form-control" id="permalinkInput" readonly>
+            <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyPermalink()">Copy Link</button>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+                <div style="flex: 1; min-width: 200px;">
+                    <p class="mb-1"><strong>Data Sources:</strong></p>
+                    <p class="text-muted small mb-0">
+                        <a href="https://nvd.nist.gov/" target="_blank" class="text-decoration-none">National Vulnerability Database (NVD)</a><br>
+                        <a href="https://cve.org/" target="_blank" class="text-decoration-none">CVE Program</a><br>
+                        Last updated: <span id="lastUpdated">Loading...</span>
+                    </p>
+                </div>
+                <div style="flex: 1; min-width: 200px; text-align: right;">
+                    <p class="mb-1"><strong>Platform Links:</strong></p>
+                    <p class="text-muted small mb-0">
+                        <a href="about.html" class="text-decoration-none">About CVE.ICU</a><br>
+                        <a href="https://cnascorecard.org" target="_blank" class="text-decoration-none">CNA Scorecard</a><br>
+                        <a href="https://cveforecast.org" target="_blank" class="text-decoration-none">CVE Forecast</a><br>
+                        <a href="https://github.com/rogolabs/cve.icu" target="_blank" class="text-decoration-none">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+            
+            <hr class="my-2">
+            <div class="text-center">
+                <small class="text-muted">
+                    &copy; 2026 CVE.ICU • Built by <a href="https://rogolabs.net" target="_blank" class="text-decoration-none">RogoLabs</a>
+                    <br>
+                    Data updated every 6 hours • CVE coverage: 1999-2026
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chart.js Library (UMD version) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- D3.js for advanced visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Universal timestamp loader -->
+    <script>
+    // Universal function to load and display the last updated timestamp
+    // Uses cve_all.json as the single source of truth for all pages
+    function loadUniversalTimestamp() {
+        const lastUpdatedElement = document.getElementById('lastUpdated');
+        if (!lastUpdatedElement) return;
+        
+        fetch('data/cve_all.json?v=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                if (data.generated_at) {
+                    const date = new Date(data.generated_at);
+                    const options = {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false, // Use 24-hour clock
+                        timeZone: 'UTC', // Always show UTC
+                        timeZoneName: 'short'
+                    };
+                    const formattedDate = date.toLocaleString('en-US', options);
+                    lastUpdatedElement.textContent = formattedDate;
+                } else {
+                    lastUpdatedElement.textContent = 'Unknown';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading timestamp:', error);
+                lastUpdatedElement.textContent = 'Error loading timestamp';
+            });
+    }
+    
+    // Load timestamp when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        loadUniversalTimestamp();
+    });
+    </script>
+    
+    <!-- Mobile Navigation Enhancement -->
+    <script>
+        // Enhanced mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    
+                    // Prevent body scroll when menu is open
+                    if (navMenu.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInside = navToggle.contains(event.target) || navMenu.contains(event.target);
+                    
+                    if (!isClickInside && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when a nav link is clicked
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Wait for Chart.js to load before configuring
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof Chart !== 'undefined') {
+                // Global configuration for Chart.js with design system
+                Chart.defaults.responsive = true;
+                Chart.defaults.maintainAspectRatio = false;
+                Chart.defaults.plugins.legend.position = 'top';
+                Chart.defaults.plugins.legend.labels.usePointStyle = true;
+                Chart.defaults.plugins.legend.labels.padding = 20;
+                Chart.defaults.plugins.legend.labels.font = {
+                    family: 'Inter, sans-serif',
+                    size: 12,
+                    weight: '500'
+                };
+                Chart.defaults.plugins.title.display = true;
+                Chart.defaults.plugins.title.font = {
+                    family: 'Inter, sans-serif',
+                    size: 16,
+                    weight: '600'
+                };
+                Chart.defaults.plugins.title.color = '#212529';
+                Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                Chart.defaults.plugins.tooltip.titleColor = '#212529';
+                Chart.defaults.plugins.tooltip.bodyColor = '#6c757d';
+                Chart.defaults.plugins.tooltip.borderColor = '#dee2e6';
+                Chart.defaults.plugins.tooltip.borderWidth = 1;
+                Chart.defaults.plugins.tooltip.cornerRadius = 8;
+                Chart.defaults.plugins.tooltip.titleFont = {
+                    family: 'Inter, sans-serif',
+                    size: 13,
+                    weight: '600'
+                };
+                Chart.defaults.plugins.tooltip.bodyFont = {
+                    family: 'Inter, sans-serif',
+                    size: 12,
+                    weight: '400'
+                };
+                // Chart.js v4 scale configuration - Phoenix Security Colors
+                Chart.defaults.elements.point.backgroundColor = '#F36717';
+                Chart.defaults.elements.point.borderColor = '#F36717';
+                Chart.defaults.elements.line.borderColor = '#F36717';
+                Chart.defaults.elements.line.borderWidth = 3;
+                Chart.defaults.elements.bar.backgroundColor = '#F36717';
+                Chart.defaults.elements.bar.borderWidth = 0;
+                Chart.defaults.elements.arc.borderWidth = 2;
+                
+                // Note: Scale-specific defaults are set per chart type in Chart.js v4
+                // Global scale defaults are handled differently
+            }
+            
+            // Add active class to current page navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Phoenix Security Color Palette - Orange/Purple Theme
+        window.CVE_COLORS = window.CVE_COLORS || {
+            // Primary colors
+            primary: '#F36717',      // Pumpkin Orange
+            secondary: '#FF2D46',    // Vivid Red
+            tertiary: '#6714CC',     // Purple
+            success: '#27ae60',      // Green
+            warning: '#F36717',      // Orange
+            danger: '#F03E1E',       // Red Orange
+            light: '#f8f9fa',
+            dark: '#1E2535',
+            
+            // Phoenix Security Orange Shades (light to dark)
+            orangeShades: [
+                '#fee6d8',  // Very light orange
+                '#fdc4a8',  // Light orange
+                '#FF9059',  // Medium light orange
+                '#F36717',  // Primary Pumpkin Orange
+                '#F03E1E',  // Red Orange
+                '#C6361F',  // Mahogany
+            ],
+            
+            // Phoenix Security Purple Shades (light to dark)
+            purpleShades: [
+                '#B87A9E',  // Very light purple
+                '#9E517B',  // Light purple
+                '#6714CC',  // Primary Purple
+                '#523DD9',  // Blue Purple
+                '#380886',  // Dark Purple
+                '#05057A',  // Very dark purple
+            ],
+            
+            // Chart-specific colors (alternating orange/purple for multi-series)
+            chartColors: [
+                '#F36717',  // 1. Primary Orange
+                '#6714CC',  // 2. Primary Purple
+                '#FF2D46',  // 3. Vivid Red
+                '#9E517B',  // 4. Light Purple
+                '#C6361F',  // 5. Mahogany
+                '#523DD9',  // 6. Blue Purple
+                '#FF9059',  // 7. Light Orange
+                '#380886',  // 8. Dark Purple
+            ],
+            
+            // Visualization gradient (orange to purple)
+            vizColors: [
+                '#F36717',  // Orange
+                '#FF9059',  // Light Orange
+                '#fdc4a8',  // Very Light Orange
+                '#9E517B',  // Light Purple
+                '#6714CC',  // Purple
+                '#380886',  // Dark Purple
+            ],
+            
+            // For fills (with transparency)
+            fills: {
+                orange: 'rgba(243, 103, 23, 0.15)',
+                orangeDark: 'rgba(243, 103, 23, 0.25)',
+                purple: 'rgba(103, 20, 204, 0.15)',
+                purpleDark: 'rgba(103, 20, 204, 0.25)',
+            }
+        };
+        
+        // Get theme-aware chart colors (brighter in dark mode)
+        function getPhoenixChartColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                return {
+                    primary: '#FF9059',       // Brighter Orange
+                    primaryDark: '#F36717',   // Standard Orange
+                    primaryLight: '#fdc4a8',  // Light Orange
+                    secondary: '#FF5A6E',     // Brighter Red
+                    purple: '#9E517B',        // Lighter Purple
+                    purpleDark: '#6714CC',    // Standard Purple
+                    purpleLight: '#B87A9E',   // Very Light Purple
+                    fill: 'rgba(255, 144, 89, 0.2)',
+                    fillDark: 'rgba(255, 144, 89, 0.3)',
+                    purpleFill: 'rgba(158, 81, 123, 0.2)',
+                    textColor: '#ffffff',
+                    gridColor: 'rgba(255, 255, 255, 0.1)',
+                    // Multi-series (brighter)
+                    series: ['#FF9059', '#9E517B', '#FF5A6E', '#B87A9E', '#fdc4a8', '#7B68EE']
+                };
+            } else {
+                return {
+                    primary: '#F36717',       // Standard Orange
+                    primaryDark: '#C6361F',   // Mahogany
+                    primaryLight: '#FF9059',  // Light Orange
+                    secondary: '#FF2D46',     // Vivid Red
+                    purple: '#6714CC',        // Standard Purple
+                    purpleDark: '#380886',    // Dark Purple
+                    purpleLight: '#9E517B',   // Light Purple
+                    fill: 'rgba(243, 103, 23, 0.15)',
+                    fillDark: 'rgba(243, 103, 23, 0.25)',
+                    purpleFill: 'rgba(103, 20, 204, 0.15)',
+                    textColor: '#1E2535',
+                    gridColor: 'rgba(0, 0, 0, 0.1)',
+                    // Multi-series (standard)
+                    series: ['#F36717', '#6714CC', '#FF2D46', '#9E517B', '#C6361F', '#523DD9']
+                };
+            }
+        }
+        
+        // Enhanced utility function to generate colors for charts
+        function getChartColors(count, type = 'chart') {
+            const colors = [];
+            const palette = type === 'viz' ? CVE_COLORS.vizColors : CVE_COLORS.chartColors;
+            
+            for (let i = 0; i < count; i++) {
+                colors.push(palette[i % palette.length]);
+            }
+            return colors;
+        }
+        
+        // Generate orange gradient colors (for bar charts)
+        function getOrangeGradientColors(count) {
+            const shades = CVE_COLORS.orangeShades;
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                colors.push(shades[Math.min(i, shades.length - 1)]);
+            }
+            return colors;
+        }
+        
+        // Generate purple gradient colors
+        function getPurpleGradientColors(count) {
+            const shades = CVE_COLORS.purpleShades;
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                colors.push(shades[Math.min(i, shades.length - 1)]);
+            }
+            return colors;
+        }
+        
+        // Generate alternating orange/purple colors
+        function getAlternatingColors(count) {
+            const colors = [];
+            const palette = getPhoenixChartColors().series;
+            for (let i = 0; i < count; i++) {
+                colors.push(palette[i % palette.length]);
+            }
+            return colors;
+        }
+        
+        // Get color with opacity
+        function getColorWithOpacity(color, opacity = 0.8) {
+            if (color.startsWith('#')) {
+                const r = parseInt(color.slice(1, 3), 16);
+                const g = parseInt(color.slice(3, 5), 16);
+                const b = parseInt(color.slice(5, 7), 16);
+                return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+            }
+            return color;
+        }
+        
+        // Utility function to format numbers
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+        
+        // Utility function to show loading state
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = '<div class="loading"><div class="spinner"></div>Loading data...</div>';
+            }
+        }
+        
+        // Utility function to hide loading state
+        function hideLoading(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                const loading = container.querySelector('.loading');
+                if (loading) {
+                    loading.remove();
+                }
+            }
+        }
+        
+        // Get current year for dynamic functionality
+        const CURRENT_YEAR = new Date().getFullYear();
+        const AVAILABLE_YEARS = [];
+        for (let year = 1999; year <= CURRENT_YEAR; year++) {
+            AVAILABLE_YEARS.push(year);
+        }
+        
+        // Mobile table enhancement - add touch scroll indicators
+        function enhanceMobileTable(tableContainer) {
+            if (window.innerWidth <= 768 && tableContainer) {
+                const table = tableContainer.querySelector('table');
+                if (table && table.scrollWidth > tableContainer.clientWidth) {
+                    tableContainer.style.overflowX = 'auto';
+                    tableContainer.style.webkitOverflowScrolling = 'touch';
+                    
+                    // Add scroll shadow indicators
+                    tableContainer.addEventListener('scroll', function() {
+                        const scrollLeft = this.scrollLeft;
+                        const maxScroll = this.scrollWidth - this.clientWidth;
+                        
+                        if (scrollLeft > 0) {
+                            this.classList.add('scrolled-left');
+                        } else {
+                            this.classList.remove('scrolled-left');
+                        }
+                        
+                        if (scrollLeft < maxScroll - 1) {
+                            this.classList.add('scrolled-right');
+                        } else {
+                            this.classList.remove('scrolled-right');
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Apply mobile table enhancements on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableContainers = document.querySelectorAll('.table-container');
+            tableContainers.forEach(enhanceMobileTable);
+            
+            // Re-apply on window resize
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    tableContainers.forEach(enhanceMobileTable);
+                }, 250);
+            });
+        });
+        
+        // Theme Toggle Functionality
+        (function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeColorMeta = document.getElementById('theme-color-meta');
+            
+            // Get current theme
+            function getCurrentTheme() {
+                return document.documentElement.getAttribute('data-theme') || 'light';
+            }
+            
+            // Set theme
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    if (themeColorMeta) themeColorMeta.content = '#0d1117';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    if (themeColorMeta) themeColorMeta.content = '#f8f9fa';
+                }
+                localStorage.setItem('cveicu-theme', theme);
+                
+                // Update Chart.js defaults if charts exist
+                if (typeof Chart !== 'undefined') {
+                    updateChartTheme(theme);
+                }
+            }
+            
+            // Update Chart.js colors for theme
+            function updateChartTheme(theme) {
+                const isDark = theme === 'dark';
+                const textColor = isDark ? '#e6edf3' : '#212529';
+                const secondaryColor = isDark ? '#8b949e' : '#6c757d';
+                const borderColor = isDark ? '#30363d' : '#dee2e6';
+                const bgColor = isDark ? 'rgba(28, 33, 40, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                
+                Chart.defaults.plugins.title.color = textColor;
+                Chart.defaults.plugins.legend.labels.color = textColor;
+                Chart.defaults.plugins.tooltip.backgroundColor = bgColor;
+                Chart.defaults.plugins.tooltip.titleColor = textColor;
+                Chart.defaults.plugins.tooltip.bodyColor = secondaryColor;
+                Chart.defaults.plugins.tooltip.borderColor = borderColor;
+                
+                // Update existing charts
+                Chart.helpers.each(Chart.instances, function(chart) {
+                    if (chart.options.plugins) {
+                        if (chart.options.plugins.title) {
+                            chart.options.plugins.title.color = textColor;
+                        }
+                        if (chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+                            chart.options.plugins.legend.labels.color = textColor;
+                        }
+                    }
+                    if (chart.options.scales) {
+                        ['x', 'y', 'r'].forEach(axis => {
+                            if (chart.options.scales[axis]) {
+                                if (chart.options.scales[axis].ticks) {
+                                    chart.options.scales[axis].ticks.color = secondaryColor;
+                                }
+                                if (chart.options.scales[axis].grid) {
+                                    chart.options.scales[axis].grid.color = borderColor;
+                                }
+                                if (chart.options.scales[axis].title) {
+                                    chart.options.scales[axis].title.color = textColor;
+                                }
+                            }
+                        });
+                    }
+                    chart.update('none');
+                });
+            }
+            
+            // Toggle theme on button click
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = getCurrentTheme();
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                // Only auto-switch if user hasn't set a preference
+                if (!localStorage.getItem('cveicu-theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+            
+            // Initialize chart theme on load
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof Chart !== 'undefined') {
+                    updateChartTheme(getCurrentTheme());
+                }
+            });
+        })();
+    </script>
+    
+    
+<script>
+// Chart.js is loaded from base.html
+// Global variables
+let currentGrowthView = 'absolute';
+let growthData = null;
+let charts = {};
+
+// Phoenix Security Orange/Purple color palette
+function getChartColors() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        return {
+            primary: '#F36717',       // Phoenix Orange
+            secondary: '#FF9059',     // Light Orange
+            tertiary: '#fdc4a8',      // Very light orange
+            accent: '#C6361F',        // Dark Orange
+            prediction: '#9E517B',    // Purple-pink (visible in dark mode)
+            predictionLight: 'rgba(158, 81, 123, 0.3)',
+            gray: '#5a5a75',
+            lightGray: '#3a3a55',
+            success: '#27ae60',
+            warning: '#F36717',
+            danger: '#F03E1E',
+            info: '#6714CC',          // Phoenix Purple
+            textColor: '#ffffff',
+            gridColor: 'rgba(255, 255, 255, 0.1)'
+        };
+    }
+    return {
+        primary: '#F36717',       // Phoenix Orange
+        secondary: '#FF9059',     // Light Orange
+        tertiary: '#fdc4a8',      // Very light orange
+        accent: '#C6361F',        // Dark Orange
+        prediction: '#6714CC',    // Phoenix Purple
+        predictionLight: 'rgba(103, 20, 204, 0.2)',
+        gray: '#9ca3af',
+        lightGray: '#e5e7eb',
+        success: '#27ae60',
+        warning: '#F36717',
+        danger: '#F03E1E',
+        info: '#6714CC',
+        textColor: '#1E2535',
+        gridColor: 'rgba(0, 0, 0, 0.1)'
+    };
+}
+
+let colorPalette = getChartColors();
+
+// Current chart mode (per year or cumulative)
+let chartMode = 'yearly'; // 'yearly' or 'cumulative'
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    loadGrowthData();
+});
+
+// Load growth data
+function loadGrowthData() {
+    fetch('/data/growth_analysis.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            growthData = data;
+            updateStatsCards(data);
+            updateGrowthTrendsChart(data);
+            updateGrowthDistributionChart(data);
+            updateCumulativeGrowthChart(data);
+            updateGrowthInsights(data);
+            updateGrowthTable(data);
+            updateProjections(data);
+            updateActualVsProjection(data);
+        })
+        .catch(error => {
+            console.error('Error loading growth data:', error);
+            showErrorState();
+        });
+}
+
+// Update stats cards
+function updateStatsCards(data) {
+    const growthDataArray = data.growth_data || [];
+    
+    if (growthDataArray.length === 0) {
+        document.getElementById('totalCvesCount').textContent = '0';
+        document.getElementById('avgGrowthRate').textContent = '0%';
+        document.getElementById('peakGrowthYear').textContent = '-';
+        document.getElementById('ytdComparison').textContent = '0%';
+        return;
+    }
+    
+    // Total CVEs (latest year)
+    const latestYear = growthDataArray[growthDataArray.length - 1];
+    document.getElementById('totalCvesCount').textContent = latestYear.cves.toLocaleString();
+    document.getElementById('totalCvesSubtext').textContent = `As of ${latestYear.year}`;
+    
+    // Average annual growth
+    const avgGrowth = data.avg_annual_growth || 0;
+    document.getElementById('avgGrowthRate').textContent = `${avgGrowth}%`;
+    document.getElementById('avgGrowthSubtext').textContent = `Across ${growthDataArray.length} years`;
+    
+    // Peak growth year
+    const peakGrowth = data.highest_growth_year;
+    if (peakGrowth) {
+        document.getElementById('peakGrowthYear').textContent = peakGrowth.year;
+        document.getElementById('peakGrowthSubtext').textContent = `${peakGrowth.growth_rate}% growth`;
+    }
+    
+    // Year-to-date comparison - use same data source as table (growth_data array)
+    const ytdGrowthDataArray = data.growth_data || [];
+    const currentYearData = ytdGrowthDataArray.find(d => d.is_ytd === true);
+    
+    if (currentYearData && typeof currentYearData.ytd_vs_prev_ytd === 'number') {
+        const ytdGrowth = currentYearData.ytd_vs_prev_ytd;
+        const currentYearCVEs = currentYearData.cves;
+        const prevYearYTDActual = currentYearData.prev_year_ytd_actual || 0;
+        
+        document.getElementById('ytdComparison').textContent = `${ytdGrowth > 0 ? '+' : ''}${ytdGrowth}%`;
+        document.getElementById('ytdSubtext').innerHTML = `${currentYearCVEs.toLocaleString()} vs ${prevYearYTDActual.toLocaleString()} CVEs<br>(YTD vs Same Period Last Year)`;
+    } else {
+        console.log('YTD validation failed:', { 
+            hasData: !!currentYearData, 
+            hasYTDField: currentYearData ? 'ytd_vs_prev_ytd' in currentYearData : false,
+            ytdValue: currentYearData ? currentYearData.ytd_vs_prev_ytd : 'N/A'
+        });
+        document.getElementById('ytdComparison').textContent = 'N/A';
+        document.getElementById('ytdSubtext').textContent = 'Insufficient data';
+    }
+}
+
+// Update growth trends chart
+// Update color palette on theme change
+const themeObserverGrowth = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'data-theme') {
+            colorPalette = getChartColors();
+            if (growthData) {
+                updateGrowthTrendsChart(growthData);
+                updateGrowthDistributionChart(growthData);
+                updateCumulativeGrowthChart(growthData);
+                updateProjections(growthData);
+            }
+        }
+    });
+});
+themeObserverGrowth.observe(document.documentElement, { attributes: true });
+
+function updateGrowthTrendsChart(data) {
+    const ctx = document.getElementById('growthTrendsChart').getContext('2d');
+    colorPalette = getChartColors();
+    
+    // Destroy existing chart
+    if (charts.growthTrends) {
+        charts.growthTrends.destroy();
+    }
+    
+    const growthDataArray = data.growth_data || [];
+    // Filter out current year YTD data for trend analysis since it's not comparable to completed years
+    const completedYearsData = growthDataArray.filter(d => !d.is_ytd);
+    const labels = completedYearsData.map(d => d.year);
+    
+    let chartData, yAxisLabel, yAxisConfig;
+    
+    if (currentGrowthView === 'absolute') {
+        // Check if we're in cumulative mode
+        if (chartMode === 'cumulative') {
+            // Calculate cumulative totals
+            let cumulative = 0;
+            chartData = completedYearsData.map(d => {
+                cumulative += d.cves;
+                return cumulative;
+            });
+            yAxisLabel = 'Cumulative CVEs';
+        } else {
+            chartData = completedYearsData.map(d => d.cves);
+            yAxisLabel = 'CVEs Per Year';
+        }
+        yAxisConfig = {
+            beginAtZero: true,
+            ticks: {
+                color: colorPalette.textColor,
+                callback: function(value) {
+                    return value.toLocaleString();
+                }
+            },
+            grid: {
+                color: colorPalette.gridColor
+            }
+        };
+    } else {
+        chartData = completedYearsData.map(d => d.growth_rate);
+        yAxisLabel = 'Growth Rate (%)';
+        yAxisConfig = {
+            ticks: {
+                color: colorPalette.textColor,
+                callback: function(value) {
+                    return value + '%';
+                }
+            },
+            grid: {
+                color: colorPalette.gridColor
+            }
+        };
+    }
+    
+    charts.growthTrends = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: yAxisLabel,
+                data: chartData,
+                borderColor: colorPalette.primary,
+                backgroundColor: `${colorPalette.primary}20`,
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: colorPalette.primary,
+                pointBorderColor: colorPalette.textColor === '#ffffff' ? '#1a1a2e' : '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            return `Year ${context[0].label}`;
+                        },
+                        label: function(context) {
+                            if (currentGrowthView === 'absolute') {
+                                return `Total CVEs: ${context.parsed.y.toLocaleString()}`;
+                            } else {
+                                return `Growth Rate: ${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: yAxisLabel
+                    },
+                    ...yAxisConfig
+                }
+            }
+        }
+    });
+}
+
+// Update growth distribution chart
+function updateGrowthDistributionChart(data) {
+    const ctx = document.getElementById('growthDistributionChart').getContext('2d');
+    
+    // Destroy existing chart
+    if (charts.growthDistribution) {
+        charts.growthDistribution.destroy();
+    }
+    
+    const growthDataArray = data.growth_data || [];
+    // Skip first year (0% growth) and exclude current year YTD data
+    const growthRates = growthDataArray.slice(1)
+        .filter(d => !d.is_ytd) // Exclude YTD data from distribution
+        .map(d => d.growth_rate);
+    
+    // Create growth rate bins (ordered from highest to lowest, negative at bottom)
+    const bins = {
+        '50%+': growthRates.filter(r => r >= 50).length,
+        '25-50%': growthRates.filter(r => r >= 25 && r < 50).length,
+        '10-25%': growthRates.filter(r => r >= 10 && r < 25).length,
+        '0-10%': growthRates.filter(r => r >= 0 && r < 10).length,
+        'Negative': growthRates.filter(r => r < 0).length
+    };
+    
+    charts.growthDistribution = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(bins),
+            datasets: [{
+                label: 'Years',
+                data: Object.values(bins),
+                backgroundColor: [
+                    colorPalette.accent,     // Darkest blue for 50%+ (highest growth)
+                    colorPalette.primary,    // Light blue for 25-50%
+                    colorPalette.secondary,  // Lighter blue for 10-25%
+                    colorPalette.tertiary,   // Very light blue for 0-10%
+                    colorPalette.lightGray   // Light gray for negative (lowest)
+                ],
+                borderColor: [
+                    colorPalette.accent,
+                    colorPalette.primary,
+                    colorPalette.secondary,
+                    colorPalette.tertiary,
+                    colorPalette.gray
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y', // This makes it a horizontal bar chart
+            plugins: {
+                legend: {
+                    display: false // Hide legend for cleaner look
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.parsed.x / total) * 100).toFixed(1);
+                            return `${context.parsed.x} years (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of Years'
+                    },
+                    grid: {
+                        color: colorPalette.lightGray
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Growth Rate Range'
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Update cumulative growth chart
+function updateCumulativeGrowthChart(data) {
+    const ctx = document.getElementById('cumulativeGrowthChart').getContext('2d');
+    
+    // Destroy existing chart
+    if (charts.cumulativeGrowth) {
+        charts.cumulativeGrowth.destroy();
+    }
+    
+    const growthDataArray = data.growth_data || [];
+    // Filter out current year YTD data for consistency with other charts
+    const completedYearsData = growthDataArray.filter(d => !d.is_ytd);
+    const labels = completedYearsData.map(d => d.year);
+    const cumulativeData = completedYearsData.map(d => d.cves);
+    
+    charts.cumulativeGrowth = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Cumulative CVEs',
+                data: cumulativeData,
+                backgroundColor: `${colorPalette.primary}CC`,
+                borderColor: colorPalette.accent,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            return `Year ${context[0].label}`;
+                        },
+                        label: function(context) {
+                            return `Total CVEs: ${context.parsed.y.toLocaleString()}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Cumulative CVEs'
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Update growth insights
+function updateGrowthInsights(data) {
+    const highestGrowth = data.highest_growth_year;
+    const lowestGrowth = data.lowest_growth_year;
+    const avgGrowth = data.avg_annual_growth || 0;
+    
+    // Highest growth insight
+    if (highestGrowth) {
+        document.getElementById('highestGrowthInsight').innerHTML = 
+            `<strong>${highestGrowth.year}</strong> saw the highest growth at <strong>${highestGrowth.growth_rate}%</strong> with ${highestGrowth.growth_absolute.toLocaleString()} new CVEs.`;
+    }
+    
+    // Lowest growth insight
+    if (lowestGrowth) {
+        document.getElementById('lowestGrowthInsight').innerHTML = 
+            `<strong>${lowestGrowth.year}</strong> had the lowest growth at <strong>${lowestGrowth.growth_rate}%</strong> with ${lowestGrowth.growth_absolute.toLocaleString()} new CVEs.`;
+    }
+    
+    // Trend analysis
+    const growthDataArray = data.growth_data || [];
+    if (growthDataArray.length >= 5) {
+        const recentYears = growthDataArray.slice(-5);
+        const recentAvg = recentYears.reduce((sum, year) => sum + year.growth_rate, 0) / recentYears.length;
+        const trend = recentAvg > avgGrowth ? 'accelerating' : 'decelerating';
+        
+        document.getElementById('trendAnalysisInsight').innerHTML = 
+            `Recent 5-year average growth is <strong>${recentAvg.toFixed(1)}%</strong>, indicating <strong>${trend}</strong> growth trends.`;
+    }
+}
+
+// Update growth table
+function updateGrowthTable(data) {
+    const tableBody = document.getElementById('growthTableBody');
+    const growthDataArray = data.growth_data || [];
+    
+    if (growthDataArray.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No growth data available</td></tr>';
+        return;
+    }
+    
+    tableBody.innerHTML = growthDataArray.map(yearData => {
+        const growthRateClass = yearData.growth_rate > 0 ? 'text-success' : yearData.growth_rate < 0 ? 'text-danger' : 'text-muted';
+        const growthIcon = yearData.growth_rate > 0 ? '↗️' : yearData.growth_rate < 0 ? '↘️' : '➡️';
+        
+        let rowClass = '';
+        let yearDisplay = yearData.year;
+        let borderLeftStyle = '';
+        
+        if (yearData.is_ytd) {
+            rowClass = 'table-warning';
+            borderLeftStyle = '4px solid #ffc107';
+            yearDisplay = `${yearData.year} <span class="badge bg-warning text-dark ms-1">YTD</span>`;
+        }
+        
+        const growthIconHtml = yearData.growth_rate > 0 ? 
+            '<i class="fas fa-arrow-up text-success me-1"></i>' : 
+            '<i class="fas fa-arrow-down text-danger me-1"></i>';
+        
+        return `
+            <tr class="${rowClass}" style="border-left: ${borderLeftStyle}">
+                <td>${yearDisplay}</td>
+                <td>${yearData.cves.toLocaleString()}</td>
+                <td class="${growthRateClass}">
+                    ${growthIconHtml}${yearData.growth_rate > 0 ? '+' : ''}${yearData.growth_rate}%
+                </td>
+                <td class="${yearData.growth_absolute >= 0 ? 'text-success' : 'text-danger'}">
+                    ${yearData.growth_absolute >= 0 ? '+' : ''}${yearData.growth_absolute.toLocaleString()}
+                </td>
+                <td>${yearData.growth_rate_3yr_avg}%</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// Growth view toggle (absolute vs rate)
+function toggleGrowthView(view) {
+    if (currentGrowthView === view) return;
+    
+    currentGrowthView = view;
+    
+    // Update button states
+    document.getElementById('absoluteBtn').classList.toggle('active', view === 'absolute');
+    document.getElementById('rateBtn').classList.toggle('active', view === 'rate');
+    
+    // Show/hide mode toggle based on view
+    const modeToggle = document.getElementById('modeToggle');
+    if (modeToggle) {
+        modeToggle.style.display = view === 'absolute' ? 'flex' : 'none';
+    }
+    
+    // Update chart
+    if (growthData) {
+        updateGrowthTrendsChart(growthData);
+    }
+}
+
+// Chart mode toggle (per year vs cumulative)
+function toggleChartMode(mode) {
+    if (chartMode === mode) return;
+    
+    chartMode = mode;
+    
+    // Update button states
+    document.getElementById('yearlyBtn').classList.toggle('active', mode === 'yearly');
+    document.getElementById('cumulativeBtn').classList.toggle('active', mode === 'cumulative');
+    
+    // Update chart
+    if (growthData) {
+        updateGrowthTrendsChart(growthData);
+    }
+}
+
+// Projection view mode (yearly or cumulative)
+let projectionViewMode = 'yearly';
+
+function toggleProjectionView(mode) {
+    if (projectionViewMode === mode) return;
+    
+    projectionViewMode = mode;
+    
+    // Update button states
+    document.getElementById('projYearlyBtn').classList.toggle('active', mode === 'yearly');
+    document.getElementById('projCumulativeBtn').classList.toggle('active', mode === 'cumulative');
+    
+    // Update projection chart
+    if (growthData) {
+        updateProjectionsChart(growthData);
+    }
+}
+
+
+
+// Sort table
+function sortTable(column) {
+    if (!growthData || !growthData.growth_data) return;
+    
+    const sortedData = [...growthData.growth_data];
+    
+    sortedData.sort((a, b) => {
+        if (column === 'year') {
+            return b.year - a.year; // Descending by year
+        } else if (column === 'growth_rate') {
+            return b.growth_rate - a.growth_rate; // Descending by growth rate
+        }
+        return 0;
+    });
+    
+    // Update table with sorted data
+    const tempData = { ...growthData, growth_data: sortedData };
+    updateGrowthTable(tempData);
+}
+
+// Update projections section
+function updateProjections(data) {
+    if (!data.projections || data.projections.length === 0) {
+        document.getElementById('projectionsTableBody').innerHTML = 
+            '<tr><td colspan="5" class="text-center text-muted">No projections available</td></tr>';
+        return;
+    }
+    
+    // Update projection basis text
+    const basisText = document.getElementById('projectionBasis');
+    if (basisText && data.projection_base_year && data.avg_recent_growth) {
+        basisText.textContent = `Based on ${data.projection_base_year}+ average growth rate (${data.avg_recent_growth}%)`;
+    }
+    
+    // Get current year for comparison
+    const currentYear = new Date().getFullYear();
+    const currentYearData = data.current_year_ytd;
+    
+    // Update projections table
+    const tableBody = document.getElementById('projectionsTableBody');
+    tableBody.innerHTML = data.projections.map(proj => {
+        let statusBadge = '';
+        let projectedDisplay = proj.projected_cves.toLocaleString();
+        
+        if (proj.year === currentYear && currentYearData) {
+            // For current year, show actual vs projected
+            const actual = currentYearData.cves;
+            const dayOfYear = new Date().getDate() + (new Date().getMonth() * 30); // Approximate
+            const projectedYtd = Math.round(proj.projected_cves * (dayOfYear / 365));
+            const diff = actual - projectedYtd;
+            const diffPct = ((diff / projectedYtd) * 100).toFixed(1);
+            
+            if (diff > 0) {
+                statusBadge = `<span class="badge bg-success">+${diffPct}% ahead</span>`;
+            } else if (diff < 0) {
+                statusBadge = `<span class="badge bg-danger">${diffPct}% behind</span>`;
+            } else {
+                statusBadge = '<span class="badge bg-info">On track</span>';
+            }
+            projectedDisplay = `${actual.toLocaleString()} <small class="text-muted">(YTD)</small> / ${proj.projected_cves.toLocaleString()} <small class="text-muted">(projected)</small>`;
+        } else if (proj.year < currentYear) {
+            // For past years, show actual data
+            const actualData = data.growth_data.find(d => d.year === proj.year);
+            if (actualData) {
+                projectedDisplay = `${actualData.cves.toLocaleString()} <small class="text-muted">(actual)</small>`;
+                statusBadge = '<span class="badge bg-primary">Actual</span>';
+            }
+        } else {
+            statusBadge = '<span class="badge bg-secondary">Projected</span>';
+        }
+        
+        return `
+            <tr>
+                <td><strong>${proj.year}</strong></td>
+                <td>${projectedDisplay}</td>
+                <td>${proj.cumulative_projected.toLocaleString()}</td>
+                <td class="text-success">+${proj.growth_rate}%</td>
+                <td>${statusBadge}</td>
+            </tr>
+        `;
+    }).join('');
+    
+    // Create projections chart
+    updateProjectionsChart(data);
+}
+
+// Update projections chart
+function updateProjectionsChart(data) {
+    const ctx = document.getElementById('projectionsChart');
+    if (!ctx) return;
+    colorPalette = getChartColors();
+    
+    // Destroy existing chart
+    if (charts.projectionsChart) {
+        charts.projectionsChart.destroy();
+    }
+    
+    const currentYear = new Date().getFullYear();
+    
+    // Get historical data (last 5 years)
+    const historicalData = data.growth_data
+        .filter(d => !d.is_ytd && d.year >= currentYear - 5);
+    const historicalYears = historicalData.map(d => d.year);
+    
+    // Get projection data
+    const projectionYears = data.projections.map(p => p.year);
+    
+    // Combine data
+    const allYears = [...historicalYears, ...projectionYears.filter(y => !historicalYears.includes(y))];
+    
+    let actualData, projectedData, yAxisLabel;
+    
+    if (projectionViewMode === 'cumulative') {
+        // Calculate cumulative totals
+        let actualCumulative = 0;
+        // Get cumulative up to the start of our historical window
+        const priorYearsData = data.growth_data.filter(d => !d.is_ytd && d.year < currentYear - 5);
+        actualCumulative = priorYearsData.reduce((sum, d) => sum + d.cves, 0);
+        
+        actualData = allYears.map(year => {
+            const match = data.growth_data.find(d => d.year === year && !d.is_ytd);
+            if (match) {
+                actualCumulative += match.cves;
+                return actualCumulative;
+            }
+            return null;
+        });
+        
+        projectedData = allYears.map(year => {
+            const match = data.projections.find(p => p.year === year);
+            return match ? match.cumulative_projected : null;
+        });
+        yAxisLabel = 'Cumulative CVEs';
+    } else {
+        // Per year data
+        actualData = allYears.map(year => {
+            const match = data.growth_data.find(d => d.year === year && !d.is_ytd);
+            return match ? match.cves : null;
+        });
+        projectedData = allYears.map(year => {
+            const match = data.projections.find(p => p.year === year);
+            return match ? match.projected_cves : null;
+        });
+        yAxisLabel = 'CVEs Per Year';
+    }
+    
+    charts.projectionsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: allYears,
+            datasets: [
+                {
+                    label: projectionViewMode === 'cumulative' ? 'Actual Cumulative' : 'Actual CVEs',
+                    data: actualData,
+                    borderColor: colorPalette.primary,
+                    backgroundColor: `${colorPalette.primary}30`,
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 5,
+                    pointBackgroundColor: colorPalette.primary
+                },
+                {
+                    label: projectionViewMode === 'cumulative' ? 'Projected Cumulative' : 'Projected CVEs',
+                    data: projectedData,
+                    borderColor: colorPalette.prediction,
+                    backgroundColor: colorPalette.predictionLight,
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 4,
+                    pointBackgroundColor: colorPalette.prediction
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: colorPalette.textColor }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y.toLocaleString()} CVEs`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: colorPalette.textColor },
+                    grid: { color: colorPalette.gridColor }
+                },
+                y: {
+                    ticks: { 
+                        color: colorPalette.textColor,
+                        callback: function(value) {
+                            return value.toLocaleString();
+                        }
+                    },
+                    grid: { color: colorPalette.gridColor },
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+}
+
+// Update actual vs projection comparison box
+function updateActualVsProjection(data) {
+    const avp = data.actual_vs_projection;
+    if (!avp) {
+        document.getElementById('actualVsProjectionBox').style.display = 'none';
+        return;
+    }
+    
+    document.getElementById('actualVsProjectionBox').style.display = 'block';
+    
+    // Update actual YTD
+    document.getElementById('avpActualYtd').textContent = avp.actual_ytd.toLocaleString();
+    document.getElementById('avpActualDate').textContent = `Day ${avp.day_of_year} of ${avp.year}`;
+    
+    // Update projected YTD
+    document.getElementById('avpProjectedYtd').textContent = avp.projected_ytd.toLocaleString();
+    
+    // Update difference
+    const diffEl = document.getElementById('avpDifference');
+    const statusEl = document.getElementById('avpStatus');
+    
+    if (avp.difference > 0) {
+        diffEl.textContent = `+${avp.difference.toLocaleString()}`;
+        diffEl.className = 'stat-number text-success';
+        statusEl.innerHTML = `<span class="badge bg-success">+${avp.difference_pct}% ahead of projection</span>`;
+    } else if (avp.difference < 0) {
+        diffEl.textContent = avp.difference.toLocaleString();
+        diffEl.className = 'stat-number text-danger';
+        statusEl.innerHTML = `<span class="badge bg-danger">${avp.difference_pct}% behind projection</span>`;
+    } else {
+        diffEl.textContent = '0';
+        diffEl.className = 'stat-number text-info';
+        statusEl.innerHTML = '<span class="badge bg-info">On track with projection</span>';
+    }
+}
+
+// Export data
+function exportData(format) {
+    if (!growthData) {
+        alert('No data available to export');
+        return;
+    }
+    
+    const filename = `growth_analysis_${currentDataMode}_${new Date().toISOString().split('T')[0]}`;
+    
+    if (format === 'csv') {
+        const csv = convertToCSV(growthData.growth_data);
+        downloadFile(csv, `${filename}.csv`, 'text/csv');
+    } else if (format === 'json') {
+        const json = JSON.stringify(growthData, null, 2);
+        downloadFile(json, `${filename}.json`, 'application/json');
+    }
+}
+
+// Convert data to CSV
+function convertToCSV(data) {
+    if (!data || data.length === 0) return '';
+    
+    const headers = ['Year', 'Total CVEs', 'Growth Rate (%)', 'Absolute Change', '3-Year Average (%)'];
+    const csvContent = [
+        headers.join(','),
+        ...data.map(row => [
+            row.year,
+            row.cves,
+            row.growth_rate,
+            row.growth_absolute,
+            row.growth_rate_3yr_avg
+        ].join(','))
+    ].join('\n');
+    
+    return csvContent;
+}
+
+// Download file
+function downloadFile(content, filename, contentType) {
+    const blob = new Blob([content], { type: contentType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+// Timestamp now handled by universal loader in base.html
+
+// Copy permalink
+function copyPermalink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        // Show success feedback
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+        btn.classList.add('btn-success');
+        btn.classList.remove('btn-outline-primary');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-primary');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy permalink:', err);
+        alert('Failed to copy permalink to clipboard');
+    });
+}
+
+// Show error state
+function showErrorState() {
+    document.getElementById('totalCvesCount').textContent = 'Error';
+    document.getElementById('avgGrowthRate').textContent = 'Error';
+    document.getElementById('peakGrowthYear').textContent = 'Error';
+    document.getElementById('ytdComparison').textContent = 'Error';
+    
+    document.getElementById('totalCvesSubtext').textContent = 'Failed to load data';
+    document.getElementById('avgGrowthSubtext').textContent = 'Failed to load data';
+    document.getElementById('peakGrowthSubtext').textContent = 'Failed to load data';
+    document.getElementById('ytdSubtext').textContent = 'Failed to load data';
+    
+    document.getElementById('growthTableBody').innerHTML = 
+        '<tr><td colspan="5" class="text-center text-danger">Error loading growth data</td></tr>';
+}
+</script>
+
+</body>
+</html>
