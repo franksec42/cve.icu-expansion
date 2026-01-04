@@ -80,6 +80,7 @@ class CVEQuickBuilder:
             ('cwe.html', 'CWE Analysis - CVE.ICU'),
             ('calendar.html', 'Calendar View - CVE.ICU'),
             ('growth.html', 'Growth Trends - CVE.ICU'),
+            ('nvd-status.html', 'NVD Status Analysis - CVE.ICU'),
             ('about.html', 'About CVE.ICU - Vulnerability Intelligence Platform'),
             ('scoring.html', 'Scoring Hub - CVE.ICU'),
             ('epss.html', 'EPSS Analysis - CVE.ICU'),

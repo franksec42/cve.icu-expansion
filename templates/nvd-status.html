@@ -39,8 +39,46 @@
             </div>
         </div>
         
-        <div class="chart-container">
-            <canvas id="statusPieChart"></canvas>
+        <div class="status-chart-grid">
+            <div class="chart-container pie-chart">
+                <canvas id="statusPieChart"></canvas>
+            </div>
+            <div class="backlog-summary-box">
+                <h3>📋 Current Backlog Summary</h3>
+                <div class="backlog-item">
+                    <span class="backlog-label">Total in Backlog:</span>
+                    <span class="backlog-value" id="backlogTotal">-</span>
+                </div>
+                <div class="backlog-item analyzed">
+                    <span class="backlog-label">✅ Analyzed (Complete):</span>
+                    <span class="backlog-value" id="backlogAnalyzed">-</span>
+                </div>
+                <div class="backlog-item awaiting">
+                    <span class="backlog-label">⏳ Awaiting Analysis:</span>
+                    <span class="backlog-value" id="backlogAwaiting">-</span>
+                </div>
+                <div class="backlog-item modified">
+                    <span class="backlog-label">📝 Modified:</span>
+                    <span class="backlog-value" id="backlogModified">-</span>
+                </div>
+                <div class="backlog-item undergoing">
+                    <span class="backlog-label">🔄 Undergoing Analysis:</span>
+                    <span class="backlog-value" id="backlogUndergoing">-</span>
+                </div>
+                <div class="backlog-item received">
+                    <span class="backlog-label">📥 Received:</span>
+                    <span class="backlog-value" id="backlogReceived">-</span>
+                </div>
+                <hr class="backlog-divider">
+                <div class="backlog-item cumulative">
+                    <span class="backlog-label">📊 Cumulative Total:</span>
+                    <span class="backlog-value" id="cumulativeTotal">-</span>
+                </div>
+                <div class="backlog-item completion">
+                    <span class="backlog-label">✔️ Analysis Rate:</span>
+                    <span class="backlog-value" id="analysisRate">-</span>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -159,7 +197,7 @@
 
 <style>
     .subtitle {
-        color: var(--text-secondary);
+        color: var(--color-text-secondary, #6c757d);
         margin-bottom: 2rem;
     }
     
@@ -167,8 +205,12 @@
         margin-bottom: 3rem;
     }
     
+    .section h2 {
+        color: var(--color-text-primary, #212529);
+    }
+    
     .section-description {
-        color: var(--text-secondary);
+        color: var(--color-text-secondary, #6c757d);
         margin-bottom: 1.5rem;
     }
     
@@ -179,14 +221,6 @@
         margin-bottom: 2rem;
     }
     
-    .stat-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 1.5rem;
-        text-align: center;
-    }
-    
     .stat-card.highlight-blue {
         border-left: 4px solid #3498db;
     }
@@ -195,21 +229,106 @@
         border-left: 4px solid #27ae60;
     }
     
-    .stat-value {
-        font-size: 2rem;
-        font-weight: bold;
-        color: var(--accent-color);
+    /* Status chart grid layout */
+    .status-chart-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
     }
     
-    .stat-label {
-        color: var(--text-secondary);
+    .chart-container.pie-chart {
+        min-height: 300px;
+    }
+    
+    /* Backlog Summary Box */
+    .backlog-summary-box {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border: 1px solid var(--color-border, #dee2e6);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .backlog-summary-box h3 {
+        color: var(--color-text-primary, #212529);
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-border, #dee2e6);
+    }
+    
+    .backlog-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .backlog-item:last-child {
+        border-bottom: none;
+    }
+    
+    .backlog-label {
+        color: var(--color-text-secondary, #6c757d);
         font-size: 0.9rem;
-        margin-top: 0.5rem;
+    }
+    
+    .backlog-value {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--color-text-primary, #212529);
+    }
+    
+    .backlog-item.analyzed .backlog-value { color: #27ae60; }
+    .backlog-item.awaiting .backlog-value { color: #f39c12; }
+    .backlog-item.modified .backlog-value { color: #3498db; }
+    .backlog-item.undergoing .backlog-value { color: #9b59b6; }
+    .backlog-item.received .backlog-value { color: #e67e22; }
+    .backlog-item.cumulative .backlog-value { color: #2c3e50; font-size: 1.2rem; }
+    .backlog-item.completion .backlog-value { color: #27ae60; }
+    
+    .backlog-divider {
+        border: none;
+        border-top: 2px solid var(--color-border, #dee2e6);
+        margin: 1rem 0;
+    }
+    
+    /* Dark mode backlog box */
+    [data-theme="dark"] .backlog-summary-box {
+        background: linear-gradient(135deg, #1c2128 0%, #161b22 100%);
+        border-color: #30363d;
+    }
+    
+    [data-theme="dark"] .backlog-summary-box h3 {
+        color: #e6edf3;
+        border-bottom-color: #30363d;
+    }
+    
+    [data-theme="dark"] .backlog-label {
+        color: #8b949e;
+    }
+    
+    [data-theme="dark"] .backlog-value {
+        color: #e6edf3;
+    }
+    
+    [data-theme="dark"] .backlog-item.cumulative .backlog-value {
+        color: #58a6ff;
+    }
+    
+    [data-theme="dark"] .backlog-divider {
+        border-top-color: #30363d;
+    }
+    
+    [data-theme="dark"] .backlog-item {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
     }
     
     .chart-container {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
+        background: var(--color-bg-content, #ffffff);
+        border: 1px solid var(--color-border, #dee2e6);
         border-radius: 8px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
@@ -219,29 +338,38 @@
         min-height: 400px;
     }
     
+    /* Dark mode chart container */
+    [data-theme="dark"] .chart-container {
+        background: var(--color-bg-content);
+        border-color: var(--color-border);
+    }
+    
     .table-container {
         overflow-x: auto;
+        background: var(--color-bg-content, #ffffff);
+        border-radius: 8px;
+        border: 1px solid var(--color-border, #dee2e6);
     }
     
     .data-table {
         width: 100%;
         border-collapse: collapse;
-        background: var(--card-bg);
-        border-radius: 8px;
-        overflow: hidden;
+        background: transparent;
     }
     
     .data-table th,
     .data-table td {
         padding: 12px 16px;
         text-align: right;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--color-border, #dee2e6);
+        color: var(--color-text-primary, #212529);
     }
     
     .data-table th {
-        background: var(--bg-secondary);
+        background: var(--color-bg-secondary, #e9ecef);
         font-weight: 600;
         text-align: center;
+        color: var(--color-text-primary, #212529);
     }
     
     .data-table th:first-child,
@@ -249,13 +377,38 @@
         text-align: left;
     }
     
-    .data-table tr:hover {
-        background: var(--bg-secondary);
+    .data-table tr:hover td {
+        background: var(--color-bg-hover, #f8f9fa);
     }
     
-    .data-table tr.current-year {
+    .data-table tr.current-year td {
         background: rgba(52, 152, 219, 0.1);
         font-weight: 600;
+    }
+    
+    /* Dark mode table styles */
+    [data-theme="dark"] .table-container {
+        background: var(--color-bg-content);
+        border-color: var(--color-border);
+    }
+    
+    [data-theme="dark"] .data-table th {
+        background: #21262d;
+        color: #e6edf3;
+        border-color: #30363d;
+    }
+    
+    [data-theme="dark"] .data-table td {
+        color: #e6edf3;
+        border-color: #30363d;
+    }
+    
+    [data-theme="dark"] .data-table tr:hover td {
+        background: #21262d;
+    }
+    
+    [data-theme="dark"] .data-table tr.current-year td {
+        background: rgba(88, 166, 255, 0.15);
     }
     
     .positive {
@@ -267,16 +420,20 @@
     }
     
     .info-section {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
+        background: var(--color-bg-content, #ffffff);
+        border: 1px solid var(--color-border, #dee2e6);
         border-radius: 8px;
         padding: 2rem;
+    }
+    
+    .info-section h2 {
+        color: var(--color-text-primary, #212529);
     }
     
     .info-box h4 {
         margin-top: 1.5rem;
         margin-bottom: 0.5rem;
-        color: var(--accent-color);
+        color: var(--color-accent, #0d6efd);
     }
     
     .info-box h4:first-child {
@@ -285,11 +442,38 @@
     
     .info-box ul {
         margin-left: 1.5rem;
-        color: var(--text-secondary);
+        color: var(--color-text-secondary, #6c757d);
     }
     
     .info-box li {
         margin-bottom: 0.5rem;
+    }
+    
+    .info-box strong {
+        color: var(--color-text-primary, #212529);
+    }
+    
+    /* Dark mode info section */
+    [data-theme="dark"] .info-section {
+        background: var(--color-bg-content);
+        border-color: var(--color-border);
+    }
+    
+    [data-theme="dark"] .info-section h2 {
+        color: #e6edf3;
+    }
+    
+    [data-theme="dark"] .info-box h4 {
+        color: #58a6ff;
+    }
+    
+    [data-theme="dark"] .info-box ul,
+    [data-theme="dark"] .info-box li {
+        color: #8b949e;
+    }
+    
+    [data-theme="dark"] .info-box strong {
+        color: #e6edf3;
     }
     
     @media (max-width: 768px) {
@@ -297,13 +481,31 @@
             grid-template-columns: repeat(2, 1fr);
         }
         
-        .stat-value {
-            font-size: 1.5rem;
+        .status-chart-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
 
 <script>
+// Check if dark mode is active
+function isDarkMode() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+}
+
+// Get text color based on theme
+function getTextColor() {
+    return isDarkMode() ? '#e6edf3' : '#212529';
+}
+
+function getSecondaryTextColor() {
+    return isDarkMode() ? '#8b949e' : '#6c757d';
+}
+
+function getGridColor() {
+    return isDarkMode() ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+}
+
 // Format number with K/M suffix
 function formatNumber(num) {
     if (num >= 1000000) {
@@ -327,12 +529,33 @@ async function loadNvdStatusData() {
         // Populate status snapshot
         if (data.current_status) {
             const status = data.current_status;
-            document.getElementById('totalCves').textContent = formatNumber(status.total_cves || 0);
-            document.getElementById('analyzedCount').textContent = formatNumber(status.status_counts?.['Analyzed'] || 0);
-            document.getElementById('awaitingCount').textContent = formatNumber(status.status_counts?.['Awaiting Analysis'] || 0);
-            document.getElementById('modifiedCount').textContent = formatNumber(status.status_counts?.['Modified'] || 0);
-            document.getElementById('receivedCount').textContent = formatNumber(status.status_counts?.['Received'] || 0);
-            document.getElementById('undergoingCount').textContent = formatNumber(status.status_counts?.['Undergoing Analysis'] || 0);
+            const totalCves = status.total_cves || 0;
+            const analyzed = status.status_counts?.['Analyzed'] || 0;
+            const awaiting = status.status_counts?.['Awaiting Analysis'] || 0;
+            const modified = status.status_counts?.['Modified'] || 0;
+            const received = status.status_counts?.['Received'] || 0;
+            const undergoing = status.status_counts?.['Undergoing Analysis'] || 0;
+            
+            document.getElementById('totalCves').textContent = formatNumber(totalCves);
+            document.getElementById('analyzedCount').textContent = formatNumber(analyzed);
+            document.getElementById('awaitingCount').textContent = formatNumber(awaiting);
+            document.getElementById('modifiedCount').textContent = formatNumber(modified);
+            document.getElementById('receivedCount').textContent = formatNumber(received);
+            document.getElementById('undergoingCount').textContent = formatNumber(undergoing);
+            
+            // Populate backlog summary
+            const backlogTotal = awaiting + undergoing + received;
+            document.getElementById('backlogTotal').textContent = formatNumber(backlogTotal);
+            document.getElementById('backlogAnalyzed').textContent = formatNumber(analyzed);
+            document.getElementById('backlogAwaiting').textContent = formatNumber(awaiting);
+            document.getElementById('backlogModified').textContent = formatNumber(modified);
+            document.getElementById('backlogUndergoing').textContent = formatNumber(undergoing);
+            document.getElementById('backlogReceived').textContent = formatNumber(received);
+            document.getElementById('cumulativeTotal').textContent = formatNumber(totalCves);
+            
+            // Calculate analysis rate
+            const analysisRate = totalCves > 0 ? ((analyzed / totalCves) * 100).toFixed(1) : 0;
+            document.getElementById('analysisRate').textContent = analysisRate + '%';
             
             // Create status pie chart
             createStatusPieChart(status.status_counts);
@@ -404,12 +627,12 @@ function createStatusPieChart(statusCounts) {
             plugins: {
                 legend: {
                     position: 'right',
-                    labels: { color: '#e0e0e0' }
+                    labels: { color: getTextColor() }
                 },
                 title: {
                     display: true,
                     text: 'CVE Status Distribution',
-                    color: '#e0e0e0'
+                    color: getTextColor()
                 }
             }
         }
@@ -445,23 +668,23 @@ function createMonthlyStatusChart(monthlyStatus) {
             scales: {
                 x: {
                     stacked: true,
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 },
                 y: {
                     stacked: true,
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: '#e0e0e0' }
+                    labels: { color: getTextColor() }
                 },
                 title: {
                     display: true,
                     text: 'Monthly Status Activity (Last 12 Months)',
-                    color: '#e0e0e0'
+                    color: getTextColor()
                 }
             }
         }
@@ -506,23 +729,23 @@ function createQuarterlyChart(quarterlyData) {
             scales: {
                 x: {
                     stacked: true,
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 },
                 y: {
                     stacked: true,
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: '#e0e0e0' }
+                    labels: { color: getTextColor() }
                 },
                 title: {
                     display: true,
                     text: 'Quarterly CVE Publications',
-                    color: '#e0e0e0'
+                    color: getTextColor()
                 }
             }
         }
@@ -585,12 +808,12 @@ function createTopCnasChart(cnaList) {
             responsive: true,
             scales: {
                 x: {
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 },
                 y: {
-                    ticks: { color: '#e0e0e0' },
-                    grid: { color: 'rgba(255,255,255,0.1)' }
+                    ticks: { color: getTextColor() },
+                    grid: { color: getGridColor() }
                 }
             },
             plugins: {
@@ -600,7 +823,7 @@ function createTopCnasChart(cnaList) {
                 title: {
                     display: true,
                     text: 'Top 10 CVE Numbering Authorities',
-                    color: '#e0e0e0'
+                    color: getTextColor()
                 }
             }
         }

@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // Apply theme immediately to prevent flash of wrong theme
+    (function() {
+        const savedTheme = localStorage.getItem('cveicu-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
@@ -32,7 +43,7 @@
     <meta name="author" content="CVE.ICU">
     
     <!-- Mobile-specific meta tags -->
-    <meta name="theme-color" content="#0d6efd">
+    <meta name="theme-color" content="#0d1117" id="theme-color-meta">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="CVE.ICU">
@@ -87,6 +98,26 @@
                     <span></span>
                     <span></span>
                     <span></span>
+                </button>
+                
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                    <!-- Moon icon (for light mode - click to go dark) -->
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <!-- Sun icon (for dark mode - click to go light) -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
                 </button>
             </nav>
         </div>
@@ -1345,6 +1376,102 @@ function updateLastUpdated(timestamp) {
                 }, 250);
             });
         });
+        
+        // Theme Toggle Functionality
+        (function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeColorMeta = document.getElementById('theme-color-meta');
+            
+            // Get current theme
+            function getCurrentTheme() {
+                return document.documentElement.getAttribute('data-theme') || 'light';
+            }
+            
+            // Set theme
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    if (themeColorMeta) themeColorMeta.content = '#0d1117';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    if (themeColorMeta) themeColorMeta.content = '#f8f9fa';
+                }
+                localStorage.setItem('cveicu-theme', theme);
+                
+                // Update Chart.js defaults if charts exist
+                if (typeof Chart !== 'undefined') {
+                    updateChartTheme(theme);
+                }
+            }
+            
+            // Update Chart.js colors for theme
+            function updateChartTheme(theme) {
+                const isDark = theme === 'dark';
+                const textColor = isDark ? '#e6edf3' : '#212529';
+                const secondaryColor = isDark ? '#8b949e' : '#6c757d';
+                const borderColor = isDark ? '#30363d' : '#dee2e6';
+                const bgColor = isDark ? 'rgba(28, 33, 40, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                
+                Chart.defaults.plugins.title.color = textColor;
+                Chart.defaults.plugins.legend.labels.color = textColor;
+                Chart.defaults.plugins.tooltip.backgroundColor = bgColor;
+                Chart.defaults.plugins.tooltip.titleColor = textColor;
+                Chart.defaults.plugins.tooltip.bodyColor = secondaryColor;
+                Chart.defaults.plugins.tooltip.borderColor = borderColor;
+                
+                // Update existing charts
+                Chart.helpers.each(Chart.instances, function(chart) {
+                    if (chart.options.plugins) {
+                        if (chart.options.plugins.title) {
+                            chart.options.plugins.title.color = textColor;
+                        }
+                        if (chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+                            chart.options.plugins.legend.labels.color = textColor;
+                        }
+                    }
+                    if (chart.options.scales) {
+                        ['x', 'y', 'r'].forEach(axis => {
+                            if (chart.options.scales[axis]) {
+                                if (chart.options.scales[axis].ticks) {
+                                    chart.options.scales[axis].ticks.color = secondaryColor;
+                                }
+                                if (chart.options.scales[axis].grid) {
+                                    chart.options.scales[axis].grid.color = borderColor;
+                                }
+                                if (chart.options.scales[axis].title) {
+                                    chart.options.scales[axis].title.color = textColor;
+                                }
+                            }
+                        });
+                    }
+                    chart.update('none');
+                });
+            }
+            
+            // Toggle theme on button click
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = getCurrentTheme();
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                // Only auto-switch if user hasn't set a preference
+                if (!localStorage.getItem('cveicu-theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+            
+            // Initialize chart theme on load
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof Chart !== 'undefined') {
+                    updateChartTheme(getCurrentTheme());
+                }
+            });
+        })();
     </script>
     
     

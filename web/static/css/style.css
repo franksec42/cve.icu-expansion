@@ -80,6 +80,60 @@
     --box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
+/* Dark Theme - Black/Dark Mode */
+[data-theme="dark"] {
+    /* Base Colors - Dark Theme */
+    --color-bg-primary: #0d1117;
+    --color-bg-secondary: #161b22;
+    --color-bg-content: #1c2128;
+    --color-bg-hover: #21262d;
+    --color-text: #e6edf3;
+    --color-text-primary: #e6edf3;
+    --color-text-secondary: #8b949e;
+    --color-text-muted: #6e7681;
+    --color-primary: #58a6ff;
+    --color-primary-light: rgba(88, 166, 255, 0.15);
+    --color-accent: #58a6ff;
+    --color-border: #30363d;
+    --color-border-light: #21262d;
+    --color-success: #3fb950;
+    --color-warning: #d29922;
+    --color-danger: #f85149;
+    
+    /* Dark Theme Visualization Palette */
+    --viz-color-1: #1f3a5f;
+    --viz-color-2: #2a4a6f;
+    --viz-color-3: #3d5a80;
+    --viz-color-4: #4a6fa5;
+    --viz-color-5: #5c8cc9;
+    --viz-color-6: #58a6ff;
+    --viz-color-7: #79b8ff;
+    --viz-color-8: #a5d6ff;
+    --viz-color-9: #484f58;
+    --viz-color-10: #6e7681;
+    
+    /* Dark Theme Chart Palette */
+    --chart-primary: #58a6ff;
+    --chart-secondary: #79b8ff;
+    --chart-tertiary: #a5d6ff;
+    --chart-quaternary: #cae8ff;
+    --chart-accent-1: #3fb950;
+    --chart-accent-2: #d29922;
+    --chart-accent-3: #f778ba;
+    --chart-grey-light: #30363d;
+    --chart-grey-medium: #484f58;
+    --chart-grey-dark: #6e7681;
+    
+    /* Semantic Colors - Dark Theme */
+    --color-info: #39c5cf;
+    --color-light: #21262d;
+    --color-dark: #f0f6fc;
+    
+    /* Dark Theme Shadows */
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+    --box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
 /* Base Typography */
 body {
     font-family: var(--font-family);
@@ -179,6 +233,7 @@ a:hover {
 .nav {
     display: flex;
     align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .nav-menu {
@@ -277,6 +332,548 @@ a:hover {
     background-color: var(--color-text-primary);
     margin: 2px 0;
     transition: 0.3s;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: var(--color-text-secondary);
+    stroke: var(--color-text-secondary);
+    transition: fill 0.2s ease, stroke 0.2s ease, transform 0.3s ease;
+}
+
+.theme-toggle svg path,
+.theme-toggle svg circle {
+    fill: var(--color-text-secondary);
+}
+
+.theme-toggle svg line {
+    stroke: var(--color-text-secondary);
+}
+
+.theme-toggle:hover svg,
+.theme-toggle:hover svg path,
+.theme-toggle:hover svg circle {
+    fill: var(--color-accent);
+}
+
+.theme-toggle:hover svg line {
+    stroke: var(--color-accent);
+}
+
+/* Sun icon (shown in dark mode) */
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+/* Moon icon (shown in light mode) */
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+/* Dark mode: show sun, hide moon */
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+/* Dark theme toggle button styling */
+[data-theme="dark"] .theme-toggle {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-accent);
+}
+
+/* Dark Theme Specific Overrides */
+[data-theme="dark"] .page-header {
+    background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+}
+
+[data-theme="dark"] .page-header::before {
+    background: linear-gradient(90deg, #58a6ff, #79b8ff, #a5d6ff);
+}
+
+[data-theme="dark"] .page-header button {
+    background-color: #21262d !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .page-header button:hover {
+    background-color: #30363d !important;
+    border-color: var(--color-accent) !important;
+    color: var(--color-accent) !important;
+}
+
+[data-theme="dark"] .page-header button:active,
+[data-theme="dark"] .page-header button.active {
+    background-color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
+    color: #0d1117 !important;
+}
+
+/* Dark theme link hover */
+[data-theme="dark"] a:hover {
+    color: #79b8ff;
+}
+
+/* Dark theme nav hover */
+[data-theme="dark"] .nav-menu a:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-accent);
+}
+
+[data-theme="dark"] .nav-menu a.active {
+    background-color: var(--color-primary-light);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* Dark theme dropdown menu */
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .dropdown-menu a:hover {
+    background-color: var(--color-bg-hover);
+}
+
+/* Dark theme tables */
+[data-theme="dark"] .data-table th {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .data-table tr:hover {
+    background-color: var(--color-bg-hover);
+}
+
+[data-theme="dark"] .data-table tr:nth-child(even) {
+    background-color: var(--color-bg-secondary);
+}
+
+/* Dark theme stat cards */
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .stats-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+/* Dark theme stat card text - ensure visibility */
+[data-theme="dark"] .stat-value,
+[data-theme="dark"] .stat-number {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .stat-label {
+    color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .stat-sublabel,
+[data-theme="dark"] .stat-detail {
+    color: var(--color-text-muted) !important;
+}
+
+/* Dark theme badges */
+[data-theme="dark"] .badge {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+/* Dark theme - all card content text visibility */
+[data-theme="dark"] .card h2,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card h4,
+[data-theme="dark"] .card-title {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .card p,
+[data-theme="dark"] .card-content,
+[data-theme="dark"] .section-description,
+[data-theme="dark"] .subtitle {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - highlight cards with colored borders */
+[data-theme="dark"] .stat-card.highlight,
+[data-theme="dark"] .stat-card.highlight-blue,
+[data-theme="dark"] .stat-card.highlight-green,
+[data-theme="dark"] .stat-card.highlight-orange,
+[data-theme="dark"] .stat-card.highlight-red {
+    background: var(--color-bg-content);
+}
+
+/* Dark theme - ensure readable text in boxes and info sections */
+[data-theme="dark"] .info-box,
+[data-theme="dark"] .methodology-box,
+[data-theme="dark"] .alert,
+[data-theme="dark"] .notice {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .info-box h3,
+[data-theme="dark"] .info-box h4,
+[data-theme="dark"] .methodology-box h3 {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .info-box p,
+[data-theme="dark"] .info-box li,
+[data-theme="dark"] .methodology-box p,
+[data-theme="dark"] .methodology-box li {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - table improvements */
+[data-theme="dark"] table,
+[data-theme="dark"] .data-table {
+    background-color: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .data-table th {
+    background-color: var(--color-bg-secondary) !important;
+    color: var(--color-text-primary) !important;
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .data-table td {
+    background-color: var(--color-bg-content);
+    color: var(--color-text-primary) !important;
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .data-table tr:nth-child(even) td {
+    background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .data-table tr:hover td {
+    background-color: var(--color-bg-hover) !important;
+}
+
+/* Dark theme - metric/stats grids */
+[data-theme="dark"] .stats-grid .stat-card,
+[data-theme="dark"] .metric-grid .stat-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+/* Dark theme - lists and descriptions */
+[data-theme="dark"] ul li,
+[data-theme="dark"] ol li {
+    color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] strong {
+    color: var(--color-text-primary);
+}
+
+/* Dark theme - code and pre blocks */
+[data-theme="dark"] code {
+    background-color: var(--color-bg-secondary);
+    color: #79b8ff;
+}
+
+/* Dark theme - section headers */
+[data-theme="dark"] .section h2,
+[data-theme="dark"] .section h3 {
+    color: var(--color-text-primary) !important;
+}
+
+/* Dark theme - match quality sections (data-quality.html) */
+[data-theme="dark"] .match-card,
+[data-theme="dark"] .quality-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .match-card h3,
+[data-theme="dark"] .quality-card h3,
+[data-theme="dark"] .match-card .title,
+[data-theme="dark"] .quality-card .title {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .match-card p,
+[data-theme="dark"] .quality-card p,
+[data-theme="dark"] .match-card .description,
+[data-theme="dark"] .quality-card .description {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - viz cards (used across multiple pages) */
+[data-theme="dark"] .viz-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .viz-card h3,
+[data-theme="dark"] .viz-card .title {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .viz-card p,
+[data-theme="dark"] .viz-card .description {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - CWE/CPE/Scoring specific cards */
+[data-theme="dark"] .cwe-card,
+[data-theme="dark"] .cpe-card,
+[data-theme="dark"] .scoring-card,
+[data-theme="dark"] .growth-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .cwe-card h3,
+[data-theme="dark"] .cpe-card h3,
+[data-theme="dark"] .scoring-card h3,
+[data-theme="dark"] .growth-card h3 {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .cwe-card p,
+[data-theme="dark"] .cpe-card p,
+[data-theme="dark"] .scoring-card p,
+[data-theme="dark"] .growth-card p {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - all generic content boxes */
+[data-theme="dark"] .content-box,
+[data-theme="dark"] .summary-box,
+[data-theme="dark"] .detail-box,
+[data-theme="dark"] .explanation-box {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .content-box h3,
+[data-theme="dark"] .content-box h4,
+[data-theme="dark"] .summary-box h3,
+[data-theme="dark"] .summary-box h4 {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .content-box p,
+[data-theme="dark"] .content-box li,
+[data-theme="dark"] .summary-box p,
+[data-theme="dark"] .summary-box li {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - number/percentage displays */
+[data-theme="dark"] .big-number,
+[data-theme="dark"] .percentage,
+[data-theme="dark"] .count-value,
+[data-theme="dark"] .metric-value {
+    color: var(--color-text-primary) !important;
+}
+
+/* Dark theme - progress bars */
+[data-theme="dark"] .progress-bar-container {
+    background: var(--color-bg-secondary);
+}
+
+/* Dark theme - all span/div with numeric values */
+[data-theme="dark"] span.value,
+[data-theme="dark"] div.value,
+[data-theme="dark"] .data-value {
+    color: var(--color-text-primary) !important;
+}
+
+/* Dark theme - methodology/info sections on all pages */
+[data-theme="dark"] .methodology,
+[data-theme="dark"] .methodology-section,
+[data-theme="dark"] .info-panel {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .methodology h3,
+[data-theme="dark"] .methodology h4,
+[data-theme="dark"] .methodology-section h3,
+[data-theme="dark"] .methodology-section h4 {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .methodology p,
+[data-theme="dark"] .methodology li,
+[data-theme="dark"] .methodology-section p,
+[data-theme="dark"] .methodology-section li {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - ensure all headings in main content are visible */
+[data-theme="dark"] main h1,
+[data-theme="dark"] main h2,
+[data-theme="dark"] main h3,
+[data-theme="dark"] main h4,
+[data-theme="dark"] main h5,
+[data-theme="dark"] main h6 {
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] main p,
+[data-theme="dark"] main .subtitle {
+    color: var(--color-text-secondary);
+}
+
+/* Dark theme - generic label/value pairs */
+[data-theme="dark"] .label {
+    color: var(--color-text-secondary) !important;
+}
+
+/* Dark theme - override inline styles for stat numbers */
+[data-theme="dark"] .stat-number,
+[data-theme="dark"] .stat-card .stat-number {
+    color: #e6edf3 !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] small.text-muted {
+    color: #8b949e !important;
+}
+
+/* Dark theme - Bootstrap-style cards */
+[data-theme="dark"] .card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .card-header {
+    background: #21262d;
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .card-header h3,
+[data-theme="dark"] .card-header .card-title {
+    color: #e6edf3 !important;
+}
+
+[data-theme="dark"] .card-header small,
+[data-theme="dark"] .card-header .text-muted {
+    color: #8b949e !important;
+}
+
+[data-theme="dark"] .card-body {
+    background: var(--color-bg-content);
+}
+
+[data-theme="dark"] .card-body p,
+[data-theme="dark"] .card-body li {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .card-body strong {
+    color: #e6edf3;
+}
+
+/* Dark theme - Bootstrap tables */
+[data-theme="dark"] .table,
+[data-theme="dark"] .table-hover {
+    background: var(--color-bg-content);
+    color: #e6edf3;
+}
+
+[data-theme="dark"] .table th {
+    background: #21262d;
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+[data-theme="dark"] .table td {
+    background: var(--color-bg-content);
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover td {
+    background: #21262d;
+}
+
+[data-theme="dark"] .table td.text-center,
+[data-theme="dark"] .table td.text-muted {
+    color: #8b949e !important;
+}
+
+/* Dark theme - confidence badges */
+[data-theme="dark"] .confidence-low,
+[data-theme="dark"] .confidence-high,
+[data-theme="dark"] .confidence-medium {
+    color: inherit;
+}
+
+/* Dark theme footer */
+[data-theme="dark"] .footer {
+    background-color: var(--color-bg-secondary);
+    border-top-color: var(--color-border);
+}
+
+/* Dark theme scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 5px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
+
+/* Dark theme code blocks */
+[data-theme="dark"] code,
+[data-theme="dark"] pre {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
 }
 
 /* Main Content */
@@ -422,6 +1019,52 @@ main {
         0 1px 3px rgba(0, 0, 0, 0.05),
         0 1px 2px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+}
+
+/* Light mode - ensure dark text in stat cards */
+.stat-card .stat-value,
+.stat-card .stat-number {
+    color: #1a202c !important;
+}
+
+.stat-card .stat-label {
+    color: #4a5568 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.stat-card small.text-muted,
+.stat-card .text-muted {
+    color: #718096 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Dark mode stat-card override */
+[data-theme="dark"] .stat-card {
+    background: linear-gradient(135deg, #1c2128 0%, #161b22 100%);
+    border-color: #30363d;
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .stat-card .stat-value,
+[data-theme="dark"] .stat-card .stat-number {
+    color: #e6edf3 !important;
+}
+
+[data-theme="dark"] .stat-card .stat-label {
+    color: #8b949e !important;
+}
+
+[data-theme="dark"] .stat-card .stat-sublabel,
+[data-theme="dark"] .stat-card .stat-detail {
+    color: #6e7681 !important;
+}
+
+[data-theme="dark"] .stat-card:hover {
+    border-color: #58a6ff;
 }
 
 .stat-card::before {
@@ -1884,6 +2527,7 @@ tbody tr:hover {
     .header,
     .footer,
     .nav-toggle,
+    .theme-toggle,
     .quick-select-buttons,
     .export-buttons,
     .btn {
