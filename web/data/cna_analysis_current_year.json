@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-04T12:23:07.322960",
+  "generated_at": "2026-01-04T16:47:59.146549",
   "source": "CVE V5 List (Authoritative)",
   "year": 2026,
   "total_cnas": 12,
@@ -11,10 +11,10 @@
     {
       "name": "VulDB",
       "assigner_org_id": "1af790b2-7ee1-4545-860a-a788eba489b5",
-      "count": 52,
+      "count": 53,
       "rank": 1,
       "first_cve_date": "2026-01-01T09:02:10.684Z",
-      "last_cve_date": "2026-01-04T12:02:07.658Z",
+      "last_cve_date": "2026-01-04T12:32:07.749Z",
       "years_active": 5,
       "first_cve_year": 2022,
       "last_cve_year": 2026,
@@ -207,19 +207,19 @@
       "top_cwes": []
     },
     {
-      "name": "JFROG",
-      "assigner_org_id": "48a46f29-ae42-4e1d-90dd-c1676c1e5e6d",
+      "name": "@huntr_ai",
+      "assigner_org_id": "c09c270a-b464-47c1-9133-acb35b22c19a",
       "count": 1,
       "rank": 10,
-      "first_cve_date": "2026-01-04T09:17:34.468Z",
-      "last_cve_date": "2026-01-04T09:17:34.468Z",
+      "first_cve_date": "2026-01-01T07:03:57.277Z",
+      "last_cve_date": "2026-01-01T07:03:57.277Z",
       "years_active": 6,
       "first_cve_year": 2021,
       "last_cve_year": 2026,
       "is_official": true,
       "activity_status": "Active",
       "cna_types": [
-        "Vendor"
+        "Other"
       ],
       "severity_distribution": {},
       "top_cwe_types": {},
@@ -251,19 +251,19 @@
       "top_cwes": []
     },
     {
-      "name": "@huntr_ai",
-      "assigner_org_id": "c09c270a-b464-47c1-9133-acb35b22c19a",
+      "name": "JFROG",
+      "assigner_org_id": "48a46f29-ae42-4e1d-90dd-c1676c1e5e6d",
       "count": 1,
       "rank": 12,
-      "first_cve_date": "2026-01-01T07:03:57.277Z",
-      "last_cve_date": "2026-01-01T07:03:57.277Z",
+      "first_cve_date": "2026-01-04T09:17:34.468Z",
+      "last_cve_date": "2026-01-04T09:17:34.468Z",
       "years_active": 6,
       "first_cve_year": 2021,
       "last_cve_year": 2026,
       "is_official": true,
       "activity_status": "Active",
       "cna_types": [
-        "Other"
+        "Vendor"
       ],
       "severity_distribution": {},
       "top_cwe_types": {},
@@ -277,10 +277,10 @@
     {
       "name": "VulDB",
       "assigner_org_id": "1af790b2-7ee1-4545-860a-a788eba489b5",
-      "count": 52,
+      "count": 53,
       "rank": 1,
       "first_cve_date": "2026-01-01T09:02:10.684Z",
-      "last_cve_date": "2026-01-04T12:02:07.658Z",
+      "last_cve_date": "2026-01-04T12:32:07.749Z",
       "years_active": 5,
       "first_cve_year": 2022,
       "last_cve_year": 2026,
@@ -473,19 +473,19 @@
       "top_cwes": []
     },
     {
-      "name": "JFROG",
-      "assigner_org_id": "48a46f29-ae42-4e1d-90dd-c1676c1e5e6d",
+      "name": "@huntr_ai",
+      "assigner_org_id": "c09c270a-b464-47c1-9133-acb35b22c19a",
       "count": 1,
       "rank": 10,
-      "first_cve_date": "2026-01-04T09:17:34.468Z",
-      "last_cve_date": "2026-01-04T09:17:34.468Z",
+      "first_cve_date": "2026-01-01T07:03:57.277Z",
+      "last_cve_date": "2026-01-01T07:03:57.277Z",
       "years_active": 6,
       "first_cve_year": 2021,
       "last_cve_year": 2026,
       "is_official": true,
       "activity_status": "Active",
       "cna_types": [
-        "Vendor"
+        "Other"
       ],
       "severity_distribution": {},
       "top_cwe_types": {},
@@ -517,19 +517,19 @@
       "top_cwes": []
     },
     {
-      "name": "@huntr_ai",
-      "assigner_org_id": "c09c270a-b464-47c1-9133-acb35b22c19a",
+      "name": "JFROG",
+      "assigner_org_id": "48a46f29-ae42-4e1d-90dd-c1676c1e5e6d",
       "count": 1,
       "rank": 12,
-      "first_cve_date": "2026-01-01T07:03:57.277Z",
-      "last_cve_date": "2026-01-01T07:03:57.277Z",
+      "first_cve_date": "2026-01-04T09:17:34.468Z",
+      "last_cve_date": "2026-01-04T09:17:34.468Z",
       "years_active": 6,
       "first_cve_year": 2021,
       "last_cve_year": 2026,
       "is_official": true,
       "activity_status": "Active",
       "cna_types": [
-        "Other"
+        "Vendor"
       ],
       "severity_distribution": {},
       "top_cwe_types": {},

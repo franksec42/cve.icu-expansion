@@ -572,9 +572,9 @@
       }
     },
     "epss_summary": {
-      "epss_gt_0_1": 1322,
-      "epss_gt_0_5": 389,
-      "epss_gt_0_9": 123
+      "epss_gt_0_1": 1342,
+      "epss_gt_0_5": 398,
+      "epss_gt_0_9": 131
     }
   },
   "kev": {
@@ -837,7 +837,7 @@
     ]
   },
   "processing_stats": {
-    "processed_at": "2026-01-04T12:19:13.472000",
+    "processed_at": "2026-01-04T16:41:30.511410",
     "data_source": "data/cache/nvd.json"
   }
 }

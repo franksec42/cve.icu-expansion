@@ -453,6 +453,134 @@ Large counts include both absolute values and percentages:
 }
 ```
 
+### nvd_status_analysis.json
+
+NVD status tracking and growth analysis.
+
+```json
+{
+  "generated_at": "2024-01-15T10:30:00Z",
+  "data_source": "NVD",
+  "metadata": {
+    "total_cves": 320000,
+    "current_year": 2024,
+    "day_of_year": 15
+  },
+  "current_status": {
+    "snapshot_date": "2024-01-15",
+    "total_cves": 320000,
+    "status_counts": {
+      "Analyzed": 150000,
+      "Awaiting Analysis": 2971,
+      "Modified": 120000,
+      "Rejected": 16188,
+      "Received": 180,
+      "Undergoing Analysis": 31
+    },
+    "status_percentages": {
+      "Analyzed": 46.9,
+      "Modified": 37.5,
+      "Rejected": 5.1
+    }
+  },
+  "monthly_status": {
+    "2024-01": {
+      "Analyzed": 1500,
+      "Awaiting Analysis": 2971,
+      "Modified": 2485,
+      "Rejected": 672,
+      "Received": 180,
+      "Undergoing Analysis": 31
+    }
+  },
+  "quarterly_breakdown": {
+    "2024": {"Q1": 8500, "Q2": 9200, "Q3": 9800, "Q4": 8700, "total": 36200},
+    "2023": {"Q1": 7200, "Q2": 8100, "Q3": 8500, "Q4": 8900, "total": 32700}
+  },
+  "growth_table": [
+    {
+      "year": 2024,
+      "q1": 8500, "q2": 9200, "q3": 9800, "q4": 8700,
+      "total_actual": 36200,
+      "projection": 38000,
+      "cumulative": 340000,
+      "yoy_difference": 5200,
+      "delta_percent": 16.8,
+      "is_current_year": true,
+      "is_ytd": true
+    }
+  ],
+  "recent_activity": {
+    "last_7_days": {
+      "total_activity": 5000,
+      "new_cves": 800,
+      "modified_cves": 4200
+    },
+    "last_30_days": {
+      "total_activity": 20000,
+      "new_cves": 3200,
+      "modified_cves": 16800
+    }
+  }
+}
+```
+
+### growth_table.json
+
+Standalone growth table for quick access to YoY comparisons.
+
+```json
+{
+  "generated_at": "2024-01-15T10:30:00Z",
+  "growth_table": [
+    {
+      "year": 2024,
+      "q1": 8500,
+      "q2": 9200,
+      "q3": 9800,
+      "q4": 0,
+      "total_actual": 27500,
+      "projection": 36200,
+      "total_projection": 36200,
+      "cumulative": 340000,
+      "cumulative_projection": 348700,
+      "yoy_difference": 5200,
+      "delta_percent": 16.8,
+      "is_current_year": true,
+      "is_ytd": true
+    }
+  ],
+  "quarterly_breakdown": {
+    "2024": {"Q1": 8500, "Q2": 9200, "Q3": 9800, "Q4": 0, "total": 27500},
+    "2023": {"Q1": 7200, "Q2": 8100, "Q3": 8500, "Q4": 8900, "total": 32700}
+  }
+}
+```
+
+### cna_vulnerability_mapping.json
+
+CNA to vulnerability mapping with monthly breakdown.
+
+```json
+{
+  "generated_at": "2024-01-15T10:30:00Z",
+  "total_cnas": 450,
+  "total_cves": 303000,
+  "top_50_cnas": [
+    {
+      "cna": "cve@mitre.org",
+      "total_cves": 50000,
+      "monthly_counts": {
+        "2024-01": 1200,
+        "2023-12": 1500
+      },
+      "sample_cves": ["CVE-2024-1234", "CVE-2024-1235"]
+    }
+  ],
+  "cna_list": []
+}
+```
+
 ## Validation
 
 Use the `--validate` flag on build.py to verify schema consistency:

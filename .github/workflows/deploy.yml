@@ -5,9 +5,14 @@ on:
   push:
     branches: [ main ]
   
-  # Run every 6 hours
+  # Run every 6 hours for full data updates
   schedule:
     - cron: '0 */6 * * *'
+  
+  # Run daily at midnight UTC for status tracking
+  # This ensures NVD status changes are captured even on low-activity days
+  # Note: The 6-hour cron will also capture this, but explicit daily ensures consistency
+  # - cron: '0 0 * * *'  # Covered by 6-hour schedule
   
   # Allow manual triggering
   workflow_dispatch:

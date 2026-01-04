@@ -569,6 +569,28 @@ class CVESiteBuilder:
             'cna_current': 'handled_in_combined_analysis'
         }
     
+    def generate_nvd_status_analysis(self):
+        """Generate NVD status analysis with monthly aggregation and growth tables"""
+        print("📊 Generating NVD status analysis...")
+        
+        try:
+            from nvd_status_analysis import NVDStatusAnalyzer
+            analyzer = NVDStatusAnalyzer(self.base_dir, self.cache_dir, self.data_dir, quiet=self.quiet)
+            results = analyzer.generate_all()
+            
+            if results:
+                if not self.quiet:
+                    print("  ✅ NVD status analysis generated successfully")
+            else:
+                print("  ⚠️  NVD status analysis generation failed")
+                
+        except ImportError as e:
+            print(f"  ⚠️  Could not import NVD status analyzer: {e}")
+        except Exception as e:
+            print(f"  ⚠️  Error generating NVD status analysis: {e}")
+            import traceback
+            traceback.print_exc()
+    
     def generate_data_quality_json(self):
         """Generate data quality analysis JSON using CNAScorecard-style name matching"""
         print("🔍 Generating data quality analysis...")
@@ -618,6 +640,7 @@ class CVESiteBuilder:
             {'template': 'epss.html', 'output': 'epss.html', 'title': 'EPSS Analysis'},
             {'template': 'kev.html', 'output': 'kev.html', 'title': 'KEV Analysis'},
             {'template': 'data-quality.html', 'output': 'data-quality.html', 'title': 'CNA Name Matching'},
+            {'template': 'nvd-status.html', 'output': 'nvd-status.html', 'title': 'NVD Status Analysis'},
             {'template': 'about.html', 'output': 'about.html', 'title': 'About CVE.ICU'}
         ]
         
@@ -673,7 +696,10 @@ class CVESiteBuilder:
             # Step 6: Generate data quality analysis
             self.generate_data_quality_json()
             
-            # Step 7: Generate HTML pages
+            # Step 7: Generate NVD status analysis
+            self.generate_nvd_status_analysis()
+            
+            # Step 8: Generate HTML pages
             self.generate_html_pages()
             
             if not self.quiet:

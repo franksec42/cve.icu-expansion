@@ -1,0 +1,614 @@
+{% extends "base.html" %}
+
+{% block title %}NVD Status Analysis - {{ title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>📊 NVD Status Analysis</h1>
+    <p class="subtitle">Real-time tracking of NVD vulnerability processing status and growth trends</p>
+    
+    <!-- Status Snapshot Section -->
+    <section class="section">
+        <h2>Current Status Snapshot</h2>
+        <p class="section-description">Current distribution of CVE vulnerability status in NVD</p>
+        
+        <div class="stats-grid" id="statusStats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalCves">-</div>
+                <div class="stat-label">Total CVEs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="analyzedCount">-</div>
+                <div class="stat-label">Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="awaitingCount">-</div>
+                <div class="stat-label">Awaiting Analysis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="modifiedCount">-</div>
+                <div class="stat-label">Modified</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="receivedCount">-</div>
+                <div class="stat-label">Received</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="undergoingCount">-</div>
+                <div class="stat-label">Undergoing Analysis</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="statusPieChart"></canvas>
+        </div>
+    </section>
+    
+    <!-- Recent Activity Section -->
+    <section class="section">
+        <h2>Recent Activity</h2>
+        <p class="section-description">CVE activity in the last 7 and 30 days</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card highlight-blue">
+                <div class="stat-value" id="activity7Days">-</div>
+                <div class="stat-label">Last 7 Days Activity</div>
+            </div>
+            <div class="stat-card highlight-green">
+                <div class="stat-value" id="newCves7Days">-</div>
+                <div class="stat-label">New CVEs (7 Days)</div>
+            </div>
+            <div class="stat-card highlight-blue">
+                <div class="stat-value" id="activity30Days">-</div>
+                <div class="stat-label">Last 30 Days Activity</div>
+            </div>
+            <div class="stat-card highlight-green">
+                <div class="stat-value" id="newCves30Days">-</div>
+                <div class="stat-label">New CVEs (30 Days)</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Monthly Status Trend Section -->
+    <section class="section">
+        <h2>Monthly Status Distribution</h2>
+        <p class="section-description">Status changes over the last 12 months</p>
+        
+        <div class="chart-container large">
+            <canvas id="monthlyStatusChart"></canvas>
+        </div>
+    </section>
+    
+    <!-- Quarterly Breakdown Section -->
+    <section class="section">
+        <h2>Quarterly CVE Breakdown</h2>
+        <p class="section-description">CVE publications by quarter (excludes rejected CVEs)</p>
+        
+        <div class="chart-container large">
+            <canvas id="quarterlyChart"></canvas>
+        </div>
+    </section>
+    
+    <!-- Growth Table Section -->
+    <section class="section">
+        <h2>CVE Growth Table</h2>
+        <p class="section-description">Year-over-year growth with cumulative totals and projections</p>
+        
+        <div class="table-container">
+            <table class="data-table" id="growthTable">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Q1</th>
+                        <th>Q2</th>
+                        <th>Q3</th>
+                        <th>Q4</th>
+                        <th>Total</th>
+                        <th>Projection</th>
+                        <th>Cumulative</th>
+                        <th>YoY Diff</th>
+                        <th>Delta %</th>
+                    </tr>
+                </thead>
+                <tbody id="growthTableBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Top CNAs Section -->
+    <section class="section">
+        <h2>Top CVE Numbering Authorities</h2>
+        <p class="section-description">CNAs with the most vulnerability assignments</p>
+        
+        <div class="chart-container">
+            <canvas id="topCnasChart"></canvas>
+        </div>
+    </section>
+    
+    <!-- Methodology Section -->
+    <section class="section info-section">
+        <h2>📝 Methodology</h2>
+        <div class="info-box">
+            <h4>Data Sources</h4>
+            <ul>
+                <li><strong>NVD (National Vulnerability Database)</strong>: Primary source for CVE data and status</li>
+                <li><strong>Update Frequency</strong>: Data refreshed every 6 hours via GitHub Actions</li>
+            </ul>
+            
+            <h4>Status Definitions</h4>
+            <ul>
+                <li><strong>Analyzed</strong>: CVE has been fully analyzed by NVD</li>
+                <li><strong>Awaiting Analysis</strong>: CVE is in the queue for NVD analysis</li>
+                <li><strong>Modified</strong>: CVE has been updated since initial analysis</li>
+                <li><strong>Received</strong>: CVE has been received but not yet processed</li>
+                <li><strong>Undergoing Analysis</strong>: CVE is currently being analyzed</li>
+                <li><strong>Rejected</strong>: CVE has been rejected/withdrawn</li>
+            </ul>
+            
+            <h4>Counting Rules</h4>
+            <ul>
+                <li>Rejected CVEs are excluded from quarterly totals and growth calculations</li>
+                <li>Status counts include all CVEs regardless of rejection status</li>
+                <li>Projections are annualized from year-to-date data for the current year</li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<style>
+    .subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+    
+    .section {
+        margin-bottom: 3rem;
+    }
+    
+    .section-description {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .stat-card.highlight-blue {
+        border-left: 4px solid #3498db;
+    }
+    
+    .stat-card.highlight-green {
+        border-left: 4px solid #27ae60;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+    
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+    
+    .chart-container {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .chart-container.large {
+        min-height: 400px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 12px 16px;
+        text-align: right;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .data-table th {
+        background: var(--bg-secondary);
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    .data-table th:first-child,
+    .data-table td:first-child {
+        text-align: left;
+    }
+    
+    .data-table tr:hover {
+        background: var(--bg-secondary);
+    }
+    
+    .data-table tr.current-year {
+        background: rgba(52, 152, 219, 0.1);
+        font-weight: 600;
+    }
+    
+    .positive {
+        color: #27ae60;
+    }
+    
+    .negative {
+        color: #e74c3c;
+    }
+    
+    .info-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 2rem;
+    }
+    
+    .info-box h4 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--accent-color);
+    }
+    
+    .info-box h4:first-child {
+        margin-top: 0;
+    }
+    
+    .info-box ul {
+        margin-left: 1.5rem;
+        color: var(--text-secondary);
+    }
+    
+    .info-box li {
+        margin-bottom: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+// Format number with K/M suffix
+function formatNumber(num) {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toLocaleString();
+}
+
+// Load and display NVD status data
+async function loadNvdStatusData() {
+    try {
+        const response = await fetch('data/nvd_status_analysis.json');
+        if (!response.ok) {
+            console.log('NVD status analysis not yet generated');
+            return;
+        }
+        const data = await response.json();
+        
+        // Populate status snapshot
+        if (data.current_status) {
+            const status = data.current_status;
+            document.getElementById('totalCves').textContent = formatNumber(status.total_cves || 0);
+            document.getElementById('analyzedCount').textContent = formatNumber(status.status_counts?.['Analyzed'] || 0);
+            document.getElementById('awaitingCount').textContent = formatNumber(status.status_counts?.['Awaiting Analysis'] || 0);
+            document.getElementById('modifiedCount').textContent = formatNumber(status.status_counts?.['Modified'] || 0);
+            document.getElementById('receivedCount').textContent = formatNumber(status.status_counts?.['Received'] || 0);
+            document.getElementById('undergoingCount').textContent = formatNumber(status.status_counts?.['Undergoing Analysis'] || 0);
+            
+            // Create status pie chart
+            createStatusPieChart(status.status_counts);
+        }
+        
+        // Populate recent activity
+        if (data.recent_activity) {
+            const last7 = data.recent_activity.last_7_days || {};
+            const last30 = data.recent_activity.last_30_days || {};
+            
+            document.getElementById('activity7Days').textContent = formatNumber(last7.total_activity || 0);
+            document.getElementById('newCves7Days').textContent = formatNumber(last7.new_cves || 0);
+            document.getElementById('activity30Days').textContent = formatNumber(last30.total_activity || 0);
+            document.getElementById('newCves30Days').textContent = formatNumber(last30.new_cves || 0);
+        }
+        
+        // Create monthly status chart
+        if (data.monthly_status) {
+            createMonthlyStatusChart(data.monthly_status);
+        }
+        
+        // Create quarterly chart
+        if (data.quarterly_breakdown) {
+            createQuarterlyChart(data.quarterly_breakdown);
+        }
+        
+        // Populate growth table
+        if (data.growth_table) {
+            populateGrowthTable(data.growth_table);
+        }
+        
+        // Create top CNAs chart
+        if (data.cna_mapping_summary) {
+            createTopCnasChart(data.cna_mapping_summary.top_10_cnas || []);
+        }
+        
+    } catch (error) {
+        console.error('Error loading NVD status data:', error);
+    }
+}
+
+function createStatusPieChart(statusCounts) {
+    const ctx = document.getElementById('statusPieChart').getContext('2d');
+    
+    // Filter out small values for readability
+    const filteredData = Object.entries(statusCounts)
+        .filter(([key, value]) => value > 1000)
+        .sort((a, b) => b[1] - a[1]);
+    
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: filteredData.map(([key]) => key),
+            datasets: [{
+                data: filteredData.map(([, value]) => value),
+                backgroundColor: [
+                    '#27ae60', // Analyzed - green
+                    '#f39c12', // Awaiting - orange
+                    '#3498db', // Modified - blue
+                    '#e74c3c', // Rejected - red
+                    '#9b59b6', // Received - purple
+                    '#1abc9c', // Undergoing - teal
+                    '#95a5a6'  // Other - gray
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: '#e0e0e0' }
+                },
+                title: {
+                    display: true,
+                    text: 'CVE Status Distribution',
+                    color: '#e0e0e0'
+                }
+            }
+        }
+    });
+}
+
+function createMonthlyStatusChart(monthlyStatus) {
+    const ctx = document.getElementById('monthlyStatusChart').getContext('2d');
+    
+    // Get last 12 months
+    const months = Object.keys(monthlyStatus).sort().slice(-12);
+    
+    // Status types to track
+    const statusTypes = ['Analyzed', 'Awaiting Analysis', 'Modified', 'Received'];
+    const colors = ['#27ae60', '#f39c12', '#3498db', '#9b59b6'];
+    
+    const datasets = statusTypes.map((status, index) => ({
+        label: status,
+        data: months.map(month => monthlyStatus[month]?.[status] || 0),
+        backgroundColor: colors[index],
+        borderColor: colors[index],
+        borderWidth: 1
+    }));
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                },
+                y: {
+                    stacked: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#e0e0e0' }
+                },
+                title: {
+                    display: true,
+                    text: 'Monthly Status Activity (Last 12 Months)',
+                    color: '#e0e0e0'
+                }
+            }
+        }
+    });
+}
+
+function createQuarterlyChart(quarterlyData) {
+    const ctx = document.getElementById('quarterlyChart').getContext('2d');
+    
+    // Get recent years (last 10)
+    const years = Object.keys(quarterlyData).sort().slice(-10);
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Q1',
+                    data: years.map(year => quarterlyData[year]?.Q1 || 0),
+                    backgroundColor: '#3498db'
+                },
+                {
+                    label: 'Q2',
+                    data: years.map(year => quarterlyData[year]?.Q2 || 0),
+                    backgroundColor: '#27ae60'
+                },
+                {
+                    label: 'Q3',
+                    data: years.map(year => quarterlyData[year]?.Q3 || 0),
+                    backgroundColor: '#f39c12'
+                },
+                {
+                    label: 'Q4',
+                    data: years.map(year => quarterlyData[year]?.Q4 || 0),
+                    backgroundColor: '#9b59b6'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                },
+                y: {
+                    stacked: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#e0e0e0' }
+                },
+                title: {
+                    display: true,
+                    text: 'Quarterly CVE Publications',
+                    color: '#e0e0e0'
+                }
+            }
+        }
+    });
+}
+
+function populateGrowthTable(growthTable) {
+    const tbody = document.getElementById('growthTableBody');
+    tbody.innerHTML = '';
+    
+    // Show last 15 years
+    const recentData = growthTable.slice(-15);
+    
+    recentData.forEach(row => {
+        const tr = document.createElement('tr');
+        if (row.is_current_year) {
+            tr.classList.add('current-year');
+        }
+        
+        const deltaClass = row.delta_percent >= 0 ? 'positive' : 'negative';
+        const deltaSign = row.delta_percent >= 0 ? '+' : '';
+        
+        tr.innerHTML = `
+            <td><strong>${row.year}</strong>${row.is_ytd ? ' (YTD)' : ''}</td>
+            <td>${formatNumber(row.q1)}</td>
+            <td>${formatNumber(row.q2)}</td>
+            <td>${formatNumber(row.q3)}</td>
+            <td>${formatNumber(row.q4)}</td>
+            <td><strong>${formatNumber(row.total_actual)}</strong></td>
+            <td>${row.is_current_year ? formatNumber(row.projection) : '-'}</td>
+            <td>${formatNumber(row.cumulative)}</td>
+            <td class="${deltaClass}">${row.yoy_difference >= 0 ? '+' : ''}${formatNumber(row.yoy_difference)}</td>
+            <td class="${deltaClass}">${deltaSign}${row.delta_percent}%</td>
+        `;
+        
+        tbody.appendChild(tr);
+    });
+}
+
+function createTopCnasChart(cnaList) {
+    const ctx = document.getElementById('topCnasChart').getContext('2d');
+    
+    const labels = cnaList.map(cna => cna.cna.length > 30 ? cna.cna.substring(0, 30) + '...' : cna.cna);
+    const values = cnaList.map(cna => cna.total_cves);
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'CVEs Assigned',
+                data: values,
+                backgroundColor: '#3498db',
+                borderColor: '#2980b9',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                },
+                y: {
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Top 10 CVE Numbering Authorities',
+                    color: '#e0e0e0'
+                }
+            }
+        }
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', loadNvdStatusData);
+</script>
+{% endblock %}
+

@@ -19,12 +19,13 @@ help:
 	@echo "  install   - Install Python dependencies"
 	@echo ""
 	@echo "Data rebuild targets:"
-	@echo "  rebuild-cna    - Rebuild CNA analysis only"
-	@echo "  rebuild-cpe    - Rebuild CPE analysis only"
-	@echo "  rebuild-cvss   - Rebuild CVSS analysis only"
-	@echo "  rebuild-cwe    - Rebuild CWE analysis only"
-	@echo "  rebuild-growth - Rebuild growth analysis only"
-	@echo "  rebuild-quality - Rebuild data quality analysis only"
+	@echo "  rebuild-cna       - Rebuild CNA analysis only"
+	@echo "  rebuild-cpe       - Rebuild CPE analysis only"
+	@echo "  rebuild-cvss      - Rebuild CVSS analysis only"
+	@echo "  rebuild-cwe       - Rebuild CWE analysis only"
+	@echo "  rebuild-growth    - Rebuild growth analysis only"
+	@echo "  rebuild-quality   - Rebuild data quality analysis only"
+	@echo "  rebuild-nvd-status - Rebuild NVD status analysis only"
 
 # Install dependencies
 install:
@@ -85,8 +86,11 @@ rebuild-growth:
 rebuild-quality:
 	python data/scripts/rebuild_data_quality.py
 
+rebuild-nvd-status:
+	python data/scripts/rebuild_nvd_status.py
+
 # Rebuild all analysis files without full build
-rebuild-all: rebuild-cna rebuild-cpe rebuild-cvss rebuild-cwe rebuild-growth rebuild-quality
+rebuild-all: rebuild-cna rebuild-cpe rebuild-cvss rebuild-cwe rebuild-growth rebuild-quality rebuild-nvd-status
 	@echo "All analysis files rebuilt"
 
 # Validate JSON schemas

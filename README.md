@@ -182,6 +182,8 @@ python build.py --validate
 | `cpe_analysis.json` | Vendor/product analysis |
 | `calendar_analysis.json` | Publication timing patterns |
 | `growth_analysis.json` | CVE growth trends |
+| `nvd_status_analysis.json` | NVD status aggregation (monthly) |
+| `growth_table.json` | Quarterly CVE breakdown with YoY deltas |
 | `scoring_analysis.json` | EPSS and KEV data |
 
 ### HTML Pages
@@ -195,6 +197,7 @@ python build.py --validate
 | `cpe.html` | Vendor/product analysis |
 | `calendar.html` | Publication calendar |
 | `growth.html` | Growth trends |
+| `nvd-status.html` | NVD status & growth table |
 | `scoring.html` | EPSS/KEV/Risk Matrix |
 
 ## 🔄 CI/CD
@@ -207,6 +210,7 @@ The project uses GitHub Actions for automation:
 
 ## 📖 Documentation
 
+- **[Quick Start Guide](docs/QUICKSTART.md)** - Commands, data locations, GitHub Actions setup
 - [Architecture Guide](docs/ARCHITECTURE.md) - System design and data flow
 - [JSON Schemas](docs/SCHEMAS.md) - Output file format specifications
 - [Development Roadmap](docs/ROADMAP.md) - Project history and future plans
