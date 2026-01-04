@@ -228,6 +228,73 @@
         padding: 1rem;
     }
 }
+
+/* Dark Mode Calendar Styles */
+[data-theme="dark"] .calendar-container {
+    background: var(--color-bg-content);
+}
+
+[data-theme="dark"] .calendar-heatmap .day {
+    fill: #2a2a40;
+    stroke: #1a1a2e;
+}
+
+[data-theme="dark"] .calendar-heatmap .month-label,
+[data-theme="dark"] .calendar-heatmap .day-label {
+    fill: #ffffff;
+}
+
+[data-theme="dark"] .calendar-heatmap text {
+    fill: #ffffff;
+}
+
+[data-theme="dark"] .year-selector {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .calendar-tooltip {
+    background: rgba(26, 26, 46, 0.95);
+    border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .legend-label {
+    color: #ffffff;
+}
+
+/* Insight Card Dark Mode */
+[data-theme="dark"] .insight-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .insight-title {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .insight-text {
+    color: #e0e0e5 !important;
+}
+
+/* Calendar day with data - Orange Phoenix Theme */
+.calendar-heatmap .day.level-1 { fill: #fee6d8; }
+.calendar-heatmap .day.level-2 { fill: #fdc4a8; }
+.calendar-heatmap .day.level-3 { fill: #fc9c6d; }
+.calendar-heatmap .day.level-4 { fill: #F36717; }
+.calendar-heatmap .day.level-5 { fill: #C6361F; }
+
+[data-theme="dark"] .calendar-heatmap .day.level-1 { fill: #4a3528; }
+[data-theme="dark"] .calendar-heatmap .day.level-2 { fill: #6b4020; }
+[data-theme="dark"] .calendar-heatmap .day.level-3 { fill: #8c4d18; }
+[data-theme="dark"] .calendar-heatmap .day.level-4 { fill: #F36717; }
+[data-theme="dark"] .calendar-heatmap .day.level-5 { fill: #FF9059; }
+
+/* Calendar grid text colors */
+[data-theme="dark"] #calendar text,
+[data-theme="dark"] .calendar text {
+    fill: #ffffff !important;
+}
 </style>
 {% endblock %}
 
@@ -353,10 +420,22 @@ let selectedYear = currentYear;
 let tooltip = null;
 
 // Color palette for calendar heatmap (Blue theme)
-const colorPalette = {
-    empty: '#ebedf0',
-    scale: ['#ebedf0', '#c6e7ff', '#7cc7ff', '#3b9eff', '#0969da']
-};
+// Theme-aware color palette
+function getColorPalette() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        return {
+            empty: '#2a2a40',
+            scale: ['#2a2a40', '#4a3528', '#8c4d18', '#F36717', '#FF9059']
+        };
+    }
+    return {
+        empty: '#ebedf0',
+        scale: ['#ebedf0', '#fee6d8', '#fdc4a8', '#F36717', '#C6361F']
+    };
+}
+
+let colorPalette = getColorPalette();
 
 // Color scale function
 function getColor(value) {
@@ -366,6 +445,21 @@ function getColor(value) {
     if (value <= 30) return colorPalette.scale[3];
     return colorPalette.scale[4];
 }
+
+// Update palette when theme changes
+const themeObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'data-theme') {
+            colorPalette = getColorPalette();
+            // Redraw calendar if it exists
+            if (calendarData && calendarData.daily_data) {
+                document.getElementById('calendar').innerHTML = '';
+                renderCalendar(calendarData);
+            }
+        }
+    });
+});
+themeObserver.observe(document.documentElement, { attributes: true });
 
 document.addEventListener('DOMContentLoaded', async function() {
     await loadCalendarData();

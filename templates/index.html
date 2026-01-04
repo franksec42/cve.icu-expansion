@@ -296,10 +296,14 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'CVEs Published',
                 data: [],
-                borderColor: window.CVE_COLORS.primary,
-                backgroundColor: window.CVE_COLORS.primaryLight,
-                fill: false,
-                tension: 0.1
+                borderColor: '#F36717',
+                backgroundColor: 'rgba(243, 103, 23, 0.15)',
+                fill: true,
+                tension: 0.1,
+                borderWidth: 3,
+                pointBackgroundColor: '#F36717',
+                pointBorderColor: '#F36717',
+                pointRadius: 4
             }]
         };
         
@@ -554,10 +558,11 @@ function initializeGrowthPreview() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        borderColor: '#5a9bd4',
-                        backgroundColor: 'rgba(90, 155, 212, 0.1)',
+                        borderColor: '#F36717',
+                        backgroundColor: 'rgba(243, 103, 23, 0.15)',
                         fill: true,
-                        tension: 0.4
+                        tension: 0.4,
+                        borderWidth: 3
                     }]
                 },
                 options: {
@@ -662,16 +667,16 @@ function updateCvssPreviewChart(version) {
     // Light blue/gray color palette matching CVE.ICU design (11 bins)
     const colors = [
         '#d6e7f5', // Lightest blue (0.0-0.9)
-        '#c8dff0', // Very light blue (1.0-1.9)
-        '#b9d7eb', // Light blue (2.0-2.9)
-        '#aacfe6', // Light-medium blue (3.0-3.9)
-        '#9bc7e1', // Medium blue (4.0-4.9)
-        '#8cbfdc', // Medium-dark blue (5.0-5.9)
-        '#7db7d7', // Dark blue (6.0-6.9)
-        '#6eafd2', // Darker blue (7.0-7.9)
-        '#5fa7cd', // Very dark blue (8.0-8.9)
-        '#509fc8', // Darkest blue (9.0-9.9)
-        '#4197c3'  // Deepest blue (10.0)
+        '#fee6d8', // Very light orange (1.0-1.9)
+        '#fdc4a8', // Light orange (2.0-2.9)
+        '#FF9059', // Light-medium orange (3.0-3.9)
+        '#F36717', // Medium orange (4.0-4.9)
+        '#F03E1E', // Medium-dark orange (5.0-5.9)
+        '#C6361F', // Dark orange/Mahogany (6.0-6.9)
+        '#9E517B', // Light purple (7.0-7.9)
+        '#6714CC', // Primary purple (8.0-8.9)
+        '#523DD9', // Blue purple (9.0-9.9)
+        '#380886'  // Dark purple (10.0)
     ];
     
     // Destroy existing chart if it exists
@@ -739,9 +744,9 @@ function initializeCwePreview() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        backgroundColor: ['#a8c8ec', '#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2'],
-                        borderColor: ['#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2', '#5fa7cd'],
-                        borderWidth: 1
+                        backgroundColor: ['#F36717', '#FF9059', '#fdc4a8', '#9E517B', '#6714CC'],
+                        borderColor: ['#C6361F', '#F36717', '#FF9059', '#6714CC', '#380886'],
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -779,9 +784,9 @@ function initializeCnaPreview() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        backgroundColor: ['#a8c8ec', '#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2'],
-                        borderColor: ['#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2', '#5fa7cd'],
-                        borderWidth: 1
+                        backgroundColor: ['#F36717', '#FF9059', '#fdc4a8', '#9E517B', '#6714CC'],
+                        borderColor: ['#C6361F', '#F36717', '#FF9059', '#6714CC', '#380886'],
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -820,9 +825,9 @@ function initializeCpePreview() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        backgroundColor: ['#a8c8ec', '#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2'],
-                        borderColor: ['#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2', '#5fa7cd'],
-                        borderWidth: 1
+                        backgroundColor: ['#F36717', '#FF9059', '#fdc4a8', '#9E517B', '#6714CC'],
+                        borderColor: ['#C6361F', '#F36717', '#FF9059', '#6714CC', '#380886'],
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -874,9 +879,9 @@ function initializeRiskVolumeChart() {
                     {
                         label: 'Total CVEs',
                         data: cveVolume,
-                        backgroundColor: 'rgba(168, 200, 236, 0.7)',
-                        borderColor: '#9bc7e1',
-                        borderWidth: 1,
+                        backgroundColor: 'rgba(243, 103, 23, 0.5)',
+                        borderColor: '#F36717',
+                        borderWidth: 2,
                         yAxisID: 'y',
                         order: 2
                     },
@@ -884,8 +889,8 @@ function initializeRiskVolumeChart() {
                         label: 'KEV CVEs',
                         data: kevCount,
                         type: 'line',
-                        borderColor: '#dc3545',
-                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderColor: '#6714CC',
+                        backgroundColor: 'rgba(103, 20, 204, 0.15)',
                         borderWidth: 3,
                         pointBackgroundColor: '#dc3545',
                         pointRadius: 4,
@@ -1000,9 +1005,9 @@ function initializeCalendarPreview() {
                     labels: months,
                     datasets: [{
                         data: values,
-                        backgroundColor: '#a8c8ec',
-                        borderColor: '#9bc7e1',
-                        borderWidth: 1
+                        backgroundColor: '#F36717',
+                        borderColor: '#C6361F',
+                        borderWidth: 2
                     }]
                 },
                 options: {

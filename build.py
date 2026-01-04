@@ -33,6 +33,9 @@ class CVESiteBuilder:
         self.data_scripts_dir = self.base_dir / 'data'
         self.cache_dir = self.data_scripts_dir / 'cache'
         
+        # Load site configuration
+        self.site_config = self.load_site_config()
+        
         # Set up Jinja2 environment
         self.jinja_env = Environment(
             loader=FileSystemLoader(self.templates_dir),
@@ -42,6 +45,7 @@ class CVESiteBuilder:
         # Add custom filters and globals
         self.jinja_env.globals['current_year'] = self.current_year
         self.jinja_env.globals['available_years'] = self.available_years
+        self.jinja_env.globals['site_config'] = self.site_config
         self.jinja_env.filters['format_number'] = self.format_number
         
         if not self.quiet:
@@ -67,6 +71,48 @@ class CVESiteBuilder:
         elif num >= 1000:
             return f"{num / 1000:.1f}K"
         return str(num)
+    
+    def load_site_config(self):
+        """Load site configuration from site_config.json"""
+        config_path = self.base_dir / 'site_config.json'
+        default_config = {
+            "site_name": "CVE.ICU",
+            "site_description": "CVE vulnerability analytics platform",
+            "feature_flags": {
+                "show_phoenix_branding": False,
+                "show_projections": True,
+                "enable_dark_mode": True
+            },
+            "branding": {
+                "phoenix_security": {
+                    "name": "Phoenix Security",
+                    "tagline": "Data powered by Phoenix Security",
+                    "logo_path": "/static/images/phoenix-logo.svg",
+                    "website": "https://phoenix.security"
+                }
+            },
+            "analytics": {
+                "projection_base_year": 2018,
+                "projection_end_year": 2030
+            }
+        }
+        
+        if config_path.exists():
+            try:
+                with open(config_path, 'r') as f:
+                    loaded_config = json.load(f)
+                    # Merge with defaults
+                    for key in default_config:
+                        if key not in loaded_config:
+                            loaded_config[key] = default_config[key]
+                    self.print_verbose(f"📝 Loaded site config from {config_path}")
+                    return loaded_config
+            except Exception as e:
+                self.print_verbose(f"⚠️  Failed to load site config: {e}")
+                return default_config
+        else:
+            self.print_verbose("📝 Using default site config")
+            return default_config
     
     def clean_build(self):
         """Clean and recreate the web directory"""

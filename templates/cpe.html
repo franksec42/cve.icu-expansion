@@ -329,9 +329,9 @@ function updateCpeBarChart(data) {
             datasets: [{
                 label: 'CVE Count',
                 data: topCpes.map(cpe => cpe.count),
-                backgroundColor: 'rgba(13, 110, 253, 0.8)',
-                borderColor: 'rgba(13, 110, 253, 1)',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -369,24 +369,24 @@ function updateTypeChart(data) {
             datasets: [{
                 data: typeDistribution.map(t => t.count),
                 backgroundColor: [
-                    '#3b82f6', // Primary blue
-                    '#60a5fa', // Light blue  
-                    '#93c5fd', // Lighter blue
-                    '#bfdbfe', // Very light blue
-                    '#6b7280', // Medium grey
-                    '#9ca3af', // Light grey
-                    '#d1d5db', // Very light grey
-                    '#e5e7eb'  // Lightest grey
+                    '#F36717', // Primary Orange
+                    '#FF9059', // Light Orange  
+                    '#fdc4a8', // Lighter Orange
+                    '#9E517B', // Light Purple
+                    '#6714CC', // Purple
+                    '#523DD9', // Blue Purple
+                    '#380886', // Dark Purple
+                    '#fee6d8'  // Very Light Orange
                 ],
                 borderColor: [
-                    '#1e40af', // Darker blue borders
-                    '#2563eb',
-                    '#3b82f6', 
-                    '#60a5fa',
-                    '#4b5563',
-                    '#6b7280',
-                    '#9ca3af',
-                    '#d1d5db'
+                    '#C6361F', // Mahogany
+                    '#F36717', // Orange
+                    '#FF9059', // Light Orange
+                    '#6714CC', // Purple
+                    '#380886', // Dark Purple
+                    '#380886',
+                    '#1E2535',
+                    '#1E2535'
                 ],
                 borderWidth: 2
             }]
@@ -467,8 +467,8 @@ function updateVendorChart(data) {
             datasets: [{
                 label: 'CPE Count',
                 data: topVendors.map(v => v.count),
-                backgroundColor: '#60a5fa', // Light blue from universal palette
-                borderColor: '#2563eb',     // Darker blue border
+                backgroundColor: '#F36717', // Phoenix Orange
+                borderColor: '#C6361F',     // Mahogany border
                 borderWidth: 2
             }]
         },

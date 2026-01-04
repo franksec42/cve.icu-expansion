@@ -343,10 +343,10 @@ function updateSeverityChart(data) {
             datasets: [{
                 data: values,
                 backgroundColor: [
-                    '#3b82f6', // Low - Primary blue
-                    '#60a5fa', // Medium - Light blue
-                    '#93c5fd', // High - Lighter blue
-                    '#6b7280'  // Critical - Grey
+                    '#fee6d8', // Low - Very Light Orange
+                    '#FF9059', // Medium - Light Orange
+                    '#F36717', // High - Primary Orange
+                    '#6714CC'  // Critical - Purple
                 ],
                 borderWidth: 2,
                 borderColor: '#ffffff'
@@ -392,9 +392,9 @@ function updateScoreChart(data) {
             datasets: [{
                 label: 'CVE Count',
                 data: values,
-                backgroundColor: '#60a5fa',
-                borderColor: '#2563eb',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -432,10 +432,10 @@ function updateTemporalChart(data) {
     const years = Object.keys(temporalData).sort();
     const versions = ['v2.0', 'v3.0', 'v3.1', 'v4.0'];
     const colors = {
-        'v2.0': '#3b82f6', // Blue
-        'v3.0': '#10b981', // Green
-        'v3.1': '#f59e0b', // Orange
-        'v4.0': '#ef4444'  // Red
+        'v2.0': '#fdc4a8', // Light Orange
+        'v3.0': '#FF9059', // Medium Orange
+        'v3.1': '#F36717', // Primary Orange
+        'v4.0': '#6714CC'  // Purple
     };
     
     const datasets = versions.map(version => {
@@ -529,16 +529,16 @@ function updateVersionChart(data) {
                 label: 'CVE Count',
                 data: counts,
                 backgroundColor: [
-                    '#3b82f6', // v2.0 - Primary blue
-                    '#60a5fa', // v3.0 - Light blue
-                    '#93c5fd', // v3.1 - Lighter blue
-                    '#bfdbfe'  // v4.0 - Very light blue
+                    '#fdc4a8', // v2.0 - Light Orange
+                    '#FF9059', // v3.0 - Medium Orange
+                    '#F36717', // v3.1 - Primary Orange
+                    '#6714CC'  // v4.0 - Purple
                 ],
                 borderColor: [
-                    '#1e40af',
-                    '#2563eb', 
-                    '#3b82f6',
-                    '#60a5fa'
+                    '#F36717',
+                    '#C6361F', 
+                    '#C6361F',
+                    '#380886'
                 ],
                 borderWidth: 2
             }]

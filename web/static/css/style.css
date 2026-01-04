@@ -1,4 +1,4 @@
-/* CVE.ICU Design System - Matching cnascorecard.org */
+/* Phoenix Security Data - CVE Intelligence Platform */
 
 /* CSS Reset and Base Styles */
 * {
@@ -7,54 +7,84 @@
     box-sizing: border-box;
 }
 
-/* Root Variables - Design System Colors */
+/* Root Variables - Phoenix Security Light Theme (Orange) */
 :root {
-    /* Base Colors */
-    --color-bg-primary: #f8f9fa;
-    --color-bg-secondary: #e9ecef;
+    /* Base Colors - Light Mode with Orange Accent */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8f9fa;
     --color-bg-content: #ffffff;
-    --color-bg-hover: #f8f9fa;
-    --color-text: #212529;
-    --color-text-primary: #212529;
-    --color-text-secondary: #6c757d;
-    --color-text-muted: #adb5bd;
-    --color-primary: #0d6efd;
-    --color-primary-light: rgba(13, 110, 253, 0.1);
-    --color-accent: #0d6efd;
-    --color-border: #dee2e6;
-    --color-border-light: #f1f3f4;
-    --color-success: #198754;
-    --color-warning: #ffc107;
-    --color-danger: #dc3545;
+    --color-bg-hover: #fff5f0;
+    --color-text: #1E2535;
+    --color-text-primary: #1E2535;
+    --color-text-secondary: #5a6675;
+    --color-text-muted: #8b949e;
+    --color-primary: #F36717;
+    --color-primary-light: rgba(243, 103, 23, 0.1);
+    --color-accent: #F36717;
+    --color-border: #e5e7eb;
+    --color-border-light: #f3f4f6;
+    --color-success: #27ae60;
+    --color-warning: #F36717;
+    --color-danger: #F03E1E;
     
-    /* Light Blue to Light Grey Visualization Palette */
-    --viz-color-1: #e3f2fd;  /* Very light blue */
-    --viz-color-2: #bbdefb;  /* Light blue */
-    --viz-color-3: #90caf9;  /* Medium light blue */
-    --viz-color-4: #64b5f6;  /* Medium blue */
-    --viz-color-5: #42a5f5;  /* Blue */
-    --viz-color-6: #2196f3;  /* Primary blue */
-    --viz-color-7: #1e88e5;  /* Darker blue */
-    --viz-color-8: #1976d2;  /* Dark blue */
-    --viz-color-9: #9e9e9e;  /* Medium grey */
-    --viz-color-10: #757575; /* Dark grey */
+    /* Phoenix Security Orange Palette */
+    --phoenix-orange-primary: #F36717;
+    --phoenix-orange-light: #FF9059;
+    --phoenix-orange-dark: #C6361F;
+    --phoenix-red: #F03E1E;
+    --phoenix-mahogany: #C6361F;
+    --phoenix-purple: #6714CC;
+    --phoenix-dark: #1E2535;
     
-    /* Chart Color Palette - Light Blue to Grey Gradient */
-    --chart-primary: #2196f3;
-    --chart-secondary: #64b5f6;
-    --chart-tertiary: #90caf9;
-    --chart-quaternary: #bbdefb;
-    --chart-accent-1: #81c784;
-    --chart-accent-2: #ffb74d;
-    --chart-accent-3: #f06292;
-    --chart-grey-light: #e0e0e0;
-    --chart-grey-medium: #9e9e9e;
-    --chart-grey-dark: #616161;
+    /* Visualization Palette - Orange/Warm Theme */
+    --viz-color-1: #fff5f0;
+    --viz-color-2: #fee6d8;
+    --viz-color-3: #fdc4a8;
+    --viz-color-4: #fc9c6d;
+    --viz-color-5: #F36717;
+    --viz-color-6: #C6361F;
+    --viz-color-7: #9b2c1c;
+    --viz-color-8: #6714CC;
+    --viz-color-9: #4a5568;
+    --viz-color-10: #2d3748;
+    
+    /* Chart Color Palette - Phoenix Orange/Purple (Light Mode - Darker for contrast) */
+    --chart-primary: #F36717;           /* Primary Pumpkin Orange */
+    --chart-primary-dark: #C6361F;      /* Mahogany - darker orange */
+    --chart-primary-light: #FF9059;     /* Light Orange */
+    --chart-secondary: #FF2D46;         /* Primary Vivid Red */
+    --chart-tertiary: #F03E1E;          /* Red Orange */
+    --chart-fill: rgba(243, 103, 23, 0.15);  /* Light orange fill */
+    --chart-fill-dark: rgba(243, 103, 23, 0.25);  /* Darker orange fill */
+    
+    /* Purple accent colors */
+    --chart-purple: #6714CC;            /* Primary Purple */
+    --chart-purple-dark: #380886;       /* Dark Purple */
+    --chart-purple-light: #9E517B;      /* Light Purple/Pink */
+    --chart-purple-fill: rgba(103, 20, 204, 0.15);  /* Light purple fill */
+    
+    /* Multi-series colors (orange shades then purple shades) */
+    --chart-series-1: #F36717;          /* Orange */
+    --chart-series-2: #FF2D46;          /* Vivid Red */
+    --chart-series-3: #C6361F;          /* Mahogany */
+    --chart-series-4: #6714CC;          /* Purple */
+    --chart-series-5: #9E517B;          /* Light Purple */
+    --chart-series-6: #523DD9;          /* Blue Purple */
+    
+    /* Legacy/compatibility */
+    --chart-quaternary: #fee6d8;
+    --chart-accent-1: #27ae60;
+    --chart-accent-2: #6714CC;
+    --chart-accent-3: #F03E1E;
+    --chart-prediction: #6714CC;
+    --chart-grey-light: #e5e7eb;
+    --chart-grey-medium: #9ca3af;
+    --chart-grey-dark: #4b5563;
     
     /* Semantic Colors */
-    --color-info: #17a2b8;
-    --color-light: #f8f9fa;
-    --color-dark: #343a40;
+    --color-info: #6714CC;
+    --color-light: #ffffff;
+    --color-dark: #1E2535;
     
     /* Spacing */
     --spacing-xs: 0.25rem;
@@ -80,58 +110,79 @@
     --box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-/* Dark Theme - Black/Dark Mode */
+/* Dark Theme - Phoenix Security Dark Mode (Purple/Orange) */
 [data-theme="dark"] {
-    /* Base Colors - Dark Theme */
-    --color-bg-primary: #0d1117;
-    --color-bg-secondary: #161b22;
-    --color-bg-content: #1c2128;
-    --color-bg-hover: #21262d;
-    --color-text: #e6edf3;
-    --color-text-primary: #e6edf3;
-    --color-text-secondary: #8b949e;
-    --color-text-muted: #6e7681;
-    --color-primary: #58a6ff;
-    --color-primary-light: rgba(88, 166, 255, 0.15);
-    --color-accent: #58a6ff;
-    --color-border: #30363d;
-    --color-border-light: #21262d;
-    --color-success: #3fb950;
-    --color-warning: #d29922;
-    --color-danger: #f85149;
+    /* Base Colors - Dark Theme with Purple/Orange Accents */
+    --color-bg-primary: #0a0a12;
+    --color-bg-secondary: #12121e;
+    --color-bg-content: #1a1a2e;
+    --color-bg-hover: #252540;
+    --color-text: #ffffff;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e0e0e5;
+    --color-text-muted: #b0b0c0;
+    --color-primary: #F36717;
+    --color-primary-light: rgba(243, 103, 23, 0.2);
+    --color-accent: #F36717;
+    --color-border: #2a2a40;
+    --color-border-light: #1f1f35;
+    --color-success: #27ae60;
+    --color-warning: #F36717;
+    --color-danger: #F03E1E;
     
-    /* Dark Theme Visualization Palette */
-    --viz-color-1: #1f3a5f;
-    --viz-color-2: #2a4a6f;
-    --viz-color-3: #3d5a80;
-    --viz-color-4: #4a6fa5;
-    --viz-color-5: #5c8cc9;
-    --viz-color-6: #58a6ff;
-    --viz-color-7: #79b8ff;
-    --viz-color-8: #a5d6ff;
-    --viz-color-9: #484f58;
-    --viz-color-10: #6e7681;
+    /* Dark Theme Visualization Palette - Purple/Orange */
+    --viz-color-1: #FF9059;
+    --viz-color-2: #F36717;
+    --viz-color-3: #C6361F;
+    --viz-color-4: #9E517B;
+    --viz-color-5: #6714CC;
+    --viz-color-6: #380886;
+    --viz-color-7: #fdc4a8;
+    --viz-color-8: #fee6d8;
+    --viz-color-9: #3a3a55;
+    --viz-color-10: #5a5a75;
     
-    /* Dark Theme Chart Palette */
-    --chart-primary: #58a6ff;
-    --chart-secondary: #79b8ff;
-    --chart-tertiary: #a5d6ff;
-    --chart-quaternary: #cae8ff;
-    --chart-accent-1: #3fb950;
-    --chart-accent-2: #d29922;
-    --chart-accent-3: #f778ba;
-    --chart-grey-light: #30363d;
-    --chart-grey-medium: #484f58;
-    --chart-grey-dark: #6e7681;
+    /* Dark Theme Chart Palette - Phoenix Orange/Purple (Brighter for visibility) */
+    --chart-primary: #FF9059;           /* Brighter Orange for dark bg */
+    --chart-primary-dark: #F36717;      /* Standard Orange */
+    --chart-primary-light: #fdc4a8;     /* Very Light Orange */
+    --chart-secondary: #FF5A6E;         /* Brighter Vivid Red */
+    --chart-tertiary: #F36717;          /* Orange */
+    --chart-fill: rgba(255, 144, 89, 0.2);   /* Light orange fill */
+    --chart-fill-dark: rgba(255, 144, 89, 0.3);  /* Darker orange fill */
+    
+    /* Purple accent colors (brighter for dark mode) */
+    --chart-purple: #9E517B;            /* Lighter Purple for visibility */
+    --chart-purple-dark: #6714CC;       /* Standard Purple */
+    --chart-purple-light: #B87A9E;      /* Even Lighter Purple */
+    --chart-purple-fill: rgba(158, 81, 123, 0.2);  /* Light purple fill */
+    
+    /* Multi-series colors (brighter for dark mode) */
+    --chart-series-1: #FF9059;          /* Bright Orange */
+    --chart-series-2: #FF5A6E;          /* Bright Red */
+    --chart-series-3: #fdc4a8;          /* Light Orange */
+    --chart-series-4: #9E517B;          /* Light Purple */
+    --chart-series-5: #B87A9E;          /* Lighter Purple */
+    --chart-series-6: #7B68EE;          /* Medium Purple */
+    
+    /* Legacy/compatibility */
+    --chart-quaternary: #fee6d8;
+    --chart-accent-1: #2ecc71;
+    --chart-accent-2: #9E517B;
+    --chart-accent-3: #B87A9E;
+    --chart-prediction: #9E517B;
+    --chart-grey-light: #2a2a40;
+    --chart-grey-medium: #3a3a55;
+    --chart-grey-dark: #5a5a75;
     
     /* Semantic Colors - Dark Theme */
-    --color-info: #39c5cf;
-    --color-light: #21262d;
-    --color-dark: #f0f6fc;
+    --color-info: #6714CC;
+    --color-light: #1a1a2e;
+    --color-dark: #ffffff;
     
     /* Dark Theme Shadows */
-    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
-    --box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
+    --box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
 }
 
 /* Base Typography */
@@ -209,6 +260,12 @@ a:hover {
     height: 4rem;
 }
 
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -222,6 +279,70 @@ a:hover {
 .logo:hover {
     text-decoration: none;
     color: var(--color-accent);
+}
+
+.logo-separator {
+    color: var(--color-text-muted);
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin: 0 0.25rem;
+}
+
+.phoenix-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.phoenix-logo:hover {
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+.phoenix-logo-img {
+    height: 28px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+}
+
+/* Light mode: show light logo, hide dark logo */
+.phoenix-logo-light {
+    display: block;
+}
+
+.phoenix-logo-dark {
+    display: none;
+}
+
+/* Dark mode: show dark logo, hide light logo */
+[data-theme="dark"] .phoenix-logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .phoenix-logo-dark {
+    display: block;
+}
+
+/* Footer Phoenix logo */
+.phoenix-footer-logo {
+    height: 36px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+[data-theme="dark"] .logo-separator {
+    color: #b0b0c0;
+}
+
+[data-theme="dark"] .phoenix-text {
+    color: #FF9059;
 }
 
 .logo img {
@@ -421,35 +542,35 @@ a:hover {
 
 /* Dark Theme Specific Overrides */
 [data-theme="dark"] .page-header {
-    background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+    background: #1a1a2e;
 }
 
 [data-theme="dark"] .page-header::before {
-    background: linear-gradient(90deg, #58a6ff, #79b8ff, #a5d6ff);
+    background: var(--phoenix-orange-primary);
 }
 
 [data-theme="dark"] .page-header button {
-    background-color: #21262d !important;
-    border-color: var(--color-border) !important;
-    color: var(--color-text-primary) !important;
+    background-color: #252540 !important;
+    border-color: #2a2a40 !important;
+    color: #f0f0f5 !important;
 }
 
 [data-theme="dark"] .page-header button:hover {
-    background-color: #30363d !important;
-    border-color: var(--color-accent) !important;
-    color: var(--color-accent) !important;
+    background-color: #3a3a55 !important;
+    border-color: #F36717 !important;
+    color: #F36717 !important;
 }
 
 [data-theme="dark"] .page-header button:active,
 [data-theme="dark"] .page-header button.active {
-    background-color: var(--color-accent) !important;
-    border-color: var(--color-accent) !important;
-    color: #0d1117 !important;
+    background-color: #F36717 !important;
+    border-color: #F36717 !important;
+    color: #0a0a12 !important;
 }
 
 /* Dark theme link hover */
 [data-theme="dark"] a:hover {
-    color: #79b8ff;
+    color: #FF9059;
 }
 
 /* Dark theme nav hover */
@@ -537,7 +658,27 @@ a:hover {
 [data-theme="dark"] .stat-card.highlight-green,
 [data-theme="dark"] .stat-card.highlight-orange,
 [data-theme="dark"] .stat-card.highlight-red {
-    background: var(--color-bg-content);
+    background: #1a1a2e;
+}
+
+[data-theme="dark"] .stat-card.highlight::before {
+    background: #F36717;
+}
+
+[data-theme="dark"] .stat-card.highlight-blue::before {
+    background: #7209b7;
+}
+
+[data-theme="dark"] .stat-card.highlight-green::before {
+    background: #27ae60;
+}
+
+[data-theme="dark"] .stat-card.highlight-orange::before {
+    background: #F36717;
+}
+
+[data-theme="dark"] .stat-card.highlight-red::before {
+    background: #f72585;
 }
 
 /* Dark theme - ensure readable text in boxes and info sections */
@@ -777,36 +918,36 @@ a:hover {
 
 /* Dark theme - Bootstrap-style cards */
 [data-theme="dark"] .card {
-    background: var(--color-bg-content);
-    border-color: var(--color-border);
+    background: #1a1a2e;
+    border-color: #2a2a40;
 }
 
 [data-theme="dark"] .card-header {
-    background: #21262d;
-    border-color: var(--color-border);
+    background: #252540;
+    border-color: #2a2a40;
 }
 
 [data-theme="dark"] .card-header h3,
 [data-theme="dark"] .card-header .card-title {
-    color: #e6edf3 !important;
+    color: #f0f0f5 !important;
 }
 
 [data-theme="dark"] .card-header small,
 [data-theme="dark"] .card-header .text-muted {
-    color: #8b949e !important;
+    color: #a0a0b0 !important;
 }
 
 [data-theme="dark"] .card-body {
-    background: var(--color-bg-content);
+    background: #1a1a2e;
 }
 
 [data-theme="dark"] .card-body p,
 [data-theme="dark"] .card-body li {
-    color: #8b949e;
+    color: #a0a0b0;
 }
 
 [data-theme="dark"] .card-body strong {
-    color: #e6edf3;
+    color: #f0f0f5;
 }
 
 /* Dark theme - Bootstrap tables */
@@ -884,7 +1025,7 @@ main {
 
 /* Professional Page Header Styling */
 .page-header {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: #ffffff;
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--box-shadow);
@@ -902,7 +1043,7 @@ main {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #2196f3, #64b5f6, #90caf9);
+    background: var(--phoenix-orange-primary);
     border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
 }
 
@@ -1009,62 +1150,58 @@ main {
 
 .stat-card {
     position: relative;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
     text-align: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 1px 3px rgba(0, 0, 0, 0.05),
-        0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
 
-/* Light mode - ensure dark text in stat cards */
+/* Light mode - Phoenix Orange accent */
 .stat-card .stat-value,
 .stat-card .stat-number {
-    color: #1a202c !important;
+    color: var(--phoenix-orange-primary) !important;
 }
 
 .stat-card .stat-label {
-    color: #4a5568 !important;
+    color: var(--color-text-primary) !important;
     display: block !important;
     visibility: visible !important;
 }
 
 .stat-card small.text-muted,
 .stat-card .text-muted {
-    color: #718096 !important;
+    color: var(--color-text-secondary) !important;
     display: block !important;
     visibility: visible !important;
 }
 
-/* Dark mode stat-card override */
+/* Dark mode stat-card override - Phoenix Dark Theme */
 [data-theme="dark"] .stat-card {
-    background: linear-gradient(135deg, #1c2128 0%, #161b22 100%);
-    border-color: #30363d;
-    box-shadow: 
-        0 1px 3px rgba(0, 0, 0, 0.3),
-        0 1px 2px rgba(0, 0, 0, 0.2);
+    background: #1a1a2e;
+    border-color: #2a2a40;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .stat-card .stat-value,
 [data-theme="dark"] .stat-card .stat-number {
-    color: #e6edf3 !important;
+    color: #F36717 !important;
 }
 
 [data-theme="dark"] .stat-card .stat-label {
-    color: #8b949e !important;
+    color: #f0f0f5 !important;
 }
 
 [data-theme="dark"] .stat-card .stat-sublabel,
 [data-theme="dark"] .stat-card .stat-detail {
-    color: #6e7681 !important;
+    color: #a0a0b0 !important;
 }
 
 [data-theme="dark"] .stat-card:hover {
-    border-color: #58a6ff;
+    border-color: #F36717;
 }
 
 .stat-card::before {
@@ -1073,11 +1210,8 @@ main {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, 
-        var(--chart-primary) 0%, 
-        var(--chart-secondary) 50%, 
-        var(--chart-tertiary) 100%);
+    height: 3px;
+    background: var(--phoenix-orange-primary);
     opacity: 0.8;
 }
 
@@ -1701,7 +1835,7 @@ tbody tr:hover {
     display: flex;
     align-items: center;
     padding: var(--spacing-md);
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: var(--color-bg-content);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
@@ -1718,6 +1852,53 @@ tbody tr:hover {
     font-size: 2rem;
     margin-right: var(--spacing-md);
     opacity: 0.8;
+}
+
+.insight-title {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.insight-text {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Dark mode insight cards */
+[data-theme="dark"] .insight-card {
+    background: var(--color-bg-content);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .insight-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .insight-title {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .insight-text {
+    color: #e0e0e5;
+}
+
+/* Projection stat cards dark mode */
+[data-theme="dark"] .projection-stat-card {
+    background: var(--color-bg-content) !important;
+    border-color: var(--color-border) !important;
+}
+
+[data-theme="dark"] .projection-stat-card .stat-number {
+    color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .projection-stat-card .stat-label {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .projection-stat-card .text-muted {
+    color: #b0b0c0 !important;
 }
 
 .insight-content {

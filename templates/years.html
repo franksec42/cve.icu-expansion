@@ -559,9 +559,9 @@ function updateYearlyChart() {
                         datasets: [{
                             label: `Monthly CVEs (${sortedYears[0]}-${sortedYears[sortedYears.length-1]})`,
                             data: monthlyData,
-                            borderColor: '#0d6efd',
-                            backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                            borderWidth: 2,
+                            borderColor: '#F36717',
+                            backgroundColor: 'rgba(243, 103, 23, 0.15)',
+                            borderWidth: 3,
                             fill: true,
                             tension: 0.3,
                             pointRadius: 2,
@@ -644,9 +644,9 @@ function updateYearlyChart() {
                         datasets: [{
                             label: `Monthly CVEs - ${year}`,
                             data: monthlyData,
-                            borderColor: '#0d6efd',
-                            backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                            borderWidth: 2,
+                            borderColor: '#F36717',
+                            backgroundColor: 'rgba(243, 103, 23, 0.15)',
+                            borderWidth: 3,
                             fill: true,
                             tension: 0.3,
                             pointRadius: 4,
@@ -708,9 +708,9 @@ function updateYearlyChart() {
             datasets: [{
                 label: 'CVEs Published',
                 data: data,
-                borderColor: '#0d6efd',
-                backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                borderWidth: 2,
+                borderColor: '#F36717',
+                backgroundColor: 'rgba(243, 103, 23, 0.15)',
+                borderWidth: 3,
                 fill: true,
                 tension: 0.4
             }]
@@ -816,12 +816,12 @@ function updateSeverityChart() {
     
     const activeBinLabels = activeBins.map(bin => bin.label);
     
-    // Define colors using different shades of blue for consistency
+    // Define colors using Phoenix Security orange/purple palette
     const versionColors = {
-        'v2.0': '#1e3a8a',   // Dark blue
-        'v3.0': '#3b82f6',   // Medium blue  
-        'v3.1': '#60a5fa',   // Light blue
-        'v4.0': '#93c5fd'    // Very light blue (if it exists)
+        'v2.0': '#fdc4a8',   // Light Orange
+        'v3.0': '#FF9059',   // Medium Orange  
+        'v3.1': '#F36717',   // Primary Orange
+        'v4.0': '#6714CC'    // Purple (if it exists)
     };
     
     // Create datasets for each version using binned data (only active bins)
@@ -925,9 +925,9 @@ function updateVendorChart() {
             datasets: [{
                 label: 'CVEs Assigned',
                 data: cnaCounts,
-                backgroundColor: '#60a5fa',
-                borderColor: '#60a5fa',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -1005,9 +1005,9 @@ function updateCweChart() {
             datasets: [{
                 label: 'CVE Count',
                 data: cweCounts,
-                backgroundColor: '#60a5fa',
-                borderColor: '#60a5fa',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -1071,9 +1071,9 @@ function updateAffectedVendorChart() {
             datasets: [{
                 label: 'Vulnerabilities Found',
                 data: vendorCounts,
-                backgroundColor: '#60a5fa',
-                borderColor: '#60a5fa',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -1129,8 +1129,8 @@ function updateAnalysisStatusChart() {
     const statusLabels = sortedStatus.map(([status]) => status);
     const statusCounts = sortedStatus.map(([,count]) => count);
     
-    // Use single consistent blue color like other charts
-    const backgroundColor = '#60a5fa';
+    // Use Phoenix Security orange color scheme
+    const backgroundColor = '#F36717';
     const backgroundColors = statusLabels.map(() => backgroundColor);
     
     analysisStatusChart = new Chart(ctx, {
@@ -1140,8 +1140,8 @@ function updateAnalysisStatusChart() {
             datasets: [{
                 data: statusCounts,
                 backgroundColor: backgroundColors,
-                borderColor: backgroundColors,
-                borderWidth: 1
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -1217,9 +1217,9 @@ function updateReferenceTagsChart() {
             datasets: [{
                 label: 'Reference Count',
                 data: tagCounts,
-                backgroundColor: '#60a5fa',
-                borderColor: '#60a5fa',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {

@@ -236,7 +236,7 @@ function renderCustomPagination() {
         pageBtn.dataset.page = i;
         pageBtn.style.cssText = 'cursor:pointer; padding:5px 12px; margin:0 5px; border:1px solid #dee2e6; border-radius:4px; user-select:none;';
         if (i === currentPage) {
-            pageBtn.style.backgroundColor = '#007bff';
+            pageBtn.style.backgroundColor = '#F36717';
             pageBtn.style.color = 'white';
             pageBtn.style.fontWeight = 'bold';
         }
@@ -318,10 +318,10 @@ function updateCharts(data) {
     
     const chartData = data.top_cwes_limited || data.top_cwes.slice(0, 20);
     const colors = {
-        primary: '#2563eb',
-        secondary: '#64748b',
-        accent: '#0ea5e9',
-        muted: '#94a3b8'
+        primary: '#F36717',
+        secondary: '#6714CC',
+        accent: '#FF9059',
+        muted: '#9E517B'
     };
     
     // Bar Chart

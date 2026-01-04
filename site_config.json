@@ -1,0 +1,25 @@
+{
+    "site_name": "CVE.ICU",
+    "site_description": "Comprehensive CVE vulnerability analytics and intelligence platform",
+    
+    "feature_flags": {
+        "show_phoenix_branding": false,
+        "show_projections": true,
+        "enable_dark_mode": true
+    },
+    
+    "branding": {
+        "phoenix_security": {
+            "name": "Phoenix Security",
+            "tagline": "Data powered by Phoenix Security",
+            "logo_path": "/static/images/phoenix-logo.svg",
+            "website": "https://phoenix.security"
+        }
+    },
+    
+    "analytics": {
+        "projection_base_year": 2018,
+        "projection_end_year": 2030
+    }
+}
+

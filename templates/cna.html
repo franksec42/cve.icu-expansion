@@ -735,9 +735,9 @@ function createTopCnasChart() {
             datasets: [{
                 label: 'CVEs Assigned',
                 data: data,
-                backgroundColor: '#60a5fa',
-                borderColor: '#3b82f6',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
@@ -813,7 +813,7 @@ function createActivityChart() {
     const data = Object.values(categories);
     
     // Blue gradient from dark to light
-    const colors = ['#1e40af', '#3b82f6', '#60a5fa', '#93c5fd'];
+    const colors = ['#F36717', '#FF9059', '#fdc4a8', '#fee6d8'];
     
     charts.activity = new Chart(ctx, {
         type: 'bar',
@@ -823,7 +823,8 @@ function createActivityChart() {
                 label: 'Number of CNAs',
                 data: data,
                 backgroundColor: colors,
-                borderWidth: 1
+                borderWidth: 2,
+                borderColor: ['#C6361F', '#F36717', '#FF9059', '#fdc4a8']
             }]
         },
         options: {
@@ -906,7 +907,7 @@ function createRecencyChart() {
     const data = Object.values(categories);
     
     // Activity-based color gradient (blue to grey)
-    const colors = ['#1e40af', '#3b82f6', '#60a5fa', '#6b7280'];
+    const colors = ['#F36717', '#FF9059', '#9E517B', '#6714CC'];
     
     charts.recency = new Chart(ctx, {
         type: 'bar',
@@ -916,7 +917,8 @@ function createRecencyChart() {
                 label: 'Number of CNAs',
                 data: data,
                 backgroundColor: colors,
-                borderWidth: 1
+                borderWidth: 2,
+                borderColor: ['#C6361F', '#F36717', '#6714CC', '#380886']
             }]
         },
         options: {
@@ -1143,7 +1145,7 @@ function createVolumeChart() {
     const data = Object.values(categories);
     
     // Performance-based color gradient (dark to light blue)
-    const colors = ['#1e40af', '#3b82f6', '#60a5fa', '#93c5fd'];
+    const colors = ['#F36717', '#FF9059', '#fdc4a8', '#fee6d8'];
     
     charts.volume = new Chart(ctx, {
         type: 'bar',
@@ -1153,7 +1155,8 @@ function createVolumeChart() {
                 label: 'Number of CNAs',
                 data: data,
                 backgroundColor: colors,
-                borderWidth: 1
+                borderWidth: 2,
+                borderColor: ['#C6361F', '#F36717', '#FF9059', '#fdc4a8']
             }]
         },
         options: {
@@ -1214,8 +1217,8 @@ function createKevChart() {
             const dataValues = top10.map(cna => cna.kev_count);
             
             // Blue gradient matching site design
-            const colors = ['#1e40af', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', 
-                           '#a8c8ec', '#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2'];
+            const colors = ['#F36717', '#FF2D46', '#FF9059', '#fdc4a8', '#9E517B', 
+                           '#6714CC', '#523DD9', '#380886', '#B87A9E', '#fee6d8'];
             
             charts.kev = new Chart(ctx, {
                 type: 'bar',
@@ -1225,8 +1228,8 @@ function createKevChart() {
                         label: 'KEV CVEs',
                         data: dataValues,
                         backgroundColor: colors,
-                        borderColor: '#3b82f6',
-                        borderWidth: 1
+                        borderColor: '#C6361F',
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -1296,8 +1299,8 @@ function createGrowthChart() {
             const dataValues = top10.map(cna => cna.count);
             
             // Blue gradient matching site design
-            const colors = ['#1e40af', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', 
-                           '#a8c8ec', '#9bc7e1', '#8cbfdc', '#7db7d7', '#6eafd2'];
+            const colors = ['#F36717', '#FF2D46', '#FF9059', '#fdc4a8', '#9E517B', 
+                           '#6714CC', '#523DD9', '#380886', '#B87A9E', '#fee6d8'];
             
             charts.growth = new Chart(ctx, {
                 type: 'bar',
@@ -1307,8 +1310,8 @@ function createGrowthChart() {
                         label: 'CVEs in ' + new Date().getFullYear(),
                         data: dataValues,
                         backgroundColor: colors,
-                        borderColor: '#3b82f6',
-                        borderWidth: 1
+                        borderColor: '#C6361F',
+                        borderWidth: 2
                     }]
                 },
                 options: {

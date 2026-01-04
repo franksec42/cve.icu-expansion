@@ -352,19 +352,19 @@ function renderRiskMatrix(matrix) {
                     kev_count: p.kev_count
                 })),
                 backgroundColor: dataPoints.map(p => {
-                    // Color based on risk using blues and greys
+                    // Color based on risk using orange/purple
                     const risk = (p.x + p.y) / 8;
-                    if (risk > 0.7) return 'rgba(13, 110, 253, 0.85)';   // Primary blue (highest risk)
-                    if (risk > 0.5) return 'rgba(33, 150, 243, 0.75)';   // Medium blue
-                    if (risk > 0.3) return 'rgba(100, 181, 246, 0.65)';  // Light blue
-                    return 'rgba(158, 158, 158, 0.5)';                    // Grey (lowest risk)
+                    if (risk > 0.7) return 'rgba(103, 20, 204, 0.85)';   // Purple (highest risk)
+                    if (risk > 0.5) return 'rgba(243, 103, 23, 0.75)';   // Primary orange
+                    if (risk > 0.3) return 'rgba(255, 144, 89, 0.65)';   // Light orange
+                    return 'rgba(253, 196, 168, 0.5)';                    // Very light orange (lowest risk)
                 }),
                 borderColor: dataPoints.map(p => {
                     const risk = (p.x + p.y) / 8;
-                    if (risk > 0.7) return 'rgba(13, 110, 253, 1)';
-                    if (risk > 0.5) return 'rgba(33, 150, 243, 1)';
-                    if (risk > 0.3) return 'rgba(100, 181, 246, 1)';
-                    return 'rgba(117, 117, 117, 1)';
+                    if (risk > 0.7) return 'rgba(56, 8, 134, 1)';
+                    if (risk > 0.5) return 'rgba(198, 54, 31, 1)';
+                    if (risk > 0.3) return 'rgba(243, 103, 23, 1)';
+                    return 'rgba(255, 144, 89, 1)';
                 }),
                 borderWidth: 2
             }]

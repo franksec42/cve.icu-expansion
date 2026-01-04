@@ -26,6 +26,10 @@
       gtag('config', 'G-W0CE61HN2F');
     </script>
     
+    <!-- Favicon - Phoenix Security -->
+    <link rel="icon" type="image/png" href="static/images/phoenix-favicon.png">
+    <link rel="apple-touch-icon" href="static/images/phoenix-favicon.png">
+    
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,10 +64,17 @@
     <!-- Header and Navigation -->
     <header class="header">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="static/images/logo.png" alt="CVE.ICU Logo">
-                CVE.ICU
-            </a>
+            <div class="logo-group">
+                <a href="index.html" class="logo">
+                    <img src="static/images/logo.png" alt="CVE.ICU Logo">
+                    CVE.ICU
+                </a>
+                <span class="logo-separator">×</span>
+                <a href="https://phoenix.security" target="_blank" class="phoenix-logo" title="Phoenix Security Research">
+                    <img src="static/images/phoenix-logo-light.png" alt="Phoenix Security" class="phoenix-logo-img phoenix-logo-light">
+                    <img src="static/images/phoenix-logo-dark.png" alt="Phoenix Security" class="phoenix-logo-img phoenix-logo-dark">
+                </a>
+            </div>
             
             <nav class="nav">
                 <ul class="nav-menu">
@@ -152,10 +163,21 @@
                     </p>
                 </div>
             </div>
+            {% if site_config and site_config.feature_flags.show_phoenix_branding %}
+            <div class="phoenix-branding" style="text-align: center; margin: 1rem 0; padding: 0.75rem; background: linear-gradient(135deg, rgba(243, 103, 23, 0.1) 0%, rgba(114, 9, 183, 0.1) 100%); border-radius: 8px; border: 1px solid rgba(243, 103, 23, 0.2);">
+                <a href="https://phoenix.security" target="_blank" class="text-decoration-none" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+                    <img src="static/images/phoenix-logo-light.png" alt="Phoenix Security Research" class="phoenix-footer-logo phoenix-logo-light" style="height: 32px; width: auto;">
+                    <img src="static/images/phoenix-logo-dark.png" alt="Phoenix Security Research" class="phoenix-footer-logo phoenix-logo-dark" style="height: 32px; width: auto;">
+                </a>
+            </div>
+            {% endif %}
             <hr class="my-2">
             <div class="text-center">
                 <small class="text-muted">
-                    &copy; {{ current_year if current_year else '2025' }} CVE.ICU • Built by <a href="https://rogolabs.net" target="_blank" class="text-decoration-none">RogoLabs</a><br>
+                    &copy; {{ current_year if current_year else '2025' }} CVE.ICU • Built by <a href="https://rogolabs.net" target="_blank" class="text-decoration-none">RogoLabs</a>
+                    {% if site_config and site_config.feature_flags.show_phoenix_branding %}
+                    • Data by <a href="{{ site_config.branding.phoenix_security.website }}" target="_blank" class="text-decoration-none" style="color: var(--color-primary);">{{ site_config.branding.phoenix_security.name }}</a>
+                    {% endif %}<br>
                     Data updated every 6 hours • CVE coverage: 1999-{{ current_year if current_year else '2025' }}
                 </small>
             </div>
@@ -163,7 +185,7 @@
     </footer>
 
     <!-- Chart.js Library (UMD version) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
     <!-- D3.js for advanced visualizations -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -289,11 +311,14 @@
                     size: 12,
                     weight: '400'
                 };
-                // Chart.js v4 scale configuration
-                Chart.defaults.elements.point.backgroundColor = '#2196f3';
-                Chart.defaults.elements.point.borderColor = '#2196f3';
-                Chart.defaults.elements.line.borderColor = '#2196f3';
-                Chart.defaults.elements.bar.backgroundColor = '#2196f3';
+                // Chart.js v4 scale configuration - Phoenix Security Colors
+                Chart.defaults.elements.point.backgroundColor = '#F36717';
+                Chart.defaults.elements.point.borderColor = '#F36717';
+                Chart.defaults.elements.line.borderColor = '#F36717';
+                Chart.defaults.elements.line.borderWidth = 3;
+                Chart.defaults.elements.bar.backgroundColor = '#F36717';
+                Chart.defaults.elements.bar.borderWidth = 0;
+                Chart.defaults.elements.arc.borderWidth = 2;
                 
                 // Note: Scale-specific defaults are set per chart type in Chart.js v4
                 // Global scale defaults are handled differently
@@ -311,51 +336,109 @@
             });
         });
         
-        // Enhanced Color palette for consistent styling (Light Blue to Grey)
+        // Phoenix Security Color Palette - Orange/Purple Theme
         window.CVE_COLORS = window.CVE_COLORS || {
-            primary: '#2196f3',
-            secondary: '#64b5f6', 
-            success: '#81c784',
-            warning: '#ffb74d',
-            danger: '#f06292',
+            // Primary colors
+            primary: '#F36717',      // Pumpkin Orange
+            secondary: '#FF2D46',    // Vivid Red
+            tertiary: '#6714CC',     // Purple
+            success: '#27ae60',      // Green
+            warning: '#F36717',      // Orange
+            danger: '#F03E1E',       // Red Orange
             light: '#f8f9fa',
-            dark: '#212529',
+            dark: '#1E2535',
             
-            // Light Blue to Grey Visualization Palette
-            vizColors: [
-                '#e3f2fd', // Very light blue
-                '#bbdefb', // Light blue
-                '#90caf9', // Medium light blue
-                '#64b5f6', // Medium blue
-                '#42a5f5', // Blue
-                '#2196f3', // Primary blue
-                '#1e88e5', // Darker blue
-                '#1976d2', // Dark blue
-                '#9e9e9e', // Medium grey
-                '#757575'  // Dark grey
+            // Phoenix Security Orange Shades (light to dark)
+            orangeShades: [
+                '#fee6d8',  // Very light orange
+                '#fdc4a8',  // Light orange
+                '#FF9059',  // Medium light orange
+                '#F36717',  // Primary Pumpkin Orange
+                '#F03E1E',  // Red Orange
+                '#C6361F',  // Mahogany
             ],
             
-            // Chart-specific colors
+            // Phoenix Security Purple Shades (light to dark)
+            purpleShades: [
+                '#B87A9E',  // Very light purple
+                '#9E517B',  // Light purple
+                '#6714CC',  // Primary Purple
+                '#523DD9',  // Blue Purple
+                '#380886',  // Dark Purple
+                '#05057A',  // Very dark purple
+            ],
+            
+            // Chart-specific colors (alternating orange/purple for multi-series)
             chartColors: [
-                '#2196f3', // Primary blue
-                '#64b5f6', // Secondary blue
-                '#90caf9', // Tertiary blue
-                '#bbdefb', // Quaternary blue
-                '#81c784', // Accent green
-                '#ffb74d', // Accent orange
-                '#f06292', // Accent pink
-                '#e0e0e0', // Light grey
-                '#9e9e9e', // Medium grey
-                '#616161'  // Dark grey
+                '#F36717',  // 1. Primary Orange
+                '#6714CC',  // 2. Primary Purple
+                '#FF2D46',  // 3. Vivid Red
+                '#9E517B',  // 4. Light Purple
+                '#C6361F',  // 5. Mahogany
+                '#523DD9',  // 6. Blue Purple
+                '#FF9059',  // 7. Light Orange
+                '#380886',  // 8. Dark Purple
             ],
             
-            // Gradient colors for backgrounds
-            gradients: {
-                primary: 'linear-gradient(135deg, #e3f2fd, #bbdefb)',
-                secondary: 'linear-gradient(135deg, #bbdefb, #90caf9)',
-                tertiary: 'linear-gradient(135deg, #90caf9, #64b5f6)'
+            // Visualization gradient (orange to purple)
+            vizColors: [
+                '#F36717',  // Orange
+                '#FF9059',  // Light Orange
+                '#fdc4a8',  // Very Light Orange
+                '#9E517B',  // Light Purple
+                '#6714CC',  // Purple
+                '#380886',  // Dark Purple
+            ],
+            
+            // For fills (with transparency)
+            fills: {
+                orange: 'rgba(243, 103, 23, 0.15)',
+                orangeDark: 'rgba(243, 103, 23, 0.25)',
+                purple: 'rgba(103, 20, 204, 0.15)',
+                purpleDark: 'rgba(103, 20, 204, 0.25)',
             }
         };
+        
+        // Get theme-aware chart colors (brighter in dark mode)
+        function getPhoenixChartColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                return {
+                    primary: '#FF9059',       // Brighter Orange
+                    primaryDark: '#F36717',   // Standard Orange
+                    primaryLight: '#fdc4a8',  // Light Orange
+                    secondary: '#FF5A6E',     // Brighter Red
+                    purple: '#9E517B',        // Lighter Purple
+                    purpleDark: '#6714CC',    // Standard Purple
+                    purpleLight: '#B87A9E',   // Very Light Purple
+                    fill: 'rgba(255, 144, 89, 0.2)',
+                    fillDark: 'rgba(255, 144, 89, 0.3)',
+                    purpleFill: 'rgba(158, 81, 123, 0.2)',
+                    textColor: '#ffffff',
+                    gridColor: 'rgba(255, 255, 255, 0.1)',
+                    // Multi-series (brighter)
+                    series: ['#FF9059', '#9E517B', '#FF5A6E', '#B87A9E', '#fdc4a8', '#7B68EE']
+                };
+            } else {
+                return {
+                    primary: '#F36717',       // Standard Orange
+                    primaryDark: '#C6361F',   // Mahogany
+                    primaryLight: '#FF9059',  // Light Orange
+                    secondary: '#FF2D46',     // Vivid Red
+                    purple: '#6714CC',        // Standard Purple
+                    purpleDark: '#380886',    // Dark Purple
+                    purpleLight: '#9E517B',   // Light Purple
+                    fill: 'rgba(243, 103, 23, 0.15)',
+                    fillDark: 'rgba(243, 103, 23, 0.25)',
+                    purpleFill: 'rgba(103, 20, 204, 0.15)',
+                    textColor: '#1E2535',
+                    gridColor: 'rgba(0, 0, 0, 0.1)',
+                    // Multi-series (standard)
+                    series: ['#F36717', '#6714CC', '#FF2D46', '#9E517B', '#C6361F', '#523DD9']
+                };
+            }
+        }
         
         // Enhanced utility function to generate colors for charts
         function getChartColors(count, type = 'chart') {
@@ -368,16 +451,32 @@
             return colors;
         }
         
-        // Generate light blue to grey gradient colors
-        function getGradientColors(count) {
+        // Generate orange gradient colors (for bar charts)
+        function getOrangeGradientColors(count) {
+            const shades = CVE_COLORS.orangeShades;
             const colors = [];
             for (let i = 0; i < count; i++) {
-                const ratio = i / Math.max(count - 1, 1);
-                // Interpolate between light blue and grey
-                const r = Math.round(227 + (158 - 227) * ratio); // e3 to 9e
-                const g = Math.round(242 + (158 - 242) * ratio); // f2 to 9e
-                const b = Math.round(253 + (158 - 253) * ratio); // fd to 9e
-                colors.push(`rgb(${r}, ${g}, ${b})`);
+                colors.push(shades[Math.min(i, shades.length - 1)]);
+            }
+            return colors;
+        }
+        
+        // Generate purple gradient colors
+        function getPurpleGradientColors(count) {
+            const shades = CVE_COLORS.purpleShades;
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                colors.push(shades[Math.min(i, shades.length - 1)]);
+            }
+            return colors;
+        }
+        
+        // Generate alternating orange/purple colors
+        function getAlternatingColors(count) {
+            const colors = [];
+            const palette = getPhoenixChartColors().series;
+            for (let i = 0; i < count; i++) {
+                colors.push(palette[i % palette.length]);
             }
             return colors;
         }

@@ -9,7 +9,7 @@ help:
 	@echo ""
 	@echo "Usage: make [target]"
 	@echo ""
-	@echo "Targets:"
+	@echo "Local Development:"
 	@echo "  build     - Full site build (data + templates)"
 	@echo "  quick     - Quick template-only build (no data regeneration)"
 	@echo "  test      - Run test suite"
@@ -17,8 +17,9 @@ help:
 	@echo "  clean     - Clean build artifacts"
 	@echo "  serve     - Start local development server"
 	@echo "  install   - Install Python dependencies"
+	@echo "  dev       - Quick build + serve (development workflow)"
 	@echo ""
-	@echo "Data rebuild targets:"
+	@echo "Data Rebuild Targets:"
 	@echo "  rebuild-cna       - Rebuild CNA analysis only"
 	@echo "  rebuild-cpe       - Rebuild CPE analysis only"
 	@echo "  rebuild-cvss      - Rebuild CVSS analysis only"
@@ -26,6 +27,20 @@ help:
 	@echo "  rebuild-growth    - Rebuild growth analysis only"
 	@echo "  rebuild-quality   - Rebuild data quality analysis only"
 	@echo "  rebuild-nvd-status - Rebuild NVD status analysis only"
+	@echo "  rebuild-all       - Rebuild all analysis files"
+	@echo ""
+	@echo "Docker Targets:"
+	@echo "  docker-build   - Build Docker image"
+	@echo "  docker-run     - Run container (detached)"
+	@echo "  docker-up      - Run container (foreground with logs)"
+	@echo "  docker-stop    - Stop container"
+	@echo "  docker-logs    - View container logs"
+	@echo "  docker-shell   - Shell into container"
+	@echo "  docker-update  - Trigger manual update in container"
+	@echo "  docker-rebuild - Full rebuild in container"
+	@echo "  docker-quick   - Quick rebuild in container"
+	@echo "  docker-clean   - Remove Docker resources"
+	@echo "  docker         - Build + run (full Docker workflow)"
 
 # Install dependencies
 install:
@@ -99,3 +114,54 @@ validate:
 
 # Development workflow: quick build + serve
 dev: quick serve
+
+# ============================================
+# Docker targets
+# ============================================
+
+.PHONY: docker-build docker-run docker-stop docker-logs docker-shell docker-clean
+
+# Build Docker image
+docker-build:
+	docker-compose build
+
+# Run Docker container (detached)
+docker-run:
+	docker-compose up -d
+
+# Run Docker container (foreground with logs)
+docker-up:
+	docker-compose up
+
+# Stop Docker container
+docker-stop:
+	docker-compose down
+
+# View Docker logs
+docker-logs:
+	docker-compose logs -f
+
+# Shell into running container
+docker-shell:
+	docker-compose exec cveicu /bin/bash
+
+# Trigger manual update in container
+docker-update:
+	docker-compose exec cveicu /docker-entrypoint.sh update
+
+# Full rebuild in container
+docker-rebuild:
+	docker-compose exec cveicu /docker-entrypoint.sh build full
+
+# Quick rebuild in container
+docker-quick:
+	docker-compose exec cveicu /docker-entrypoint.sh build quick
+
+# Remove Docker resources
+docker-clean:
+	docker-compose down -v --rmi local
+	rm -rf logs/
+
+# Full Docker workflow: build + run
+docker: docker-build docker-run
+	@echo "CVE.ICU container running at http://localhost:8090"

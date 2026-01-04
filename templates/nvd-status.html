@@ -612,11 +612,11 @@ function createStatusPieChart(statusCounts) {
             datasets: [{
                 data: filteredData.map(([, value]) => value),
                 backgroundColor: [
-                    '#27ae60', // Analyzed - green
-                    '#f39c12', // Awaiting - orange
-                    '#3498db', // Modified - blue
-                    '#e74c3c', // Rejected - red
-                    '#9b59b6', // Received - purple
+                    '#F36717', // Analyzed - orange
+                    '#FF9059', // Awaiting - light orange
+                    '#fdc4a8', // Modified - very light orange
+                    '#6714CC', // Rejected - purple
+                    '#9E517B', // Received - light purple
                     '#1abc9c', // Undergoing - teal
                     '#95a5a6'  // Other - gray
                 ]
@@ -647,7 +647,7 @@ function createMonthlyStatusChart(monthlyStatus) {
     
     // Status types to track
     const statusTypes = ['Analyzed', 'Awaiting Analysis', 'Modified', 'Received'];
-    const colors = ['#27ae60', '#f39c12', '#3498db', '#9b59b6'];
+    const colors = ['#F36717', '#FF9059', '#9E517B', '#6714CC'];
     
     const datasets = statusTypes.map((status, index) => ({
         label: status,
@@ -705,22 +705,22 @@ function createQuarterlyChart(quarterlyData) {
                 {
                     label: 'Q1',
                     data: years.map(year => quarterlyData[year]?.Q1 || 0),
-                    backgroundColor: '#3498db'
+                    backgroundColor: '#F36717'
                 },
                 {
                     label: 'Q2',
                     data: years.map(year => quarterlyData[year]?.Q2 || 0),
-                    backgroundColor: '#27ae60'
+                    backgroundColor: '#FF9059'
                 },
                 {
                     label: 'Q3',
                     data: years.map(year => quarterlyData[year]?.Q3 || 0),
-                    backgroundColor: '#f39c12'
+                    backgroundColor: '#9E517B'
                 },
                 {
                     label: 'Q4',
                     data: years.map(year => quarterlyData[year]?.Q4 || 0),
-                    backgroundColor: '#9b59b6'
+                    backgroundColor: '#6714CC'
                 }
             ]
         },
@@ -798,9 +798,9 @@ function createTopCnasChart(cnaList) {
             datasets: [{
                 label: 'CVEs Assigned',
                 data: values,
-                backgroundColor: '#3498db',
-                borderColor: '#2980b9',
-                borderWidth: 1
+                backgroundColor: '#F36717',
+                borderColor: '#C6361F',
+                borderWidth: 2
             }]
         },
         options: {
