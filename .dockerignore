@@ -1,0 +1,70 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info
+.eggs
+*.egg
+
+# Virtual environments
+venv
+.venv
+env
+.env
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+.cursor
+
+# Testing and coverage
+.pytest_cache
+.coverage
+htmlcov
+.tox
+
+# Documentation and artifacts
+docs/
+Artefacts/
+*.md
+!README.md
+
+# Mitre visualization (not needed for core functionality)
+Mitre Represtnation-toclean/
+
+# Logs
+logs/
+*.log
+
+# Local development
+.DS_Store
+Thumbs.db
+
+# Docker files (no need to include in context)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Tests (not needed in production)
+tests/
+
+# Large cache files (will be downloaded fresh)
+# Note: We keep data/cache structure but it will be mounted as volume
+# data/cache/cvelistV5/
+# data/cache/*.gz
+# data/cache/*.json
+
+# Temporary files
+*.tmp
+*.temp
+/tmp
+
