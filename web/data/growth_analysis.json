@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-04T16:50:41.682423",
+  "generated_at": "2026-01-05T09:10:16.994809",
   "growth_data": [
     {
       "year": 1999,
@@ -219,18 +219,20 @@
     },
     {
       "year": 2026,
-      "cves": 156,
-      "growth_rate": -47.3,
-      "growth_absolute": -140,
+      "cves": 173,
+      "growth_rate": -48.4,
+      "growth_absolute": -162,
       "is_ytd": true,
-      "projected_full_year": 14235,
-      "ytd_vs_prev_full": -99.7,
-      "ytd_vs_prev_ytd": -47.3,
-      "prev_year_ytd_actual": 296,
-      "growth_rate_3yr_avg": -47.3
+      "projected_full_year": 12629,
+      "ytd_vs_prev_full": -99.6,
+      "ytd_vs_prev_ytd": -48.4,
+      "prev_year_ytd_actual": 335,
+      "growth_rate_3yr_avg": -48.4
     }
   ],
   "avg_annual_growth": 21.1,
+  "avg_recent_growth": 25.0,
+  "projection_base_year": 2021,
   "highest_growth_year": {
     "year": 2017,
     "cves": 14642,
@@ -249,14 +251,61 @@
   },
   "current_year_ytd": {
     "year": 2026,
-    "cves": 156,
-    "growth_rate": -47.3,
-    "growth_absolute": -140,
+    "cves": 173,
+    "growth_rate": -48.4,
+    "growth_absolute": -162,
     "is_ytd": true,
-    "projected_full_year": 14235,
-    "ytd_vs_prev_full": -99.7,
-    "ytd_vs_prev_ytd": -47.3,
-    "prev_year_ytd_actual": 296,
-    "growth_rate_3yr_avg": -47.3
+    "projected_full_year": 12629,
+    "ytd_vs_prev_full": -99.6,
+    "ytd_vs_prev_ytd": -48.4,
+    "prev_year_ytd_actual": 335,
+    "growth_rate_3yr_avg": -48.4
+  },
+  "projections": [
+    {
+      "year": 2026,
+      "projected_cves": 60226,
+      "cumulative_projected": 368472,
+      "growth_rate": 25.0,
+      "is_projection": true
+    },
+    {
+      "year": 2027,
+      "projected_cves": 75282,
+      "cumulative_projected": 443754,
+      "growth_rate": 25.0,
+      "is_projection": true
+    },
+    {
+      "year": 2028,
+      "projected_cves": 94102,
+      "cumulative_projected": 537856,
+      "growth_rate": 25.0,
+      "is_projection": true
+    },
+    {
+      "year": 2029,
+      "projected_cves": 117627,
+      "cumulative_projected": 655483,
+      "growth_rate": 25.0,
+      "is_projection": true
+    },
+    {
+      "year": 2030,
+      "projected_cves": 147033,
+      "cumulative_projected": 802516,
+      "growth_rate": 25.0,
+      "is_projection": true
+    }
+  ],
+  "actual_vs_projection": {
+    "year": 2026,
+    "day_of_year": 5,
+    "actual_ytd": 173,
+    "projected_ytd": 825,
+    "projected_full_year": 60226,
+    "difference": -652,
+    "difference_pct": -79.0,
+    "status": "behind"
   }
 }

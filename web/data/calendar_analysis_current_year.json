@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-01-04T16:49:45.004098",
+  "generated_at": "2026-01-05T09:09:26.555116",
   "statistics": {
     "year": 2026,
-    "total_cves": 156,
-    "total_days_with_data": 4,
-    "average_per_day": 39.0,
+    "total_cves": 173,
+    "total_days_with_data": 5,
+    "average_per_day": 34.6,
     "peak_day": {
       "date": "2026-01-02",
       "count": 106
     },
-    "average_cvss": 6.03
+    "average_cvss": 5.98
   },
   "daily_data": [
     {
@@ -32,14 +32,20 @@
     },
     {
       "date": "2026-01-04",
-      "value": 12,
-      "avg_cvss": 6.25,
+      "value": 16,
+      "avg_cvss": 6.35,
+      "cvss_count": 16
+    },
+    {
+      "date": "2026-01-05",
+      "value": 13,
+      "avg_cvss": 5.66,
       "cvss_count": 12
     }
   ],
   "metadata": {
     "year": 2026,
-    "total_days": 4,
+    "total_days": 5,
     "data_source": "NVD JSONL",
     "analysis_type": "current_year_calendar"
   }

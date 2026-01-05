@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-01-04T17:15:11.179191+00:00",
+  "generated_at": "2026-01-05T09:10:33.659947+00:00",
   "data_source": "NVD",
   "metadata": {
-    "total_cves": 326076,
+    "total_cves": 326093,
     "current_year": 2026,
-    "day_of_year": 4
+    "day_of_year": 5
   },
   "current_status": {
-    "snapshot_date": "2026-01-04",
-    "total_cves": 326076,
+    "snapshot_date": "2026-01-05",
+    "total_cves": 326093,
     "status_counts": {
       "Deferred": 94570,
       "Rejected": 16995,
@@ -16,7 +16,7 @@
       "Modified": 139172,
       "Undergoing Analysis": 565,
       "Awaiting Analysis": 27974,
-      "Received": 51
+      "Received": 68
     },
     "status_percentages": {
       "Deferred": 29.0,
@@ -170,7 +170,7 @@
       "Deferred": 136,
       "Analyzed": 3508,
       "Modified": 5319,
-      "Awaiting Analysis": 2434,
+      "Awaiting Analysis": 2433,
       "Undergoing Analysis": 38,
       "Rejected": 96
     },
@@ -178,7 +178,7 @@
       "Analyzed": 3791,
       "Modified": 641,
       "Deferred": 85,
-      "Undergoing Analysis": 312,
+      "Undergoing Analysis": 311,
       "Awaiting Analysis": 3359,
       "Rejected": 162
     },
@@ -186,9 +186,9 @@
       "Modified": 20,
       "Analyzed": 181,
       "Rejected": 647,
-      "Awaiting Analysis": 112,
-      "Undergoing Analysis": 68,
-      "Received": 51
+      "Awaiting Analysis": 113,
+      "Undergoing Analysis": 69,
+      "Received": 68
     }
   },
   "quarterly_breakdown": {
@@ -382,11 +382,11 @@
       "total": 48181
     },
     "2026": {
-      "Q1": 156,
+      "Q1": 173,
       "Q2": 0,
       "Q3": 0,
       "Q4": 0,
-      "total": 156
+      "total": 173
     }
   },
   "growth_table": [
@@ -824,17 +824,17 @@
     },
     {
       "year": 2026,
-      "q1": 156,
+      "q1": 173,
       "q2": 0,
       "q3": 0,
       "q4": 0,
-      "total_actual": 156,
-      "projection": 14235,
-      "total_projection": 14235,
-      "cumulative": 308402,
-      "cumulative_projection": 322481,
-      "yoy_difference": -48025,
-      "delta_percent": -99.7,
+      "total_actual": 173,
+      "projection": 12629,
+      "total_projection": 12629,
+      "cumulative": 308419,
+      "cumulative_projection": 320875,
+      "yoy_difference": -48008,
+      "delta_percent": -99.6,
       "is_current_year": true,
       "is_ytd": true
     }
@@ -842,8 +842,8 @@
   "recent_activity": {
     "last_7_days": {
       "period_days": 7,
-      "period_start": "2025-12-28",
-      "period_end": "2026-01-04",
+      "period_start": "2025-12-29",
+      "period_end": "2026-01-05",
       "total_activity": 0,
       "new_cves": 0,
       "modified_cves": 0,
@@ -851,8 +851,8 @@
     },
     "last_30_days": {
       "period_days": 30,
-      "period_start": "2025-12-05",
-      "period_end": "2026-01-04",
+      "period_start": "2025-12-06",
+      "period_end": "2026-01-05",
       "total_activity": 0,
       "new_cves": 0,
       "modified_cves": 0,
@@ -1370,7 +1370,7 @@
       },
       {
         "cna": "cna@vuldb.com",
-        "total_cves": 11665,
+        "total_cves": 11681,
         "monthly_counts": {
           "2022-03": 26,
           "2022-04": 10,
@@ -1418,7 +1418,7 @@
           "2025-10": 425,
           "2025-11": 264,
           "2025-12": 486,
-          "2026-01": 50
+          "2026-01": 66
         },
         "sample_cves": [
           "CVE-2015-10002",
