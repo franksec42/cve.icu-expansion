@@ -7,6 +7,8 @@ set -e
 LOG_FILE="/var/log/cveicu/build.log"
 LOCK_FILE="/tmp/cveicu-build.lock"
 LAST_BUILD_FILE="/app/data/cache/.last_build"
+LOADING_PAGE="/app/web/static/loading.html"
+MAINTENANCE_FLAG="/tmp/cveicu-maintenance.flag"
 
 # Color codes for logging
 RED='\033[0;31m'
@@ -56,6 +58,55 @@ remove_lock() {
     rm -f "$LOCK_FILE"
 }
 
+# Enable maintenance/loading mode
+enable_maintenance() {
+    log INFO "Enabling maintenance mode (showing loading page)"
+    
+    # Create maintenance flag
+    touch "$MAINTENANCE_FLAG"
+    
+    # Backup current index.html if it exists and is not already loading page
+    if [ -f "/app/web/index.html" ]; then
+        if ! grep -q "Updating Vulnerability Data" "/app/web/index.html" 2>/dev/null; then
+            cp "/app/web/index.html" "/app/web/index.html.backup" 2>/dev/null || true
+        fi
+    fi
+    
+    # Copy loading page as index.html
+    if [ -f "$LOADING_PAGE" ]; then
+        cp "$LOADING_PAGE" "/app/web/index.html"
+        log INFO "Loading page activated"
+    fi
+}
+
+# Disable maintenance/loading mode
+disable_maintenance() {
+    log INFO "Disabling maintenance mode"
+    
+    # Remove maintenance flag
+    rm -f "$MAINTENANCE_FLAG"
+    
+    # Note: The build process will regenerate index.html
+    # If build failed, restore backup
+    if [ -f "/app/web/index.html.backup" ]; then
+        # Check if current index is still the loading page
+        if grep -q "Updating Vulnerability Data" "/app/web/index.html" 2>/dev/null; then
+            log WARN "Build may have failed, restoring previous index.html"
+            mv "/app/web/index.html.backup" "/app/web/index.html"
+        else
+            # Build succeeded, remove backup
+            rm -f "/app/web/index.html.backup"
+        fi
+    fi
+    
+    log INFO "Maintenance mode disabled"
+}
+
+# Check if in maintenance mode
+is_maintenance() {
+    [ -f "$MAINTENANCE_FLAG" ]
+}
+
 # Check if we need to run a build (based on time since last build)
 needs_build() {
     if [ ! -f "$LAST_BUILD_FILE" ]; then
@@ -80,17 +131,23 @@ needs_build() {
 # Run the build process
 run_build() {
     local build_type="${1:-full}"
+    local show_loading="${2:-true}"  # Show loading page by default for full builds
     
     if ! check_lock; then
         return 1
     fi
     
     create_lock
-    trap remove_lock EXIT
+    trap 'remove_lock; disable_maintenance' EXIT
     
     log INFO "=========================================="
     log INFO "Starting CVE.ICU $build_type build..."
     log INFO "=========================================="
+    
+    # Enable maintenance mode for full builds (shows loading page)
+    if [ "$build_type" = "full" ] && [ "$show_loading" = "true" ]; then
+        enable_maintenance
+    fi
     
     cd /app
     
@@ -105,6 +162,7 @@ run_build() {
             ;;
         *)
             log ERROR "Unknown build type: $build_type"
+            disable_maintenance
             return 1
             ;;
     esac
@@ -128,6 +186,9 @@ run_build() {
     else
         log ERROR "Build failed with status $build_status"
     fi
+    
+    # Disable maintenance mode
+    disable_maintenance
     
     remove_lock
     trap - EXIT
@@ -174,6 +235,9 @@ export -f log
 export -f check_lock
 export -f create_lock
 export -f remove_lock
+export -f enable_maintenance
+export -f disable_maintenance
+export -f is_maintenance
 export -f needs_build
 export -f run_build
 export -f scheduled_update

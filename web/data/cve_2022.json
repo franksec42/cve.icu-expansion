@@ -665,7 +665,7 @@
       },
       {
         "cwe": "CWE-416",
-        "count": 996
+        "count": 997
       },
       {
         "cwe": "CWE-22",
@@ -817,7 +817,7 @@
     ]
   },
   "processing_stats": {
-    "processed_at": "2026-01-05T09:02:16.893813",
+    "processed_at": "2026-01-06T18:30:14.594605",
     "data_source": "data/cache/nvd.json"
   }
 }

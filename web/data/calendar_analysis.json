@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-01-05T09:09:26.333954",
+  "generated_at": "2026-01-06T18:37:16.917492",
   "statistics": {
-    "total_cves": 309098,
-    "total_days_with_data": 7819,
+    "total_cves": 309301,
+    "total_days_with_data": 7820,
     "date_range": {
       "start": "1988-10-01",
-      "end": "2026-01-05"
+      "end": "2026-01-06"
     },
     "daily_stats": {
-      "average_per_day": 39.53,
+      "average_per_day": 39.55,
       "max_per_day": 1098,
       "min_per_day": 1,
       "peak_day": {
@@ -18,12 +18,12 @@
     },
     "cvss_stats": {
       "average_score": 6.75,
-      "total_with_scores": 304538
+      "total_with_scores": 304707
     },
     "current_year": {
       "year": 2026,
-      "total_cves": 173,
-      "days_with_data": 5
+      "total_cves": 383,
+      "days_with_data": 6
     }
   },
   "daily_data": [
@@ -43445,9 +43445,9 @@
     },
     {
       "date": "2024-05-30",
-      "value": 177,
-      "avg_cvss": 6.32,
-      "cvss_count": 165
+      "value": 176,
+      "avg_cvss": 6.33,
+      "cvss_count": 164
     },
     {
       "date": "2024-05-31",
@@ -44009,9 +44009,9 @@
     },
     {
       "date": "2024-09-04",
-      "value": 174,
-      "avg_cvss": 6.18,
-      "cvss_count": 174
+      "value": 173,
+      "avg_cvss": 6.19,
+      "cvss_count": 173
     },
     {
       "date": "2024-09-05",
@@ -44219,9 +44219,9 @@
     },
     {
       "date": "2024-10-09",
-      "value": 125,
-      "avg_cvss": 6.83,
-      "cvss_count": 122
+      "value": 124,
+      "avg_cvss": 6.84,
+      "cvss_count": 121
     },
     {
       "date": "2024-10-10",
@@ -44765,9 +44765,9 @@
     },
     {
       "date": "2025-01-08",
-      "value": 128,
-      "avg_cvss": 6.5,
-      "cvss_count": 125
+      "value": 127,
+      "avg_cvss": 6.51,
+      "cvss_count": 124
     },
     {
       "date": "2025-01-09",
@@ -45564,7 +45564,7 @@
     {
       "date": "2025-05-21",
       "value": 115,
-      "avg_cvss": 6.62,
+      "avg_cvss": 6.58,
       "cvss_count": 100
     },
     {
@@ -46265,9 +46265,9 @@
     },
     {
       "date": "2025-09-15",
-      "value": 409,
+      "value": 408,
       "avg_cvss": 6.22,
-      "cvss_count": 388
+      "cvss_count": 387
     },
     {
       "date": "2025-09-16",
@@ -46775,9 +46775,9 @@
     },
     {
       "date": "2025-12-09",
-      "value": 660,
-      "avg_cvss": 6.65,
-      "cvss_count": 464
+      "value": 659,
+      "avg_cvss": 6.67,
+      "cvss_count": 467
     },
     {
       "date": "2025-12-10",
@@ -46795,7 +46795,7 @@
       "date": "2025-12-12",
       "value": 226,
       "avg_cvss": 6.16,
-      "cvss_count": 216
+      "cvss_count": 218
     },
     {
       "date": "2025-12-13",
@@ -46812,7 +46812,7 @@
     {
       "date": "2025-12-15",
       "value": 125,
-      "avg_cvss": 6.76,
+      "avg_cvss": 6.73,
       "cvss_count": 110
     },
     {
@@ -46830,20 +46830,20 @@
     {
       "date": "2025-12-18",
       "value": 399,
-      "avg_cvss": 7.38,
-      "cvss_count": 378
+      "avg_cvss": 7.39,
+      "cvss_count": 379
     },
     {
       "date": "2025-12-19",
       "value": 113,
-      "avg_cvss": 6.77,
-      "cvss_count": 102
+      "avg_cvss": 6.81,
+      "cvss_count": 104
     },
     {
       "date": "2025-12-20",
       "value": 22,
-      "avg_cvss": 5.9,
-      "cvss_count": 17
+      "avg_cvss": 5.99,
+      "cvss_count": 18
     },
     {
       "date": "2025-12-21",
@@ -46854,19 +46854,19 @@
     {
       "date": "2025-12-22",
       "value": 110,
-      "avg_cvss": 7.21,
+      "avg_cvss": 7.2,
       "cvss_count": 83
     },
     {
       "date": "2025-12-23",
       "value": 156,
-      "avg_cvss": 7.56,
+      "avg_cvss": 7.55,
       "cvss_count": 147
     },
     {
       "date": "2025-12-24",
-      "value": 494,
-      "avg_cvss": 7.35,
+      "value": 493,
+      "avg_cvss": 7.36,
       "cvss_count": 169
     },
     {
@@ -46897,13 +46897,13 @@
       "date": "2025-12-29",
       "value": 119,
       "avg_cvss": 6.73,
-      "cvss_count": 115
+      "cvss_count": 116
     },
     {
       "date": "2025-12-30",
       "value": 439,
       "avg_cvss": 6.85,
-      "cvss_count": 180
+      "cvss_count": 185
     },
     {
       "date": "2025-12-31",
@@ -46915,13 +46915,13 @@
       "date": "2026-01-01",
       "value": 35,
       "avg_cvss": 6.03,
-      "cvss_count": 26
+      "cvss_count": 30
     },
     {
       "date": "2026-01-02",
       "value": 106,
-      "avg_cvss": 6.55,
-      "cvss_count": 45
+      "avg_cvss": 6.33,
+      "cvss_count": 69
     },
     {
       "date": "2026-01-03",
@@ -46937,14 +46937,20 @@
     },
     {
       "date": "2026-01-05",
-      "value": 13,
-      "avg_cvss": 5.66,
-      "cvss_count": 12
+      "value": 146,
+      "avg_cvss": 6.94,
+      "cvss_count": 104
+    },
+    {
+      "date": "2026-01-06",
+      "value": 77,
+      "avg_cvss": 6.64,
+      "cvss_count": 39
     }
   ],
   "metadata": {
-    "total_records": 309098,
-    "total_days": 7819,
+    "total_records": 309301,
+    "total_days": 7820,
     "data_source": "NVD JSONL",
     "analysis_type": "calendar_heatmap"
   }

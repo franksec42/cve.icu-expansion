@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-01-05T09:10:33.659947+00:00",
+  "generated_at": "2026-01-06T18:38:30.052741+00:00",
   "data_source": "NVD",
   "metadata": {
-    "total_cves": 326093,
+    "total_cves": 326314,
     "current_year": 2026,
-    "day_of_year": 5
+    "day_of_year": 6
   },
   "current_status": {
-    "snapshot_date": "2026-01-05",
-    "total_cves": 326093,
+    "snapshot_date": "2026-01-06",
+    "total_cves": 326314,
     "status_counts": {
       "Deferred": 94570,
-      "Rejected": 16995,
-      "Analyzed": 46749,
-      "Modified": 139172,
-      "Undergoing Analysis": 565,
-      "Awaiting Analysis": 27974,
-      "Received": 68
+      "Rejected": 17013,
+      "Analyzed": 46843,
+      "Modified": 139188,
+      "Undergoing Analysis": 569,
+      "Awaiting Analysis": 27853,
+      "Received": 278
     },
     "status_percentages": {
-      "Deferred": 29.0,
+      "Deferred": 28.98,
       "Rejected": 5.21,
-      "Analyzed": 14.34,
-      "Modified": 42.68,
+      "Analyzed": 14.36,
+      "Modified": 42.65,
       "Undergoing Analysis": 0.17,
-      "Awaiting Analysis": 8.58,
-      "Received": 0.02
+      "Awaiting Analysis": 8.54,
+      "Received": 0.09
     }
   },
   "monthly_status": {
@@ -71,28 +71,28 @@
     },
     "2024-10": {
       "Rejected": 29,
-      "Analyzed": 1469,
+      "Analyzed": 1468,
       "Modified": 102,
       "Awaiting Analysis": 698,
       "Undergoing Analysis": 1
     },
     "2024-11": {
-      "Modified": 116669,
+      "Modified": 116666,
       "Analyzed": 1528,
-      "Undergoing Analysis": 69,
+      "Undergoing Analysis": 60,
       "Rejected": 28,
-      "Awaiting Analysis": 4843
+      "Awaiting Analysis": 4840
     },
     "2024-12": {
       "Modified": 418,
-      "Analyzed": 1764,
+      "Analyzed": 1763,
       "Rejected": 30,
-      "Awaiting Analysis": 1386,
+      "Awaiting Analysis": 1385,
       "Undergoing Analysis": 4
     },
     "2025-01": {
       "Modified": 1951,
-      "Analyzed": 2619,
+      "Analyzed": 2618,
       "Undergoing Analysis": 5,
       "Awaiting Analysis": 1680,
       "Rejected": 137
@@ -113,10 +113,11 @@
     },
     "2025-04": {
       "Deferred": 93803,
-      "Analyzed": 3539,
+      "Analyzed": 3537,
       "Modified": 3356,
       "Rejected": 138,
-      "Awaiting Analysis": 1886
+      "Awaiting Analysis": 1884,
+      "Undergoing Analysis": 2
     },
     "2025-05": {
       "Analyzed": 3282,
@@ -124,22 +125,22 @@
       "Modified": 2987,
       "Rejected": 292,
       "Awaiting Analysis": 1201,
-      "Undergoing Analysis": 3
+      "Undergoing Analysis": 2
     },
     "2025-06": {
-      "Analyzed": 2844,
+      "Analyzed": 2842,
       "Deferred": 26,
       "Modified": 1133,
       "Rejected": 136,
-      "Awaiting Analysis": 1254,
-      "Undergoing Analysis": 5
+      "Awaiting Analysis": 1253,
+      "Undergoing Analysis": 6
     },
     "2025-07": {
       "Analyzed": 3624,
       "Deferred": 39,
       "Modified": 190,
-      "Undergoing Analysis": 11,
-      "Awaiting Analysis": 1141,
+      "Undergoing Analysis": 13,
+      "Awaiting Analysis": 1139,
       "Rejected": 153
     },
     "2025-08": {
@@ -152,43 +153,43 @@
     },
     "2025-09": {
       "Deferred": 40,
-      "Analyzed": 3579,
+      "Analyzed": 3578,
       "Modified": 291,
-      "Undergoing Analysis": 16,
+      "Undergoing Analysis": 14,
       "Rejected": 257,
       "Awaiting Analysis": 1576
     },
     "2025-10": {
       "Deferred": 339,
-      "Analyzed": 4668,
-      "Modified": 1159,
-      "Undergoing Analysis": 14,
+      "Analyzed": 4657,
+      "Modified": 1158,
+      "Undergoing Analysis": 10,
       "Rejected": 113,
-      "Awaiting Analysis": 1843
+      "Awaiting Analysis": 1839
     },
     "2025-11": {
       "Deferred": 136,
-      "Analyzed": 3508,
-      "Modified": 5319,
-      "Awaiting Analysis": 2433,
-      "Undergoing Analysis": 38,
+      "Analyzed": 3503,
+      "Modified": 5304,
+      "Awaiting Analysis": 2413,
+      "Undergoing Analysis": 53,
       "Rejected": 96
     },
     "2025-12": {
       "Analyzed": 3791,
-      "Modified": 641,
+      "Modified": 640,
       "Deferred": 85,
-      "Undergoing Analysis": 311,
-      "Awaiting Analysis": 3359,
+      "Undergoing Analysis": 289,
+      "Awaiting Analysis": 3301,
       "Rejected": 162
     },
     "2026-01": {
-      "Modified": 20,
-      "Analyzed": 181,
-      "Rejected": 647,
-      "Awaiting Analysis": 113,
-      "Undergoing Analysis": 69,
-      "Received": 68
+      "Modified": 56,
+      "Analyzed": 299,
+      "Rejected": 665,
+      "Awaiting Analysis": 83,
+      "Undergoing Analysis": 91,
+      "Received": 278
     }
   },
   "quarterly_breakdown": {
@@ -369,24 +370,24 @@
     },
     "2024": {
       "Q1": 8681,
-      "Q2": 11704,
-      "Q3": 8528,
-      "Q4": 11055,
-      "total": 39968
+      "Q2": 11703,
+      "Q3": 8527,
+      "Q4": 11054,
+      "total": 39965
     },
     "2025": {
-      "Q1": 11963,
+      "Q1": 11962,
       "Q2": 11695,
-      "Q3": 11729,
-      "Q4": 12794,
-      "total": 48181
+      "Q3": 11728,
+      "Q4": 12792,
+      "total": 48177
     },
     "2026": {
-      "Q1": 173,
+      "Q1": 383,
       "Q2": 0,
       "Q3": 0,
       "Q4": 0,
-      "total": 173
+      "total": 383
     }
   },
   "growth_table": [
@@ -793,48 +794,48 @@
     {
       "year": 2024,
       "q1": 8681,
-      "q2": 11704,
-      "q3": 8528,
-      "q4": 11055,
-      "total_actual": 39968,
-      "projection": 39968,
-      "total_projection": 39968,
-      "cumulative": 260065,
-      "cumulative_projection": 260065,
-      "yoy_difference": 11151,
+      "q2": 11703,
+      "q3": 8527,
+      "q4": 11054,
+      "total_actual": 39965,
+      "projection": 39965,
+      "total_projection": 39965,
+      "cumulative": 260062,
+      "cumulative_projection": 260062,
+      "yoy_difference": 11148,
       "delta_percent": 38.7,
       "is_current_year": false,
       "is_ytd": false
     },
     {
       "year": 2025,
-      "q1": 11963,
+      "q1": 11962,
       "q2": 11695,
-      "q3": 11729,
-      "q4": 12794,
-      "total_actual": 48181,
-      "projection": 48181,
-      "total_projection": 48181,
-      "cumulative": 308246,
-      "cumulative_projection": 308246,
-      "yoy_difference": 8213,
+      "q3": 11728,
+      "q4": 12792,
+      "total_actual": 48177,
+      "projection": 48177,
+      "total_projection": 48177,
+      "cumulative": 308239,
+      "cumulative_projection": 308239,
+      "yoy_difference": 8212,
       "delta_percent": 20.5,
       "is_current_year": false,
       "is_ytd": false
     },
     {
       "year": 2026,
-      "q1": 173,
+      "q1": 383,
       "q2": 0,
       "q3": 0,
       "q4": 0,
-      "total_actual": 173,
-      "projection": 12629,
-      "total_projection": 12629,
-      "cumulative": 308419,
-      "cumulative_projection": 320875,
-      "yoy_difference": -48008,
-      "delta_percent": -99.6,
+      "total_actual": 383,
+      "projection": 23299,
+      "total_projection": 23299,
+      "cumulative": 308622,
+      "cumulative_projection": 331538,
+      "yoy_difference": -47794,
+      "delta_percent": -99.2,
       "is_current_year": true,
       "is_ytd": true
     }
@@ -842,8 +843,8 @@
   "recent_activity": {
     "last_7_days": {
       "period_days": 7,
-      "period_start": "2025-12-29",
-      "period_end": "2026-01-05",
+      "period_start": "2025-12-30",
+      "period_end": "2026-01-06",
       "total_activity": 0,
       "new_cves": 0,
       "modified_cves": 0,
@@ -851,8 +852,8 @@
     },
     "last_30_days": {
       "period_days": 30,
-      "period_start": "2025-12-06",
-      "period_end": "2026-01-05",
+      "period_start": "2025-12-07",
+      "period_end": "2026-01-06",
       "total_activity": 0,
       "new_cves": 0,
       "modified_cves": 0,
@@ -864,7 +865,7 @@
     "top_10_cnas": [
       {
         "cna": "cve@mitre.org",
-        "total_cves": 111809,
+        "total_cves": 111827,
         "monthly_counts": {
           "1988-10": 1,
           "1988-11": 1,
@@ -1283,7 +1284,7 @@
           "2025-10": 437,
           "2025-11": 424,
           "2025-12": 543,
-          "2026-01": 14
+          "2026-01": 32
         },
         "sample_cves": [
           "CVE-1999-0095",
@@ -1300,7 +1301,7 @@
       },
       {
         "cna": "audit@patchstack.com",
-        "total_cves": 14131,
+        "total_cves": 14157,
         "monthly_counts": {
           "2021-09": 14,
           "2021-10": 3,
@@ -1353,7 +1354,8 @@
           "2025-09": 596,
           "2025-10": 363,
           "2025-11": 219,
-          "2025-12": 865
+          "2025-12": 865,
+          "2026-01": 26
         },
         "sample_cves": [
           "CVE-2021-36870",
@@ -1370,7 +1372,7 @@
       },
       {
         "cna": "cna@vuldb.com",
-        "total_cves": 11681,
+        "total_cves": 11702,
         "monthly_counts": {
           "2022-03": 26,
           "2022-04": 10,
@@ -1418,7 +1420,7 @@
           "2025-10": 425,
           "2025-11": 264,
           "2025-12": 486,
-          "2026-01": 66
+          "2026-01": 87
         },
         "sample_cves": [
           "CVE-2015-10002",
@@ -1972,20 +1974,20 @@
       },
       {
         "cna": "416baaa9-dc9f-4396-8d5f-8c081fb06d67",
-        "total_cves": 9977,
+        "total_cves": 9986,
         "monthly_counts": {
           "2024-02": 256,
           "2024-03": 258,
           "2024-04": 357,
-          "2024-05": 1074,
+          "2024-05": 1073,
           "2024-06": 285,
           "2024-07": 440,
           "2024-08": 302,
-          "2024-09": 278,
-          "2024-10": 416,
+          "2024-09": 277,
+          "2024-10": 415,
           "2024-11": 274,
           "2024-12": 354,
-          "2025-01": 224,
+          "2025-01": 223,
           "2025-02": 910,
           "2025-03": 207,
           "2025-04": 280,
@@ -1993,10 +1995,11 @@
           "2025-06": 375,
           "2025-07": 401,
           "2025-08": 186,
-          "2025-09": 738,
+          "2025-09": 737,
           "2025-10": 651,
           "2025-11": 104,
-          "2025-12": 1058
+          "2025-12": 1056,
+          "2026-01": 16
         },
         "sample_cves": [
           "CVE-2023-52433",
@@ -2013,7 +2016,7 @@
       },
       {
         "cna": "security-advisories@github.com",
-        "total_cves": 9667,
+        "total_cves": 9711,
         "monthly_counts": {
           "2019-09": 1,
           "2019-11": 7,
@@ -2090,7 +2093,7 @@
           "2025-10": 272,
           "2025-11": 275,
           "2025-12": 334,
-          "2026-01": 28
+          "2026-01": 72
         },
         "sample_cves": [
           "CVE-2019-16760",
@@ -2234,7 +2237,7 @@
       },
       {
         "cna": "security@wordfence.com",
-        "total_cves": 8181,
+        "total_cves": 8208,
         "monthly_counts": {
           "2021-07": 11,
           "2021-08": 38,
@@ -2289,7 +2292,7 @@
           "2025-10": 305,
           "2025-11": 422,
           "2025-12": 379,
-          "2026-01": 4
+          "2026-01": 31
         },
         "sample_cves": [
           "CVE-2021-34620",

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-01-05T09:08:29.782425",
-  "total_unique_cpes": 362108,
-  "total_cpe_entries": 2393061,
-  "total_cves_with_cpes": 280036,
-  "total_unique_vendors": 35358,
-  "total_unique_products": 109946,
+  "generated_at": "2026-01-06T18:36:22.455084",
+  "total_unique_cpes": 362224,
+  "total_cpe_entries": 2394101,
+  "total_cves_with_cpes": 280149,
+  "total_unique_vendors": 35372,
+  "total_unique_products": 109986,
   "top_cpes": [
     {
       "cpe": "cpe:2.3:o:linux:linux_kernel:*:*:*:*:*:*:*:*",
-      "count": 35470,
+      "count": 35453,
       "vendor": "linux",
       "product": "linux_kernel",
       "type": "Operating System"
@@ -57,7 +57,7 @@
     },
     {
       "cpe": "cpe:2.3:o:debian:debian_linux:10.0:*:*:*:*:*:*:*",
-      "count": 3412,
+      "count": 3414,
       "vendor": "debian",
       "product": "debian_linux",
       "type": "Operating System"
@@ -239,7 +239,7 @@
     },
     {
       "cpe": "cpe:2.3:o:debian:debian_linux:11.0:*:*:*:*:*:*:*",
-      "count": 1727,
+      "count": 1729,
       "vendor": "debian",
       "product": "debian_linux",
       "type": "Operating System"
@@ -364,11 +364,11 @@
     },
     {
       "vendor": "cisco",
-      "count": 177872
+      "count": 178115
     },
     {
       "vendor": "linux",
-      "count": 134197
+      "count": 134170
     },
     {
       "vendor": "microsoft",
@@ -442,7 +442,7 @@
   "top_products": [
     {
       "product": "linux_kernel",
-      "count": 133959
+      "count": 133932
     },
     {
       "product": "ios",
@@ -506,7 +506,7 @@
     },
     {
       "product": "debian_linux",
-      "count": 15983
+      "count": 15987
     },
     {
       "product": "itunes",
@@ -524,12 +524,12 @@
   "cpe_type_distribution": [
     {
       "type": "Application",
-      "count": 1270180,
+      "count": 1270281,
       "percentage": 53.1
     },
     {
       "type": "Operating System",
-      "count": 1067815,
+      "count": 1068754,
       "percentage": 44.6
     },
     {

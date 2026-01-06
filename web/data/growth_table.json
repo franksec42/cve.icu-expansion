@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-05T09:10:33.659947+00:00",
+  "generated_at": "2026-01-06T18:38:30.052741+00:00",
   "growth_table": [
     {
       "year": 1999,
@@ -404,48 +404,48 @@
     {
       "year": 2024,
       "q1": 8681,
-      "q2": 11704,
-      "q3": 8528,
-      "q4": 11055,
-      "total_actual": 39968,
-      "projection": 39968,
-      "total_projection": 39968,
-      "cumulative": 260065,
-      "cumulative_projection": 260065,
-      "yoy_difference": 11151,
+      "q2": 11703,
+      "q3": 8527,
+      "q4": 11054,
+      "total_actual": 39965,
+      "projection": 39965,
+      "total_projection": 39965,
+      "cumulative": 260062,
+      "cumulative_projection": 260062,
+      "yoy_difference": 11148,
       "delta_percent": 38.7,
       "is_current_year": false,
       "is_ytd": false
     },
     {
       "year": 2025,
-      "q1": 11963,
+      "q1": 11962,
       "q2": 11695,
-      "q3": 11729,
-      "q4": 12794,
-      "total_actual": 48181,
-      "projection": 48181,
-      "total_projection": 48181,
-      "cumulative": 308246,
-      "cumulative_projection": 308246,
-      "yoy_difference": 8213,
+      "q3": 11728,
+      "q4": 12792,
+      "total_actual": 48177,
+      "projection": 48177,
+      "total_projection": 48177,
+      "cumulative": 308239,
+      "cumulative_projection": 308239,
+      "yoy_difference": 8212,
       "delta_percent": 20.5,
       "is_current_year": false,
       "is_ytd": false
     },
     {
       "year": 2026,
-      "q1": 173,
+      "q1": 383,
       "q2": 0,
       "q3": 0,
       "q4": 0,
-      "total_actual": 173,
-      "projection": 12629,
-      "total_projection": 12629,
-      "cumulative": 308419,
-      "cumulative_projection": 320875,
-      "yoy_difference": -48008,
-      "delta_percent": -99.6,
+      "total_actual": 383,
+      "projection": 23299,
+      "total_projection": 23299,
+      "cumulative": 308622,
+      "cumulative_projection": 331538,
+      "yoy_difference": -47794,
+      "delta_percent": -99.2,
       "is_current_year": true,
       "is_ytd": true
     }
@@ -628,24 +628,24 @@
     },
     "2024": {
       "Q1": 8681,
-      "Q2": 11704,
-      "Q3": 8528,
-      "Q4": 11055,
-      "total": 39968
+      "Q2": 11703,
+      "Q3": 8527,
+      "Q4": 11054,
+      "total": 39965
     },
     "2025": {
-      "Q1": 11963,
+      "Q1": 11962,
       "Q2": 11695,
-      "Q3": 11729,
-      "Q4": 12794,
-      "total": 48181
+      "Q3": 11728,
+      "Q4": 12792,
+      "total": 48177
     },
     "2026": {
-      "Q1": 173,
+      "Q1": 383,
       "Q2": 0,
       "Q3": 0,
       "Q4": 0,
-      "total": 173
+      "total": 383
     }
   }
 }
